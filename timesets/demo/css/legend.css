@@ -1,0 +1,41 @@
+.sm-legend-table {
+    font-family: Arial;
+    border-spacing: 1px;
+}
+
+.sm-legend-table td {
+    padding: 0 4px 0 4px;
+}
+
+.sm-legend-list {
+    font-family: Arial;
+    list-style-type: none; 
+    margin: 1px; 
+    padding: 0;
+    cursor: pointer;
+}
+
+.sm-legend-list li {
+    padding-left: 3px;
+    margin: 1px;
+}
+
+.sm-legend-list li .handle { 
+    float:left;
+    padding-right:3px;
+    cursor:move;
+}
+
+.sm-legend-button {
+    text-align: center;
+}
+
+.sm-legend-button .ui-button-text-only .ui-button-text {
+    line-height: 0.8;
+}
+
+.ui-dialog .ui-dialog-title {
+    font-family: Tahoma;
+    font-size: 14px;
+    text-align: center;
+}

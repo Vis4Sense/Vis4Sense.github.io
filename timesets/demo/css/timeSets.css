@@ -1,0 +1,76 @@
+.sm-timeSets-svg-axis path {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.sm-timeSets-svg-axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.sm-timeSets-svg-axis-dashed line {
+    fill: none;
+    stroke: gray;
+    shape-rendering: crispEdges;
+    stroke-opacity: 0.6;
+    stroke-dasharray: 5,5;
+}
+
+.sm-timeSets-svg-event-picture-text {
+    font-size:7pt;
+    font-family:Verdana;
+    line-height:100%;
+    text-align:center;
+}
+
+.sm-timeSets-svg-event-selection {
+    fill: #BFEFFC;
+    stroke: #5F92B0;
+    stroke-width: 2;
+}
+
+.sm-timeSets-svg-cluster-rect {
+    stroke-width: 2;
+}
+
+.sm-timeSets-svg-cluster-range {
+    fill: #BFEFFC;
+    stroke-width: 2;
+}
+
+.sm-timeSets-svg-path {
+    stroke-width: 2;
+    stroke-opacity: 1;
+}
+
+.sm-timeSets-svg-path-border {
+    stroke-width: 2;
+    stroke-opacity: 1;
+}
+
+.sm-timeSets-svg-line {
+    fill: none;
+    stroke-width: 4;
+    stroke-opacity: 0.6;
+}
+
+.sm-timeSets-reset-button {
+    position: fixed;
+}
+
+.today {
+    fill: none;
+    stroke: gray;
+    shape-rendering: crispEdges;
+    stroke-opacity: 0.6;
+    stroke-dasharray: 5,5;
+}
+
+.sm-timeSets-link {
+    fill: none;
+    stroke-width: 2;
+    stroke: steelblue;
+    stroke-opacity: 0.5;
+}

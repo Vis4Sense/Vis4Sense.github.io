@@ -1,0 +1,20 @@
+.sm-articleViewer-title {
+    font-family: Georgia;
+    font-size: 1.6em;
+    color: black;
+    padding-bottom: 6px;
+    line-height: 1.2;
+}
+
+.sm-articleViewer-time {
+    font-family: Helvetica;
+    font-size: 1.2em;
+    color: #666666;
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+
+.sm-articleViewer-content {
+    font-family: Arial;
+    font-size: 1em;
+}
