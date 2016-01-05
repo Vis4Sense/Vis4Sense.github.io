@@ -1,11 +1,11 @@
 /**
- * LEGEND module displays a dialog of legend based on the input color-text. 
+ * LEGEND module displays a dialog of legend based on the input color-text.
  */
-sm.legend = function() {
+sm.misc.legend = function() {
     var dispatch = d3.dispatch("selected", "mouseover", "mouseout", "changed");
     var list, data, startIndex;
     var sortable = true;
-    
+
     /**
      * Main entry of the module.
      */
@@ -24,20 +24,20 @@ sm.legend = function() {
                         of: window
                     }
                 });
-                
+
             list = $("<ul class='sm-legend-list'></ul>").appendTo(container);
             data = d.data;
-            
+
             d.data.forEach(function(pair) {
                 var item = $("<li>" + pair.text + "</li>").addClass("ui-selected").appendTo(list);
-                
+
                 if (d.background) {
                     pair.color ? item.css("background-color", pair.color) : item.css("background-image", pair.gradient);
                 } else {
                     $("<span style='width:12px; height:12px; background-color:" + pair.color +"; border-radius: 6px; float: left; margin-top: 3px; margin-right: 8px'</span>").appendTo(item);
                 }
             });
-            
+
             // Bind events to the whole list to have better performance than each li
             list.on("mouseover", "li", function() {
                 module.highlightRow($(this).index());
@@ -46,7 +46,7 @@ sm.legend = function() {
                 module.dehighlightRows();
                 dispatch.mouseout();
             });
-            
+
             // Events
             list.bind( "mousedown", function (e) {
                 e.metaKey = true;
@@ -58,7 +58,7 @@ sm.legend = function() {
                     list.find("li").each(function(idx, dom) {
                         statusList.push($(dom).hasClass("ui-selected"));
                     });
-                    
+
                     dispatch.selected(statusList);
                 },
                 unselected: function(event, ui) {
@@ -67,11 +67,11 @@ sm.legend = function() {
                     list.find("li").each(function(idx, dom) {
                         statusList.push($(dom).hasClass("ui-selected"));
                     });
-                    
+
                     dispatch.selected(statusList);
                 },
             });
-            
+
             if (sortable) {
                 list.sortable({
                     handle: ".handle",
@@ -84,7 +84,7 @@ sm.legend = function() {
                     }
                 }).find("li").prepend("<div class='handle'><span class='ui-icon ui-icon-carat-2-n-s'></span></div>");
             }
-            
+
             // Buttons
             var btnDiv = $("<div class='sm-legend-button'></div>").appendTo(container);
             $("<button>ALL</button>").button()
@@ -105,7 +105,7 @@ sm.legend = function() {
                 .appendTo(btnDiv);
         });
 	}
-	
+
 	/**
 	 * Sets/gets the sortability of the legend.
 	 */
@@ -114,26 +114,26 @@ sm.legend = function() {
         sortable = value;
         return this;
 	};
-	
+
 	/**
-	 * Updates legend with new numbers. 
+	 * Updates legend with new numbers.
 	 */
 	module.updateNumbers = function(values) {
 	    list.find("li").each(function(idx, dom) {
 	        dom.textContent = data[idx].text + " (" + values[idx] +")";
 	    });
 	};
-	
+
 	/**
-	 * Highlights the given row. 
+	 * Highlights the given row.
 	 */
 	module.highlightRow = function(rowId) {
 	    list.find("li:eq(" + rowId + ")").css("font-weight", "bold");
 	    list.find("li").not(":eq(" + rowId + ")").css("color", "rgba(0,0,0,0.3)");
 	};
-	
+
 	/**
-     * Highlights the given rows. 
+     * Highlights the given rows.
      */
     module.highlightRows = function(rowIds) {
         list.find("li").each(function(idx, dom) {
@@ -144,9 +144,9 @@ sm.legend = function() {
             }
         });
     };
-	
+
 	/**
-	 * De-highlights all rows. 
+	 * De-highlights all rows.
 	 */
 	module.dehighlightRows = function() {
 	    list.find("li").css("font-weight", "normal").css("color", "black");
@@ -154,6 +154,6 @@ sm.legend = function() {
 
     // Binds custom events
     d3.rebind(module, dispatch, "on");
-    
+
    	return module;
 };

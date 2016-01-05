@@ -1,7 +1,7 @@
 /**
- * SHAPE_OUTLINE module provides outline for a set of rectangles.
+ * This module provides outline for a set of rectangles used in TimeSets.
  */
-sm.shapeOutline = function() {
+sm.layout.timesetsOutline = function() {
     var rects, // Input set of rectangles { left, right, top, bottom, level, part } in integer, part is top/middle/bottom
         extremeRects, // Rectangles covering the input in each level
         outline, // The outline of all input rectangles
@@ -16,10 +16,10 @@ sm.shapeOutline = function() {
             if (!levelRects[level]) {
                 levelRects[level] = [];
             }
-            
+
             levelRects[level].push(d);
         });
-        
+
         // In each level, sort increasingly by left.
         levelRects.forEach(function(d) {
             if (d) {
@@ -28,7 +28,7 @@ sm.shapeOutline = function() {
                 });
             }
         });
-        
+
         // Merge all rectangles in the same level to remove holes and gaps
         extremeRects = [];
         levelRects.forEach(function(d, i) {
@@ -37,7 +37,7 @@ sm.shapeOutline = function() {
                 var last = d[d.length - 1];
                 var left = first.left;
                 var right = last.right;
-                
+
                 // Fill h-gap between layers
                 if (fillHorizontalGap) {
                     if (i < levelRects.length - 1) {
@@ -54,9 +54,9 @@ sm.shapeOutline = function() {
                         }
                     }
                 }
-                 
-                extremeRects[i] = { 
-                    left: left, 
+
+                extremeRects[i] = {
+                    left: left,
                     right: right,
                     top: first.top,
                     bottom: first.bottom,
@@ -67,8 +67,10 @@ sm.shapeOutline = function() {
 
         // Extend top and bottom part for better perception of set intersection
         // - Find the range of top and bottom parts
-        var startBottom = stopBottom = -1;
-        var startTop = stopTop = -1;
+        var startBottom = -1,
+            stopBottom = -1,
+            startTop = -1,
+            stopTop = -1;
         var topOnly = rects.filter(function(d) { return d.part === "top"; }).sort(function(a, b) { return a.level > b.level; });
         if (topOnly.length) {
             startTop = topOnly[0].level;
@@ -85,9 +87,12 @@ sm.shapeOutline = function() {
 
         // - Extend bottom as inverse pyramid
         var bottomMinX = Number.MAX_VALUE, bottomMaxX = -Number.MAX_VALUE;
+        var leftMostIndex, leftMostValue, rightMostIndex, rightMostValue;
         if (startBottom !== -1) {
-            var leftMostIndex = -1, leftMostValue = Number.MAX_VALUE;
-            var rightMostIndex = -1, rightMostValue = -Number.MAX_VALUE;
+            leftMostIndex = -1;
+            leftMostValue = Number.MAX_VALUE,
+            rightMostIndex = -1;
+            rightMostValue = -Number.MAX_VALUE;
             for (var i = startBottom; i < stopBottom; i++) {
                 var r = extremeRects[i];
 
@@ -139,8 +144,10 @@ sm.shapeOutline = function() {
         // - Extend top as pyramid
         var topMinX = Number.MAX_VALUE, topMaxX = -Number.MAX_VALUE;
         if (startTop !== -1) {
-            var leftMostIndex = -1, leftMostValue = Number.MAX_VALUE;
-            var rightMostIndex = -1, rightMostValue = -Number.MAX_VALUE;
+            leftMostIndex = -1;
+            leftMostValue = Number.MAX_VALUE;
+            rightMostIndex = -1;
+            rightMostValue = -Number.MAX_VALUE;
             for (var i = stopTop - 1; i >= startTop; i--) {
                 var r = extremeRects[i];
 
@@ -157,11 +164,11 @@ sm.shapeOutline = function() {
             }
 
             var prev;
-            for (var i = stopTop - 1; i >= startTop; i--) { 
+            for (var i = stopTop - 1; i >= startTop; i--) {
                 var r = extremeRects[i];
 
                 if (!r) { continue; }
-                
+
                 if (i === startTop && extremeRects[startTop - 1]) {
                     // Add extra padding row to see intersection easier
                     var r2 = extremeRects[startTop - 1];
@@ -185,11 +192,11 @@ sm.shapeOutline = function() {
                 } else {
                     r.right = Math.max(r.right + padding, prev.right);
                 }
-                
+
                 prev = { "left": currentLeft, "right": currentRight };
             }
         }
-        
+
         // Find outline
         // - Left-side
         outline = [];
@@ -197,18 +204,18 @@ sm.shapeOutline = function() {
             if (!d) {
                 return true;
             }
-            
+
             outline.push({ x: d.left, y: d.bottom });
             outline.push({ x: d.left, y: d.top });
         });
-    
+
         // - Right-side
         extremeRects.reverse();
         extremeRects.forEach(function(d) {
             if (!d) {
                 return true;
             }
-            
+
             outline.push({ x: d.right, y: d.top });
             outline.push({ x: d.right, y: d.bottom });
         });
@@ -217,9 +224,9 @@ sm.shapeOutline = function() {
 
         return module;
     }
-    
+
     /**
-     * Sets/gets the input set of rectangles. 
+     * Sets/gets the input set of rectangles.
      */
     module.rects = function(value) {
         if (!arguments.length) return rects;
@@ -245,7 +252,7 @@ sm.shapeOutline = function() {
     };
 
     /**
-     * Returns the extreme rectangular outline. 
+     * Returns the extreme rectangular outline.
      */
     module.getExtremeRects = function() {
         return extremeRects;
@@ -262,7 +269,7 @@ sm.shapeOutline = function() {
         }
 
         return false;
-    }
+    };
 
     function areTwoRectsIntersected(r1, r2) {
         if (!r1 || !r2 || r1.level !== r2.level) { return false; }
@@ -283,7 +290,7 @@ sm.shapeOutline = function() {
         } else {
             smoothOutline(r * 4);
         }
-        
+
         // Directions for each horizontal segment: left/right
         var dirs = [];
         for (var i = -1; i < outline.length - 1; i += 2) {
@@ -305,26 +312,26 @@ sm.shapeOutline = function() {
         }
 
         var path = "M" + startPoint.x + "," + startPoint.y + " ";
-        
+
         // The outline consists of a series of pair of vertical-horizontal segments
         var numSegments = outline.length / 2;
         for (var i = 0; i < numSegments; i++) {
             // Vertical segment
-            path += generateVerticalSegment(outline[i * 2], outline[i * 2 + 1], 
-                outline[(i * 2 - 1 + outline.length) % outline.length], 
+            path += generateVerticalSegment(outline[i * 2], outline[i * 2 + 1],
+                outline[(i * 2 - 1 + outline.length) % outline.length],
                 outline[(i * 2 + 2) % outline.length],
                 dirs[i], dirs[(i + 1) % numSegments], r) + " ";
 
             // Horizontal segment
-            path += generateHorizontalSegment(outline[(i * 2 + 2) % outline.length], 
-                outline[(i * 2 + 3) % outline.length], 
-                outline[(i * 2 + 1) % outline.length], 
-                outline[(i * 2 + 4) % outline.length], 
+            path += generateHorizontalSegment(outline[(i * 2 + 2) % outline.length],
+                outline[(i * 2 + 3) % outline.length],
+                outline[(i * 2 + 1) % outline.length],
+                outline[(i * 2 + 4) % outline.length],
                 dirs[(i + 1) % numSegments], dirs[(i + 2) % numSegments], r) + " ";
         }
-        
+
         return path;
-    }
+    };
 
     /**
      * Generates a vertical segment from 'currentPoint' to 'nextPoint'.
@@ -440,14 +447,14 @@ sm.shapeOutline = function() {
         // var rx = Math.abs((currentPoint.x - pPoint.x) / 2);
         // return "A" + rx + ",20 0 0 1" + x + "," + currentPoint.y + " ";
     }
-    
+
     /**
      * If adjacent rows are too close to have nice individual curve, they will be merged together.
      */
     function smoothOutline(d) {
         var newOutline = [];
         var splitIdx = Math.ceil(outline.length / 2);
-        
+
         // Left side: merge too close levels
         var prevX;
         for (var i = 0; i < splitIdx; i+=2) {
@@ -463,14 +470,14 @@ sm.shapeOutline = function() {
                     // Change direction from right to left: push the top one to the left
                     outline[i].x = outline[i + 1].x = prevX - d;
                 }
-                
+
                 // Normal case
                 newOutline.push(outline[i]);
                 newOutline.push(outline[i + 1]);
                 prevX = outline[i].x;
             }
         }
-        
+
         // Right side
         prevX = null;
         for (var i = splitIdx; i < outline.length; i+=2) {
@@ -487,16 +494,16 @@ sm.shapeOutline = function() {
                     // Change direction from right to left: push the top one to the left
                     outline[i].x = outline[i + 1].x = prevX - d;
                 }
-                
+
                 // Normal case
                 newOutline.push(outline[i]);
                 newOutline.push(outline[i + 1]);
                 prevX = outline[i].x;
             }
         }
-        
+
         outline = newOutline;
     }
 
-    return module;        
+    return module;
 };

@@ -9,8 +9,8 @@
 
 .sm-legend-list {
     font-family: Arial;
-    list-style-type: none; 
-    margin: 1px; 
+    list-style-type: none;
+    margin: 1px;
     padding: 0;
     cursor: pointer;
 }
@@ -20,7 +20,7 @@
     margin: 1px;
 }
 
-.sm-legend-list li .handle { 
+.sm-legend-list li .handle {
     float:left;
     padding-right:3px;
     cursor:move;
@@ -28,6 +28,7 @@
 
 .sm-legend-button {
     text-align: center;
+    margin: 2px;
 }
 
 .sm-legend-button .ui-button-text-only .ui-button-text {

@@ -1,3 +1,11 @@
+text {
+    dominant-baseline: text-after-edge;
+}
+
+.sm-timeSets-circle-border {
+    /*stroke: white;*/
+}
+
 .sm-timeSets-svg-axis path {
     fill: none;
     stroke: black;
@@ -73,4 +81,32 @@
     stroke-width: 2;
     stroke: steelblue;
     stroke-opacity: 0.5;
+}
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
+}
+
+.no-padding .ui-dialog-content {
+    padding: 0;
+    overflow: hidden;
+}
+
+.title-center .ui-dialog-titlebar {
+    text-align: center;
+    padding: 0.1em 0 0.1em 0;
+}
+
+.ui-state-disabled {
+    cursor: pointer;
+}
+
+.ui-widget {
+    font-size: 14px;
+}
+
+#settings .ui-button-text-only .ui-button-text {
+    padding: .2em .5em;
+    font-weight: normal;
+    font-size: 14px;
 }

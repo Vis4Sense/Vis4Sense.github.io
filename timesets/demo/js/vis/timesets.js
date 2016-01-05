@@ -6,7 +6,7 @@
  * .content: String
  * .themes: an array of themes; e.g., ["Information Visualisation", "Visual Analytics"]
  */
-sm.timeSets = function() {
+sm.vis.timesets = function() {
     var width = 800, height = 500,
         margin = { top: 20, right: 30, bottom: 20, left: 20 },
         THEME_CIRCLE_RADIUS = 6,
@@ -19,7 +19,7 @@ sm.timeSets = function() {
         CLUSTER_HEIGHT = LEVEL_HEIGHT - 4, // Should be smaller than LEVEL_HEIGHT
         MAX_NUM_CHARS = 50, // The maximum characters to display for 'alwaysTrim' events
         minEventWidth = 50, // An event has to be aggregated if the remaining space for it less than this value
-        trimThresholdRatio = 0.6; // Can only trim an event so that a new event can stay in the same row if the remaining part is larger than this value
+        trimThresholdRatio = 0.1; // Can only trim an event so that a new event can stay in the same row if the remaining part is larger than this value
 
     var data, layerisedData, nonSetData, allData,
         activeData, activeNonSetData, allActiveData,
@@ -50,8 +50,10 @@ sm.timeSets = function() {
         numThemes, // The number of themes
         numLayers = 1, // The number of visual layers
         orderToId, // The mapping from rendering order of theme to its id
+        idToOrder, // The mapping from it to its rendering order of theme
         assignedLayers, // Information of levels for each layer
         colors, // Colors used for sets
+        sameOrderColor = true, // If true, colors are mapped to rendering order, not to themes
         legend,
         id = 0;
     var dispatch = d3.dispatch("eventClicked");
@@ -63,7 +65,7 @@ sm.timeSets = function() {
         setMode = "path", // color/path/line/local/background
         shapeMode = "wholevis", // layer/set/wholevis
         applyLayout = true,
-        elementMode = "none", // rings/circles/none/gradient
+        elementMode = "circles", // rings/circles/none/gradient
         intersectionMode = "gradient2", // color-blending1/color-blending2/gradient1/gradient2/texture
         layoutMode = "middle", // bottom/middle
         usePicture = false,
@@ -71,11 +73,11 @@ sm.timeSets = function() {
         compactingMode = false,
         showCirleForIntervals = false,
         showSettings = false,
-        showCapture = true,
+        showCapture = false,
         filled = true, // Fill the path or stroke it
         dotColor = "white", // white or steelblue
         verticalMode = "rounded",
-        eventViewer = sm.articleViewer(),
+        eventViewer = sm.misc.articleViewer(),
         showNonSetEvents = false,
         aggregateLevel = "neighbor"; // none/neighbor/subset/set
 
@@ -196,7 +198,7 @@ sm.timeSets = function() {
             data = theData.events;
             themes = theData.themes;
             numThemes = themes.length;
-            activeThemeIds = sm.createArray(numThemes, true);
+            activeThemeIds = d3.range(numThemes).map(function() { return true; });
 
             var domain = d3.extent(data, function(d) { return d.time; });
             xScale.domain(domain);
@@ -233,6 +235,7 @@ sm.timeSets = function() {
             // Find order of themes to maximise shared events visualised (neighbouring events)
             if (applyLayout) {
                 orderToId = computeThemeOrderingBruteForce();
+                idToOrder = computeInverseOrder();
             }
 
             // Assign events to layers, probably modify the original data to replicate some events
@@ -256,7 +259,7 @@ sm.timeSets = function() {
                 legendData.reverse();
             }
 
-            legend = sm.legend()
+            legend = sm.misc.legend()
                 .sortable(applyLayout)
                 .on("selected", function(e) {
                     if (applyLayout) {
@@ -335,7 +338,7 @@ sm.timeSets = function() {
 
         // Organise events by its layer
         if (applyLayout) {
-            layerEvents = sm.createArray2D(numLayers, 0);
+            layerEvents = d3.range(numLayers).map(function() { return []; });
             activeData.forEach(function(d) {
                 try {
                     layerEvents[d.layer].push(d);
@@ -387,8 +390,8 @@ sm.timeSets = function() {
             .classed("sm-timeSets-svg-event-background", true)
             .attr("x", function (d) { return getGlyphPadding(d); } )
             .attr("y", -CLUSTER_HEIGHT / 2)
-            .attr("rx", 8)
-            .attr("ry", 8)
+            // .attr("rx", 8)
+            // .attr("ry", 8)
             .attr("height", CLUSTER_HEIGHT)
             .style("opacity", "0");
 
@@ -407,7 +410,7 @@ sm.timeSets = function() {
             .classed("sm-timeSets-svg-event-selection-text", true)
             .text(function(d) { return d.originalTitle; } )
             .attr("x", getGlyphPadding)
-            .attr("y", 7)
+            .attr("y", 9)
             .style("display", "none");
 
         // - Theme glyphs
@@ -441,7 +444,8 @@ sm.timeSets = function() {
                         d3.select(self).append("circle")
                             .attr("cx", (THEME_CIRCLE_RADIUS * 2 + 1) * i)
                             .attr("r", THEME_CIRCLE_RADIUS)
-                            .attr("fill", color);
+                            .attr("fill", color)
+                            .classed("sm-timeSets-circle-border", elementMode === "circles");
                     });
                 } else { // Just a dot
                     d3.select(self).append("circle")
@@ -470,7 +474,7 @@ sm.timeSets = function() {
                     .style("font-style", function(d) { return d.isParent ? "italic" : "normal"; })
                     .text(function(d) { return d.title; } )
                     .attr("x", getGlyphPadding)
-                    .attr("y", 7) // 7 for 26px level-height?
+                    .attr("y", 9) // 9 for 26px level-height?
                     .on("mouseover", function(d) {
                         // highlightLayer(d.layer);
                         showHideTooltip(true, this, d);
@@ -653,7 +657,7 @@ sm.timeSets = function() {
         timeTooltipGroup.append("text")
             .classed("sm-timeSets-svg-event-selection-text", true)
             .classed("startTime", true)
-            .attr("y", 9)
+            .attr("y", 11)
             .attr("dy", ".71em");
 
         // End time
@@ -668,7 +672,7 @@ sm.timeSets = function() {
         timeTooltipGroup.append("text")
             .classed("sm-timeSets-svg-event-selection-text", true)
             .classed("endTime", true)
-            .attr("y", -CLUSTER_HEIGHT + 6)
+            .attr("y", -CLUSTER_HEIGHT + 8)
             .attr("dy", ".71em");
     }
 
@@ -928,6 +932,9 @@ sm.timeSets = function() {
                                                     : computeEventLayoutBottom(d, this, startLevel, endLevel, prevEvent, rightmostEvents, extremeLevels);
             }
         });
+
+        // Trim last events in each rows
+        trimLastEvents(rightmostEvents);
 
         // Translate to the startLevel
         if (layoutMode === "middle") {
@@ -1293,13 +1300,10 @@ sm.timeSets = function() {
         }
 
         var rects = source.filter(function(d) { return d.ref; });
-        var shapeOutline = sm.shapeOutline().rects(rects).verticalMode(verticalMode).fillHorizontalGap(intersectionMode.substring(0, 8) === "gradient");
+        var shapeOutline = sm.layout.timesetsOutline().rects(rects).verticalMode(verticalMode).fillHorizontalGap(intersectionMode.substring(0, 8) === "gradient");
         shapeOutline.call();
 
         return shapeOutline;
-    }
-
-    function getShapeOutlineForTheme(layerIndex) {
     }
 
     /**
@@ -1698,7 +1702,7 @@ sm.timeSets = function() {
         var numChars = textElement.getNumberOfChars();
         textElement.textContent += "...";
         var dotsWidth = textElement.getSubStringLength(numChars, 3);
-        width -= dotsWidth;
+        width -= dotsWidth - 10; // - 10 there's a bit space left
 
         // Find the limit position
         var limitPosition = 0;
@@ -1746,7 +1750,7 @@ sm.timeSets = function() {
             .classed("sm-timeSets-svg-event-text", true)
             .text(text)
             .attr("x", 5)
-            .attr("y", 7) // 7 for 26px level-height
+            .attr("y", 9) // 9 for 26px level-height
             .on("mouseover", function(d) {
                 showHideTooltip(true, this, d);
                 d3.select(this).style("cursor", "pointer");
@@ -1770,7 +1774,7 @@ sm.timeSets = function() {
                 d.x = d3.event.pageX;
                 d.y = d3.event.pageY + 25;
                 d.dialogTitle = d3.select(this).text();
-                d3.select(this).call(sm.articleViewer());  // Always show all events
+                d3.select(this).call(sm.misc.articleViewer());  // Always show all events
             });
 
         rect.attr("width", textElement.node().getComputedTextLength() + 10);
@@ -1830,11 +1834,21 @@ sm.timeSets = function() {
      */
     function cScale(i) {
         if (!colors) {
-            colors = colorbrewer.Set2[8];
-            // colors = ["#66c2a5","#fc8d62","#e78ac3","#8da0cb","#a6d854","#ffd92f","#e5c494","#b3b3b3"]
+            // Set 2 - colorbrewer
+            colors = ["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854","#ffd92f","#e5c494","#b3b3b3"];
+            // Change order to use brighter colors
+            colors = ["#66c2a5","#8da0cb","#ffd92f","#e78ac3","#fc8d62","#a6d854","#e78ac3","#e5c494","#b3b3b3"];
+
+            // Set 3 - colorbrewer
+            // colors = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"];
+
+            // d3 category10, excluding gray, adding yellow
+            // colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#bcbd22", "#17becf", "ffff33"];
         }
 
-        return d3.rgb(colors[i]).brighter(0.2).toString();
+        var c = sameOrderColor ? colors[idToOrder[i]] : colors[i];
+        return d3.rgb(c).toString();
+        // return d3.rgb(c).brighter(0.2).toString();
     }
 
     /**
@@ -2446,6 +2460,14 @@ sm.timeSets = function() {
         }
 
         return orderedThemes;
+    }
+
+    function computeInverseOrder() {
+        var o = {};
+        for (var key in orderToId) {
+            o[orderToId[key]] = key;
+        }
+        return o;
     }
 
     /**
@@ -3103,7 +3125,7 @@ sm.timeSets = function() {
                     counts[d.layer].push(d.level);
                 }
             });
-            var shapeOutline = sm.shapeOutline().rects(rects).verticalMode(verticalMode).fillHorizontalGap(intersectionMode.substring(0, 8) === "gradient");
+            var shapeOutline = sm.layout.timesetsOutline().rects(rects).verticalMode(verticalMode).fillHorizontalGap(intersectionMode.substring(0, 8) === "gradient");
             shapeOutline.call();
 
             // The path itself
@@ -3381,7 +3403,7 @@ sm.timeSets = function() {
                 continue;
             }
 
-            var color = null;
+            var color = null, aboveColor = null, belowColor = null;
             if (i % 2 === 0) { // Single theme
                 var themeId = orderToId[getFullLayerIndex(i / 2)];
                 if (!activeThemeIds[themeId]) {
@@ -3389,44 +3411,88 @@ sm.timeSets = function() {
                 } else {
                     color = cScale(themeId);
                 }
+            } else {
+                var themeIdAbove = orderToId[getFullLayerIndex((i + 1) / 2)];
+                var themeIdBelow = orderToId[getFullLayerIndex((i - 1) / 2)];
+
+                if (!activeThemeIds[themeIdAbove] || !activeThemeIds[themeIdBelow]) {
+                    continue;
+                } else {
+                    aboveColor = cScale(themeIdAbove);
+                    belowColor = cScale(themeIdBelow);
+                }
             }
+
 
             layerEvents[i].forEach(function(d) {
                 if (d.ref) {
+                    // Start and end colors are the theme's background color
+                    var onePartWidth = 15;
                     var w = d3.select(d.ref).select(".sm-timeSets-svg-event-text").node().getComputedTextLength();
                     var rect = d3.select(d.ref).select(".sm-timeSets-svg-event-background").attr("width", w);
+                    var toPixelRatio = onePartWidth / w;
+                    var startOffset = 0;
+                    var endOffset = 1;
+
+                    // Color transition with fix color to make the color clear: start - c1 - c1 - c2 - c2 - end
+                    var part = endOffset - startOffset;
+
                     if (color) {
                         if (d.themeIds.length === 1) {
-                            d3.select(d.ref).select(".sm-timeSets-svg-event-background").style("fill", "none");
+                            rect.style("fill", "none");
                         } else {
-                            // Try gradient for each event
                             // Vertical gradient from the bottom to the top (y: 1->0)
                             var grad = d3.select(d.ref).append("linearGradient")
                                 .attr("id", "gradient" + d.id)
-                                .attr("x1", 0).attr("y1", 1)
-                                .attr("x2", 0).attr("y2", 0);
+                                .attr("x1", 0).attr("y1", 0)
+                                .attr("x2", 1).attr("y2", 0);
                             rect.style("fill", "url(#gradient" + d.id + ")");
 
-                            // Update color stops
-                            var diffColor = cScale(d.themeIds[1]);
-                            if (diffColor === color) {
-                                diffColor = cScale(d.themeIds[0]);
-                            }
+                            var numStops = (d.themeIds.length - 1) * 2;
+                            var stopColors = d.themeIds.map(function(t) { return cScale(t); }).filter(function(c) { return c !== color; });
+
                             grad.append("stop")
-                                .attr("offset", 0.15)
+                                .attr("offset", startOffset * toPixelRatio)
                                 .attr("stop-color", color);
+
+                            for (var i = 0; i < numStops; i++) {
+                                grad.append("stop")
+                                    .attr("offset", (startOffset + (i + 1) * part) * toPixelRatio)
+                                    .attr("stop-color", stopColors[Math.floor(i / 2)]);
+                            }
+
                             grad.append("stop")
-                                .attr("offset", 0.4)
-                                .attr("stop-color", diffColor);
-                            grad.append("stop")
-                                .attr("offset", 0.6)
-                                .attr("stop-color", diffColor);
-                            grad.append("stop")
-                                .attr("offset", 0.85)
+                                .attr("offset", (startOffset + (numStops + 1) * part) * toPixelRatio)
                                 .attr("stop-color", color);
                         }
                     } else {
-                        d3.select(d.ref).select(".sm-timeSets-svg-event-background").style("fill", "none");
+                        // if (d.themeIds.length === 2) {
+                            rect.style("fill", "none");
+                        // } else {
+                        //     // Vertical gradient from the bottom to the top (y: 1->0)
+                        //     var grad = d3.select(d.ref).append("linearGradient")
+                        //         .attr("id", "gradient" + d.id)
+                        //         .attr("x1", 0).attr("y1", 0)
+                        //         .attr("x2", 1).attr("y2", 0);
+                        //     rect.style("fill", "url(#gradient" + d.id + ")");
+
+                        //     var numStops = (d.themeIds.length - 2) * 2;
+                        //     var stopColors = d.themeIds.map(function(t) { return cScale(t); }).filter(function(c) { return c !== aboveColor && c !== belowColor; });
+
+                        //     grad.append("stop")
+                        //         .attr("offset", startOffset * toPixelRatio)
+                        //         .attr("stop-color", belowColor);
+
+                        //     for (var i = 0; i < numStops; i++) {
+                        //         grad.append("stop")
+                        //             .attr("offset", (startOffset + (i + 1) * part) * toPixelRatio)
+                        //             .attr("stop-color", stopColors[Math.floor(i / 2)]);
+                        //     }
+
+                        //     grad.append("stop")
+                        //         .attr("offset", (startOffset + (numStops + 1) * part) * toPixelRatio)
+                        //         .attr("stop-color", aboveColor);
+                        // }
                     }
                 }
             });
@@ -3513,7 +3579,7 @@ sm.timeSets = function() {
         allBands.forEach(function(b) {
             // Generate outline for band
             var rects = b.events.filter(function(d) { return d.ref && !d.cluster; });
-            shapeOutlines.push({ outline: sm.shapeOutline().verticalMode(verticalMode).rects(rects).call(), setId: b.setId });
+            shapeOutlines.push({ outline: sm.layout.timesetsOutline().verticalMode(verticalMode).rects(rects).call(), setId: b.setId });
         });
 
         return shapeOutlines;
@@ -3530,6 +3596,17 @@ sm.timeSets = function() {
             // console.log(d.level);
             d.top = Math.floor(middle - LEVEL_HEIGHT / 2);
             d.bottom = Math.floor(middle + LEVEL_HEIGHT / 2);
+        });
+    }
+
+    function trimLastEvents(rightmostEvents) {
+        d3.values(rightmostEvents).forEach(function(d) {
+            if (d.cluster) return;
+
+            // Trim events ensuring they don't exceed the right border.
+            if (d.right > width - margin.left) {
+                trimText(d, width - margin.left * 2 - d.left);
+            }
         });
     }
 
@@ -3769,10 +3846,10 @@ sm.timeSets = function() {
                     // Common fields
                     origin: "TimeSets",
                     note: "Test params from TimeSets at " + d3.time.format("%H:%M:%S")(new Date()),
-                    tags: ["TimeSets", "client"],
+                    tags: [ { "name": "TimeSets" }, { "name": "client" } ],
                     createdBy: "phong",
                     screenshot: null,
-                    contentType: "link",
+                    // contentType: "link",
                     // Deep provenance, can be stored in provenance server
                     // provenance: { scale: scale, translate: translate },
                     // originalUrl: document.url // Will be appended with &findingId

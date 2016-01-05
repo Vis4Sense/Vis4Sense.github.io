@@ -1,10 +1,10 @@
 /**
- * ARTICLE-VIEWER module provides a simple dialog that show the article. 
+ * ARTICLE-VIEWER module provides a simple dialog that show the article.
  */
-sm.articleViewer = function() {
+sm.misc.articleViewer = function() {
     var width = 400,
-        height = 250; 
-    
+        height = 250;
+
     /**
      * Main entry of the module.
      */
@@ -20,21 +20,21 @@ sm.articleViewer = function() {
                        show: {effect: 'fade', duration: sm.TRANSITION_SHOW_HIDE},
                        hide: {effect: 'fade', duration: sm.TRANSITION_SHOW_HIDE}
                     });
-                
+
                 d.forEach(function(article, i) {
                     // Title
                     $("<div class='sm-articleViewer-title'></div>").appendTo(container).html(article.originalTitle);
-                    
+
                     // Time
                     var timeText = d3.time.format("%d-%m-%Y")(article.time);
                     if (article.endTime) {
                         timeText += " -- " + d3.time.format("%d-%m-%Y")(article.endTime);
                     }
                     $("<div class='sm-articleViewer-time'></div>").appendTo(container).html(timeText);
-                    
+
                     // Content
                     $("<div class='sm-articleViewer-content'></div>").appendTo(container).html(article.content);
-                    
+
                     if (i !== d.length - 1) {
                         $("<br/><br/>").appendTo(container);
                     }
@@ -54,15 +54,15 @@ sm.articleViewer = function() {
             	       show: {effect: 'fade', duration: sm.TRANSITION_SHOW_HIDE},
                        hide: {effect: 'fade', duration: sm.TRANSITION_SHOW_HIDE}
             		});
-                
+
                 // Title
                 $("<div class='sm-articleViewer-title'></div>").appendTo(container).html(d.originalTitle);
-                
+
                 // Content
                 $("<div class='sm-articleViewer-content'></div>").appendTo(container).html(d.content);
             }
         });
-	} 
-	
+	}
+
    	return module;
 };
