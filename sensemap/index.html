@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SenseMap</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    <style>
+        header {
+            text-align: center;
+            font-family: Georgia;
+        }
+        header img {
+            max-width: 800px;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <header>
+                <h1>SenseMap</h1>
+                <!-- <img src="teaser.png"> -->
+            </header>
+            <!-- <section>
+                <h1 id="description">Project Description</h1>
+            </section>
+            <section>
+                <h1>Live Demo</h1>
+                SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>a Chrome extension</a>.
+            </section>
+            <section>
+                <h1 id="participants">Participants</h1>
+                <ul>
+                    <li><a target='_blank' href="http://scholar.google.co.uk/citations?user=rg2lIjsAAAAJ&hl=en">Phong Nguyen</a></li>
+                    <li><a target='_blank' href="http://kaixu.me">Kai Xu</a></li>
+                    <li><a target='_blank' href="http://www.mdx.ac.uk/about-us/our-people/staff-directory/wong-william">William Wong</a></li>
+                </ul>
+                Email <a href="mailto:p.nguyen@mdx.ac.uk">Phong Nguyen</a>
+            </section>
+            <section>
+                <h1 id="video">Videos</h1>
+                <h4>Shows the background of SensePath and features in analysis mode</h4>
+                <iframe src="https://player.vimeo.com/video/144641566" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <br><br>
+                <h4>Shows two modes of SensePath: capture and analysis</h4>
+                <iframe src="https://player.vimeo.com/video/144640338" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </section>
+            <section>
+                <h1 id="papers">Papers</h1>
+                <ul>
+                    <li>P. H. Nguyen, K. Xu, A. Wheat, B. L. William Wong, S. Attfield, and B. Fields. SensePath: Understanding the Sensemaking Process through Analytic Provenance. <i>IEEE Transactions on Visualization and Computer Graphics, 22(1):41-50, Jan. 2016. </i><a href="paper.pdf" title='Download full paper'><i class="fa fa-file-pdf-o"></i></a></li>
+                </ul>
+            </section>
+            <section>
+                <h1 id="imp">Implementation</h1>
+                <ul>
+                    <li>SensePath is available as a Chrome Extension in the <a href='https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk'>Chrome Web Store</a></li>
+                    <li>Source code is available in <a href="https://github.com/phongvis/SensePath">github</a></li>
+                </ul>
+            </section>-->
+            <section>
+                <h1 id="guide">User Guide</h1>
+                SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>a Chrome extension</a>. Install and click on the <img src="sm-logo-19.png"> icon at the top-right corner of your browser to open the extension. In short, SenseMap will capture, visualize your browsing activities, and allow you to curate your collection to suit you best.
+
+                <h3>Browsing Features</h3>
+                <ul>
+                    <li>You can select a passage of text and <strong>highlight</strong> it using the context menu. Click on the highlight to remove or <strong>add a note</strong>.</li>
+                    <li>A snapshot of a webpage is used to help you recognize it. You can replace that snapshot with a more representative picture in the webpage by right-clicking on the picture you want and select <strong>Set as Page Image</strong>.</li>
+                </ul>
+
+                <h3>Map Interaction</h3>
+                <dl>
+                    <dt>Node</dt>
+                    <dd>
+                        <li>Each node represents a webpage with its logo and title.</li>
+                        <li>You can highlight, minimize, and remove a node using the hovering menu.</li>
+                        <li>Click on a minimized node to maximize it.</li>
+                        <li>Click on a removed node to put it back.</li>
+                    </dd>
+
+                    <dt>Link</dt>
+                    <dd>
+                        <li>Link shows where a page comes from.</li>
+                        <li>You can add custom link by moving the mouse close to the edge of a node (note the mouse cursor changes to the right arrow) then dragding it and dropping on the target.</li>
+                        <li>You can hide or completely remove a link using the hovering menu.</li>
+                        <li>Click on a hidden link to show it.</li>
+                    </dd>
+
+                    <dt>Map Management</dt>
+                    <dd>Click on the three-bars icon to open the toolbar. You can create a new map, save, or load an existing one.</dd>
+
+                    <dt>Manual Mode</dt>
+                    <dd>
+                        <li>Available in the toolbar.</li>
+                        <li>Once use that mode, the layout won't be updated when nodes and links are modified. <strong>However, new nodes can't be added as well.</strong> So, it may only be used when you've done your collecting.</li>
+                    </dd>
+                </dl>
+
+                <strong style="color:red">A note for evaluation: please save your map when finish.</strong>
+            </section>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    </body>
+</html>
