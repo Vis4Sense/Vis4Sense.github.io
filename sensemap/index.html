@@ -63,55 +63,73 @@
             </section>-->
             <section>
                 <h1 id="guide">User Guide</h1>
-                SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>a Chrome extension</a>. Install and click on the <img src="sm-logo-19.png"> icon at the top-right corner of your browser to open the extension. In short, SenseMap will capture, visualize your browsing activities, and allow you to curate your collection to suit you best.
+                SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>a Chrome extension</a>. <strong>Make sure you have the latest version (0.5.4)</strong>. Install and click on the <img src="sm-logo-19.png"> icon at the top-right corner of your browser to open the extension. In short, SenseMap will capture, visualize your browsing activities, and allow you to curate your collection to suit your needs.
 
-                <h3>Browsing Features</h3>
+                <h3>Browser</h3>
                 <ul>
-                    <li>You can select a passage of text and <strong>highlight</strong> it using the context menu. Click on the highlight to remove or <strong>add a note</strong>.</li>
+                    <li>You can select a passage of text and <strong>highlight</strong> it using the context menu. Click on the highlight to <strong>remove or add a note</strong>.</li>
                     <li>A snapshot of a webpage is used to help you recognize it. You can replace that snapshot with a more representative picture in the webpage by right-clicking on the picture you want and select <strong>Set as Page Image</strong>.</li>
                 </ul>
 
-                <h3>Map Interaction</h3>
+                <h3>Collection View</h3>
+                Automatically collects and displays your browsing activities
                 <dl>
-                    <dt>Map</dt>
-                    <dd>
-                        <li>Click on the three-bars icon to open the toolbar. You can create a new map, save, or load an existing one.</li>
-                        <li>There are several ways to pan the map
-                            <ul>
-                                <li>Click on an empty space and drag.</li>
-                                <li>Click on any place while holding shift and drag.</li>
-                                <li>Mouse wheel for vertical pan.</li>
-                                <li>Track pad.</li>
-                            </ul>
-                        </li>
-                    </dd>
-
                     <dt>Node</dt>
                     <dd>
                         <li>Each node represents a webpage with its logo and title.</li>
+                        <li><strong>Keyword search</strong> pages are detected to show with the search icon and keyword.</li>
+                        <li>Highlights and nodes are displayed below but limit to the maximum of 2. Click on <strong>Show All</strong> hovering menu to see all of them.</li>
                         <li>You can go back to a webpage by clicking on the corresponding node.</li>
                         <li>Click on the highlight within a node to go back to that specific highlight.</li>
-                        <li>You can highlight, minimize, and remove a node using the hovering menu.</li>
+                        <li>You can <strong>highlight</strong>, <strong>minimize</strong>, <strong>curate</strong> and <strong>remove</strong> a node using the hovering menu.</li>
+                        <li>Node's background color: <span style="background-color: cyan">cyan</span> for active page, <span style="background-color: #e6e600">yellow</span> for favorite page, and <span style="background-color: #E8A199; border: 2px solid #e74c3c; border-radius: 4px">red</span> for brushing between two views.</li>
+                        <li><span style="border: 1px dashed #6e6e6e; border-radius: 4px">Dashed border</span> indicates unvisited pages</li>
+                        <li>Curated nodes have a little tick <i class="fa fa-check-square" style="color: #2ecc71"></i> at the top right cornder.</li>
                         <li>Click on a minimized node to maximize it.</li>
-                        <li>Click on a removed node to put it back.</li>
                     </dd>
 
                     <dt>Link</dt>
                     <dd>
-                        <li>Link shows where a page comes from.</li>
-                        <li>You can add custom link by moving the mouse close to the edge of a node (note the mouse cursor changes to the right arrow) then dragding it and dropping on the target.</li>
-                        <li>You can hide or completely remove a link using the hovering menu.</li>
-                        <li>Click on a hidden link to show it.</li>
+                        <li>Link shows where a page comes from. <strong style="color:red">Note: please wait for the visiting page  completely loaded before clicking on any links to make sure the link detection work properly. Sometimes, still wrong though!</strong></li>
                     </dd>
 
-                    <dt>Manual Mode</dt>
+                    <dt>Menu</dt>
                     <dd>
-                        <li>Available in the toolbar.</li>
-                        <li>Once use that mode, the layout won't be updated when nodes and links are modified. <strong>However, new nodes can't be added as well.</strong> So, it may only be used when you've done your collecting.</li>
+                        <li>Click on the three-bars icon to open the toolbar. You can create a new map, save, or load an existing one.</li>
+                        <li>You can pause and resume collecting information.</li>
+                        <li>There are several ways to pan the map
+                            <ul>
+                                <li>Click on an empty space and drag.</li>
+                                <li>Click on any place while holding Shift key and drag.</li>
+                                <li>Mouse wheel for vertical pan.</li>
+                                <li>Track pad.</li>
+                            </ul>
+                        </li>
+                        <li>You can zoom the map using plus/minus button at the bottom right corner of the window.</li>
                     </dd>
                 </dl>
 
-                <strong style="color:red">A note for evaluation: please save your map when finish.</strong>
+                <h3>Curation View</h3>
+                Curate your collected information
+                <dl>
+                    <dt>Node</dt>
+                    <dd>
+                        <li>Nodes are added from the collection view by <strong>Curate</strong> button in the hovering menu.</li>
+                        <li>Nodes are always shown with pictures.</li>
+                        <li>You can remove a node using the hovering menu.</li>
+                    </dd>
+
+                    <dt>Link</dt>
+                    <dd>
+                        <li>Links from collection view will be copied to the curation view when nodes are added.</li>
+                        <li>You can add custom link by holding the left mouse button until the cursor changes to the arrow, then dragging it and dropping onto the targeting node.</li>
+                        <li>Custom links are shown with <span style="color:blue">blue</span> color to distinguish with system links.</li>
+                        <li>You can remove a link using the hovering menu.</li>
+                    </dd>
+                </dl>
+
+                <div><strong style="color:red">Unsaved data will be gone if you close SenseMap windows.</strong></div>
+                <div><strong style="color:red">Please save your map when finish and send it to us.</strong></div>
             </section>
         </div>
 
