@@ -14,7 +14,21 @@ $(function() {
 
     var margin = { top: 5, right: 5, bottom: 5, left: 5 },
         width = 1000,
-        height = 200;
+        height = 4500,
+        chartHeight = 200;
+
+    var browTypesHisto = [ 'highlight', 'note' ],
+        colTypesHisto = [ 'favorite-node', 'unfavorite-node', 'minimize-node', 'restore-node' ],
+        curTypesHisto = [ 'curate-node', 'remove-curation-node', 'move-node', 'add-link', 'remove-link' ];
+
+    var browColors = [ '#1f77b4', d3.rgb('#1f77b4').brighter().toString() ],
+        colColors = [ '#ff7f0e', d3.rgb('#ff7f0e').brighter().toString(), d3.rgb('#ff7f0e').darker().toString(), d3.rgb('#ff7f0e').brighter(2).toString() ],
+        curColors = [ '#2ca02c', '#A1A12B', d3.rgb('#2ca02c').brighter(4).toString(),
+            d3.rgb('#2ca02c').brighter().toString(), '#B3ED40' ];
+
+    var browMaxActions = 5,
+        colMaxActions = 21,
+        curMaxActions = 60;
 
     var svg = d3.select("svg")
         .attr("width", width)
@@ -27,6 +41,8 @@ $(function() {
 
     buildTableStructure(columnNames);
 
+    addText("ACTIVITIES IN CURATION VIEW", 200, 300, true);
+
     participants.forEach((p, i) => {
         var browserPath = "user-study/" + p + "/real/browser.json",
             smPath = "user-study/" + p + "/real/sensemap.json";
@@ -38,10 +54,43 @@ $(function() {
                 var segments = extractSegments(browserData);
                 var actions = extractActions(smData);
                 var scale = buildScale(segments);
-                computeLayout(segments, actions, scale);
+                computeLayout(segments, scale);
                 computeStats(segments, actions, columnNames, p);
-                buildVis(p, margin.left, margin.top + i * 60, segments, actions, scale);
+                buildVis(p, margin.left, margin.top + i * 60, segments, scale);
             });
+        });
+
+        var offset = margin.top + 350;
+        d3.json(smPath, smFile => {
+            var smData = preprocessSenseMapData(smFile);
+            var actions = extractActions(smData);
+            buildHistogram(p, margin.left, offset + i * 250, actions, curTypesHisto, curColors, curMaxActions);
+        });
+    });
+
+    var offset = margin.top + 1700;
+    addText("ACTIVITIES IN COLLECTION VIEW", 200, offset - 50, true);
+
+    participants.forEach((p, i) => {
+        var smPath = "user-study/" + p + "/real/sensemap.json";
+        d3.json(smPath, smFile => {
+            offset = margin.top + 1700;
+            var smData = preprocessSenseMapData(smFile);
+            var actions = extractActions(smData);
+            buildHistogram(p, margin.left, offset + i * 250, actions, colTypesHisto, colColors, colMaxActions);
+        });
+    });
+
+    offset = margin.top + 3000;
+    addText("ACTIVITIES IN BROWSER", 200, offset - 50, true);
+
+    participants.forEach((p, i) => {
+        var smPath = "user-study/" + p + "/real/sensemap.json";
+        d3.json(smPath, smFile => {
+            offset = margin.top + 3000;
+            var smData = preprocessSenseMapData(smFile);
+            var actions = extractActions(smData);
+            buildHistogram(p, margin.left, offset + i * 250, actions, browTypesHisto, browColors, browMaxActions);
         });
     });
 
@@ -69,9 +118,9 @@ $(function() {
         return smData;
     }
 
-    function buildScale(actions) {
-        var min = d3.min(actions, d => d.startTime),
-            max = d3.max(actions, d => d.endTime);
+    function buildScale(segments) {
+        var min = d3.min(segments, d => d.startTime),
+            max = d3.max(segments, d => d.endTime);
         return d3.time.scale()
             .domain([ min, max ])
             .range([ 0, width ]);
@@ -142,7 +191,7 @@ $(function() {
         });
     }
 
-    function computeLayout(segments, actions, scale) {
+    function computeLayout(segments, scale) {
         var timeFormat = d3.time.format('%X');
 
         segments.forEach(s => {
@@ -154,13 +203,6 @@ $(function() {
             s.duration = s.endTime - s.startTime;
             s.title = 'start at ' + timeFormat(s.startTime) + ', spent ' + Math.round(s.duration / 1000) + 's in ' + s.view;
         });
-
-        actions.forEach(a => {
-            a.x = scale(a.time);
-            a.y = segmentHeight / 2;
-
-            a.title = a.type + ' at ' + timeFormat(a.time);
-        });
     }
 
     function buildTableStructure() {
@@ -168,6 +210,13 @@ $(function() {
         var tr = head.append('tr');
         columnNames.forEach(c => {
             tr.append('th').attr('class', 'text-center').text(c);
+        });
+
+        var legend = d3.select('#legend'),
+            types = browTypesHisto.concat(colTypesHisto).concat(curTypesHisto),
+            colors = browColors.concat(colColors).concat(curColors);
+        types.forEach((t, i) => {
+            legend.append('span').style('background-color', colors[i]).style('padding', '3px').style('margin', '3px').text(t);
         });
     }
 
@@ -227,12 +276,17 @@ $(function() {
         }));
     }
 
-    function buildVis(title, left, top, segments, actions, scale) {
-        // Title
+    function addText(title, left, top, big) {
         svg.append('text')
             .attr("transform", "translate(" + left + "," + top + ")")
             .text(title)
-            .style('font-weight', 'bold');
+            .style('font-weight', 'bold')
+            .style('font-size', big ? '30px' : '14px');
+    }
+
+    function buildVis(title, left, top, segments, scale) {
+        // Title
+        addText(title, left, top);
 
         var container = svg.append("g").attr("transform", "translate(" + (left + 60) + "," + top + ")");
 
@@ -255,15 +309,80 @@ $(function() {
             .attr('height', d => d.height)
             .attr('class', d => d.view)
             .append('title').text(d => d.title);
+    }
 
-        // Actions
-        // items = container.selectAll('g.action').data(actions).enter()
-        //     .append('g').attr('class', 'action');
-        // items.append('circle')
-        //     .attr('cx', d => d.x)
-        //     .attr('cy', d => d.y)
-        //     .attr('r', 3)
-        //     .attr('class', d => d.view)
-        //     .append('title').text(d => d.title);
+    function buildHistogram(title, left, top, actions, histoTypes, typeColors, maxActions) {
+        // Title
+        svg.append('text')
+            .attr("transform", "translate(" + left + "," + top + ")")
+            .text(title)
+            .style('font-weight', 'bold');
+
+        var startTime = actions[0].time;
+
+        // Bin data
+        var binDuration = 5 * 60 * 1000,
+            numBins = Math.floor((_.last(actions.filter(a => a.type !== 'save-image')).time - startTime) / binDuration) + 1,
+            bins = _.times(numBins, () => []);
+        actions.filter(a => a.type !== 'save-image').forEach(a => {
+            var idx = Math.floor((a.time - startTime) / binDuration);
+            bins[idx].push(a);
+        });
+
+        var layers = d3.layout.stack()(histoTypes.map(t => {
+            return bins.map((b, i) => {
+                return { x: new Date(+startTime + binDuration * i), y: b.filter(a => t.includes(a.type)).length, type: t };
+            });
+        }));
+
+        // Draw
+        var x = d3.scale.ordinal()
+            .rangeRoundBands([ 0, width ]);
+
+        var y = d3.scale.linear()
+            .rangeRound([ chartHeight, 0 ]);
+
+        var z = d3.scale.ordinal()
+            .domain(histoTypes)
+            .range(typeColors);
+
+        x.domain(layers[0].map(function(d) { return d.x; }));
+        y.domain([ 0, maxActions ]); // Use the same scale for easy comparison
+
+        var container = svg.append("g").attr("transform", "translate(" + (left + 60) + "," + top + ")");
+        var layer = container.selectAll(".layer").data(layers)
+            .enter().append("g")
+                .attr("class", "layer")
+                .style("fill", function(d, i) { return z(i); });
+
+        layer.selectAll("rect").data(function(d) { return d; })
+            .enter().append("rect")
+                .attr("x", function(d) { return x(d.x); })
+                .attr("y", function(d) { return y(d.y + d.y0); })
+                .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+                .attr("width", x.rangeBand() - 1)
+                .append("title").text(d => d.y + ' ' + d.type);
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            .tickFormat(d3.time.format("%H:%M"));
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(5)
+
+        container.append("g")
+            .attr("class", "axis axis--x")
+            // .attr("transform", "translate(0," + chartHeight + ")")
+            .attr("transform", "translate(" + (-1 - x.rangeBand() / 2) + "," + chartHeight + ")")
+            .call(xAxis)
+            .selectAll("text")
+                .attr("y", -2);
+
+        container.append("g")
+            .attr("class", "axis axis--y")
+            .call(yAxis);
     }
 });
