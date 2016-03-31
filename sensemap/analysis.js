@@ -1,5 +1,12 @@
 $(function() {
     var participants = [ 'aaron', 'ben', 'mabs', 'magda', 'reggie' ],
+        anonymousParticipants = {
+            aaron: 'P1',
+            ben: 'P2',
+            mabs: 'P3',
+            magda: 'P4',
+            reggie: 'P5'
+        },
         // The maximum amount of ms that the user can be idle but still consider active
         maxIdleTime = 60000,
         // The minimum amount of ms that the use must be in a view to be considered as working,
@@ -43,6 +50,15 @@ $(function() {
 
     addText("ACTIVITIES IN CURATION VIEW", 200, 300, true);
 
+    // Histograms have varied height, manually adjust
+    var offsetLookup = {
+        'aaron': margin.top + 350,
+        'ben': margin.top + 515,
+        'mabs': margin.top + 710,
+        'magda': margin.top + 945,
+        'reggie': margin.top + 1070
+    }
+
     participants.forEach((p, i) => {
         var browserPath = "user-study/" + p + "/real/browser.json",
             smPath = "user-study/" + p + "/real/sensemap.json";
@@ -64,35 +80,35 @@ $(function() {
         d3.json(smPath, smFile => {
             var smData = preprocessSenseMapData(smFile);
             var actions = extractActions(smData);
-            buildHistogram(p, margin.left, offset + i * 250, actions, curTypesHisto, curColors, curMaxActions);
+            buildHistogram(p, margin.left, offsetLookup[p], actions, curTypesHisto, curColors, curMaxActions);
         });
     });
 
-    var offset = margin.top + 1700;
-    addText("ACTIVITIES IN COLLECTION VIEW", 200, offset - 50, true);
+    // var offset = margin.top + 1700;
+    // addText("ACTIVITIES IN COLLECTION VIEW", 200, offset - 50, true);
 
-    participants.forEach((p, i) => {
-        var smPath = "user-study/" + p + "/real/sensemap.json";
-        d3.json(smPath, smFile => {
-            offset = margin.top + 1700;
-            var smData = preprocessSenseMapData(smFile);
-            var actions = extractActions(smData);
-            buildHistogram(p, margin.left, offset + i * 250, actions, colTypesHisto, colColors, colMaxActions);
-        });
-    });
+    // participants.forEach((p, i) => {
+    //     var smPath = "user-study/" + p + "/real/sensemap.json";
+    //     d3.json(smPath, smFile => {
+    //         offset = margin.top + 1700;
+    //         var smData = preprocessSenseMapData(smFile);
+    //         var actions = extractActions(smData);
+    //         buildHistogram(p, margin.left, offset + i * 250, actions, colTypesHisto, colColors, colMaxActions);
+    //     });
+    // });
 
-    offset = margin.top + 3000;
-    addText("ACTIVITIES IN BROWSER", 200, offset - 50, true);
+    // offset = margin.top + 3000;
+    // addText("ACTIVITIES IN BROWSER", 200, offset - 50, true);
 
-    participants.forEach((p, i) => {
-        var smPath = "user-study/" + p + "/real/sensemap.json";
-        d3.json(smPath, smFile => {
-            offset = margin.top + 3000;
-            var smData = preprocessSenseMapData(smFile);
-            var actions = extractActions(smData);
-            buildHistogram(p, margin.left, offset + i * 250, actions, browTypesHisto, browColors, browMaxActions);
-        });
-    });
+    // participants.forEach((p, i) => {
+    //     var smPath = "user-study/" + p + "/real/sensemap.json";
+    //     d3.json(smPath, smFile => {
+    //         offset = margin.top + 3000;
+    //         var smData = preprocessSenseMapData(smFile);
+    //         var actions = extractActions(smData);
+    //         buildHistogram(p, margin.left, offset + i * 250, actions, browTypesHisto, browColors, browMaxActions);
+    //     });
+    // });
 
     function preprocessBrowserData(f) {
         var browserData = f.data;
@@ -212,8 +228,10 @@ $(function() {
             tr.append('th').attr('class', 'text-center').text(c);
         });
 
+        var localCurTypesHisto = [ 'add node', 'remove node', 'move node', 'add link', 'remove link' ];
+
         var legend = d3.select('#legend'),
-            types = browTypesHisto.concat(colTypesHisto).concat(curTypesHisto),
+            types = browTypesHisto.concat(colTypesHisto).concat(localCurTypesHisto),
             colors = browColors.concat(colColors).concat(curColors);
         types.forEach((t, i) => {
             legend.append('span').style('background-color', colors[i]).style('padding', '3px').style('margin', '3px').text(t);
@@ -226,7 +244,7 @@ $(function() {
 
             if (participants.includes(t)) {
                 var href = "user-study/" + t + "/screenshot.png";
-                td.html("<a target='_blank' href=" + href + ">" + t + "</a>");
+                td.html("<a target='_blank' href=" + href + ">" + anonymousParticipants[t] + "</a>");
             } else {
                 td.text(t);
             }
@@ -277,18 +295,20 @@ $(function() {
     }
 
     function addText(title, left, top, big) {
+        title = anonymousParticipants[title] || title;
+
         svg.append('text')
             .attr("transform", "translate(" + left + "," + top + ")")
             .text(title)
             .style('font-weight', 'bold')
-            .style('font-size', big ? '30px' : '14px');
+            .style('font-size', big ? '30px' : '22px');
     }
 
     function buildVis(title, left, top, segments, scale) {
         // Title
         addText(title, left, top);
 
-        var container = svg.append("g").attr("transform", "translate(" + (left + 60) + "," + top + ")");
+        var container = svg.append("g").attr("transform", "translate(" + (left + 30) + "," + top + ")");
 
         // Axis
         var axis = d3.svg.axis().scale(scale);
@@ -313,10 +333,7 @@ $(function() {
 
     function buildHistogram(title, left, top, actions, histoTypes, typeColors, maxActions) {
         // Title
-        svg.append('text')
-            .attr("transform", "translate(" + left + "," + top + ")")
-            .text(title)
-            .style('font-weight', 'bold');
+        addText(title, left, top);
 
         var startTime = actions[0].time;
 
@@ -347,9 +364,15 @@ $(function() {
             .range(typeColors);
 
         x.domain(layers[0].map(function(d) { return d.x; }));
-        y.domain([ 0, maxActions ]); // Use the same scale for easy comparison
 
-        var container = svg.append("g").attr("transform", "translate(" + (left + 60) + "," + top + ")");
+        // y: same ratio domain/range to save space and comparable
+        var localMaxActions = d3.max(bins, b => b.length),
+            ratio = localMaxActions / maxActions,
+            localChartHeight = chartHeight * ratio;
+        y.rangeRound([ localChartHeight, 0 ])
+            .domain([ 0, localMaxActions ]);
+
+        var container = svg.append("g").attr("transform", "translate(" + (left + 50) + "," + top + ")");
         var layer = container.selectAll(".layer").data(layers)
             .enter().append("g")
                 .attr("class", "layer")
@@ -375,11 +398,18 @@ $(function() {
 
         container.append("g")
             .attr("class", "axis axis--x")
-            // .attr("transform", "translate(0," + chartHeight + ")")
-            .attr("transform", "translate(" + (-1 - x.rangeBand() / 2) + "," + chartHeight + ")")
+            .attr("transform", "translate(0," + localChartHeight + ")")
             .call(xAxis)
             .selectAll("text")
                 .attr("y", -2);
+
+        // Move tick and text to the begining of bin
+        var offset = -1 - x.rangeBand() / 2;
+        container.selectAll('.axis--x .tick')
+            .each(function(d) {
+                var x = d3.transform(d3.select(this).attr('transform')).translate[0];
+                d3.select(this).attr('transform', 'translate(' + (x + offset) + ',0)');
+            });
 
         container.append("g")
             .attr("class", "axis axis--y")

@@ -8,7 +8,7 @@
         <style>
             html, body, svg {
                 font-family: Arial, Helvetica, sans-serif;
-                font-size: 14px;
+                font-size: 24px;
                 padding: 0;
                 cursor: default;
                 display: block; /* important for svg, otherwise overflow */
@@ -17,10 +17,11 @@
 
             text {
                 dominant-baseline: text-before-edge;
+                font-size: 22px;
             }
 
             .browser {
-                fill: #1f77b4;
+                fill: #ccc;
             }
 
             .col {
@@ -29,22 +30,6 @@
 
             .cur {
                 fill: #2ca02c;
-            }
-
-            circle.browser {
-                fill: #1f77b4;
-            }
-
-            circle.col {
-                fill: #ff7f0e;
-            }
-
-            circle.cur {
-                fill: #2ca02c;
-            }
-
-            circle.mixed {
-                fill: #7f7f7f;
             }
 
             th:nth-child(2),
@@ -79,6 +64,14 @@
 
             .thing-2 {
                 fill: green;
+            }
+
+            .axis--x .tick:nth-child(even) {
+                display: none;
+            }
+
+            .axis--y .tick:first-child {
+                display: none;
             }
         </style>
     </head>
