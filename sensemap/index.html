@@ -22,57 +22,44 @@
         <div class="container">
             <header>
                 <h1>SenseMap</h1>
-                <!-- <img src="teaser.png"> -->
+                <img src="history-map.png" style="height: 600px"/>
+                <img src="knowledge-map.png" style="height: 600px"/>
             </header>
-            <!-- <section>
+            <section>
                 <h1 id="description">Project Description</h1>
+                <p>Sensemaking is described as the process of comprehension, finding meaning and gaining insight from information, producing new knowledge and informing further action. Very often, users get lost when solving a complicated task using a big dataset over a long period of exploration and analysis. They may forget what they have done, are not aware of where they are in the context of the overall task, and do not know where to continue.  In this paper, we introduce a tool, SenseMap, to address these issues in the context of browser-based online sensemaking. We conducted a semi-structured interview with nine participants to explore how they search, manage, and synthesize online information for their daily work activities. This is followed by a series of design workshops to walk the user scenarios, generate design questions, and formulate solutions relating to user interactions, tool features and manifestation. A simplified model based on Pirolli and Card’s sensemaking model is derived to better represent the browser behaviors we found and to guide the development of design requirements: users iteratively collect information sources relevant to the task, curate them in a way that makes sense, and finally communicate the findings to others. SenseMap automatically captures a user’s sensemaking actions, i.e., analytic provenance, and provides multi-linked views to visualize and curate the collected information, and communicate the findings. To explore how SenseMap is used, we conducted a user study in naturalistic work setting with five participants completing the same sensemaking task related to their daily work activities. Most of the participants found the tool intuitive to use. It helped them to organize information sources, to quickly navigate to the sources they wanted, and enabled them to effectively communicate their findings. A process model is also derived based on both quantitative and qualitative data analysis.</p>
             </section>
             <section>
                 <h1>Live Demo</h1>
                 SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>a Chrome extension</a>.
             </section>
             <section>
-                <h1 id="participants">Participants</h1>
-                <ul>
-                    <li><a target='_blank' href="http://scholar.google.co.uk/citations?user=rg2lIjsAAAAJ&hl=en">Phong Nguyen</a></li>
-                    <li><a target='_blank' href="http://kaixu.me">Kai Xu</a></li>
-                    <li><a target='_blank' href="http://www.mdx.ac.uk/about-us/our-people/staff-directory/wong-william">William Wong</a></li>
-                </ul>
-                Email <a href="mailto:p.nguyen@mdx.ac.uk">Phong Nguyen</a>
-            </section>
-            <section>
                 <h1 id="video">Videos</h1>
-                <h4>Shows the background of SensePath and features in analysis mode</h4>
-                <iframe src="https://player.vimeo.com/video/144641566" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                <br><br>
-                <h4>Shows two modes of SensePath: capture and analysis</h4>
-                <iframe src="https://player.vimeo.com/video/144640338" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe src="https://player.vimeo.com/video/161322047" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </section>
             <section>
                 <h1 id="papers">Papers</h1>
                 <ul>
-                    <li>P. H. Nguyen, K. Xu, A. Wheat, B. L. William Wong, S. Attfield, and B. Fields. SensePath: Understanding the Sensemaking Process through Analytic Provenance. <i>IEEE Transactions on Visualization and Computer Graphics, 22(1):41-50, Jan. 2016. </i><a href="paper.pdf" title='Download full paper'><i class="fa fa-file-pdf-o"></i></a></li>
                 </ul>
             </section>
             <section>
                 <h1 id="imp">Implementation</h1>
                 <ul>
-                    <li>SensePath is available as a Chrome Extension in the <a href='https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk'>Chrome Web Store</a></li>
-                    <li>Source code is available in <a href="https://github.com/phongvis/SensePath">github</a></li>
+                    <li>SenseMap is available as a Chrome Extension in the <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>Chrome Web Store</a></li>
                 </ul>
-            </section>-->
+            </section>
             <section>
                 <h1 id="guide">User Guide</h1>
-                SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>a Chrome extension</a>. <strong>Make sure you have the latest version (0.5.4)</strong>. Install and click on the <img src="sm-logo-19.png"> icon at the top-right corner of your browser to open the extension. In short, SenseMap will capture, visualize your browsing activities, and allow you to curate your collection to suit your needs.
+                SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'>a Chrome extension</a>. Install and click on the <img src="sm-logo-19.png"> icon at the top-right corner of your browser to open the extension. In short, SenseMap will capture, visualize your browsing activities, and allow you to curate your collection to suit your needs.
 
-                <h3>Browser</h3>
+                <h3>Browser View</h3>
                 <ul>
                     <li>You can select a passage of text and <strong>highlight</strong> it using the context menu. Click on the highlight to <strong>remove or add a note</strong>.</li>
                     <li>A snapshot of a webpage is used to help you recognize it. You can replace that snapshot with a more representative picture in the webpage by right-clicking on the picture you want and select <strong>Set as Page Image</strong>.</li>
                 </ul>
 
-                <h3>Collection View</h3>
-                Automatically collects and displays your browsing activities
+                <h3>History Map</h3>
+                Displays your browsing activities
                 <dl>
                     <dt>Node</dt>
                     <dd>
@@ -90,7 +77,7 @@
 
                     <dt>Link</dt>
                     <dd>
-                        <li>Link shows where a page comes from. <strong style="color:red">Note: please wait for the visiting page  completely loaded before clicking on any links to make sure the link detection work properly. Sometimes, still wrong though!</strong></li>
+                        <li>Link shows where a page comes from. </li>
                     </dd>
 
                     <dt>Menu</dt>
@@ -109,7 +96,7 @@
                     </dd>
                 </dl>
 
-                <h3>Curation View</h3>
+                <h3>Knowledge Map</h3>
                 Curate your collected information
                 <dl>
                     <dt>Node</dt>
@@ -127,9 +114,6 @@
                         <li>You can remove a link using the hovering menu.</li>
                     </dd>
                 </dl>
-
-                <div><strong style="color:red">Unsaved data will be gone if you close SenseMap windows.</strong></div>
-                <div><strong style="color:red">Please save your map when finish and send it to us.</a></strong> Email <a href="mailto:p.nguyen@mdx.ac.uk">Phong Nguyen</a> (p.nguyen@mdx.ac.uk).</div>
             </section>
         </div>
 
