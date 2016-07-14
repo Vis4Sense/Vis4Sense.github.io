@@ -1,6 +1,6 @@
 $(function() {
     var participants = [ 'aaron', 'ben', 'mabs', 'magda', 'reggie' ],
-        anonymousParticipants = {
+    	anonymousParticipants = {
             aaron: 'P1',
             ben: 'P2',
             mabs: 'P3',
@@ -33,6 +33,9 @@ $(function() {
         curColors = [ '#2ca02c', '#A1A12B', d3.rgb('#2ca02c').brighter(4).toString(),
             d3.rgb('#2ca02c').brighter().toString(), '#B3ED40' ];
 
+    // For paper, just use different hues for curation actions
+    curColors = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00'];
+
     var browMaxActions = 5,
         colMaxActions = 21,
         curMaxActions = 60;
@@ -53,10 +56,10 @@ $(function() {
     // Histograms have varied height, manually adjust
     var offsetLookup = {
         'aaron': margin.top + 350,
-        'ben': margin.top + 515,
-        'mabs': margin.top + 710,
-        'magda': margin.top + 945,
-        'reggie': margin.top + 1070
+        'ben': margin.top + 470,
+        'mabs': margin.top + 640,
+        'magda': margin.top + 780,
+        'reggie': margin.top + 880
     }
 
     participants.forEach((p, i) => {
@@ -301,7 +304,8 @@ $(function() {
             .attr("transform", "translate(" + left + "," + top + ")")
             .text(title)
             .style('font-weight', 'bold')
-            .style('font-size', big ? '30px' : '22px');
+            .style('font-size', big ? '30px' : '22px')
+            .style('fill', 'orange');
     }
 
     function buildVis(title, left, top, segments, scale) {
@@ -333,7 +337,7 @@ $(function() {
 
     function buildHistogram(title, left, top, actions, histoTypes, typeColors, maxActions) {
         // Title
-        addText(title, left, top);
+        addText(title, left + 12, top - 10);
 
         var startTime = actions[0].time;
 
@@ -341,14 +345,14 @@ $(function() {
         var binDuration = 5 * 60 * 1000,
             numBins = Math.floor((_.last(actions.filter(a => a.type !== 'save-image')).time - startTime) / binDuration) + 1,
             bins = _.times(numBins, () => []);
-        actions.filter(a => a.type !== 'save-image').forEach(a => {
+        actions.filter(a => histoTypes.includes(a.type)).forEach(a => {
             var idx = Math.floor((a.time - startTime) / binDuration);
             bins[idx].push(a);
         });
 
         var layers = d3.layout.stack()(histoTypes.map(t => {
-            return bins.map((b, i) => {
-                return { x: new Date(+startTime + binDuration * i), y: b.filter(a => t.includes(a.type)).length, type: t };
+        	return bins.map((b, i) => {
+                return { x: binDuration * i / 60 / 1000, y: b.filter(a => t === a.type).length, type: t };
             });
         }));
 
@@ -363,7 +367,11 @@ $(function() {
             .domain(histoTypes)
             .range(typeColors);
 
-        x.domain(layers[0].map(function(d) { return d.x; }));
+        // To make all charts for curation having the same domain, ensuring bar widths are unique
+        var sharedDomain = [];
+        for (var i = 0; i < 24; i++) sharedDomain.push(i * 5);
+        // x.domain(layers[0].map(function(d) { return d.x; }));
+    	x.domain(sharedDomain);
 
         // y: same ratio domain/range to save space and comparable
         var localMaxActions = d3.max(bins, b => b.length),
@@ -371,6 +379,7 @@ $(function() {
             localChartHeight = chartHeight * ratio;
         y.rangeRound([ localChartHeight, 0 ])
             .domain([ 0, localMaxActions ]);
+        console.log(y.domain())
 
         var container = svg.append("g").attr("transform", "translate(" + (left + 50) + "," + top + ")");
         var layer = container.selectAll(".layer").data(layers)
@@ -388,13 +397,12 @@ $(function() {
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .orient("bottom")
-            .tickFormat(d3.time.format("%H:%M"));
+            .orient("bottom");
 
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left")
-            .ticks(5)
+            .ticks(3)
 
         container.append("g")
             .attr("class", "axis axis--x")
