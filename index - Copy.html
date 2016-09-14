@@ -60,44 +60,10 @@
 <body id="home">
 
 <!-- Preloader -->
-<!--
 <div id="preloader">
     <div id="status"></div>
 </div>
--->
 
-<!-- FullScreen -->
-
-<!--
-<div class="intro-header">
-    <video loop="" id="bg-video" class="fullscreen-video">
-        <source src="http://blacktie.co/demo/appi/video/appi.webm" type="video/webm">
-        <source src="http://blacktie.co/demo/appi/video/appi.mp4" type="video/mp4">
-    </video>
-    <div class="col-xs-12 text-center abcen1">
-        <h1 class="h1_home wow fadeIn" data-wow-delay="0.4s">Data Visualization for Sensemaking</h1>
-
-        <h3 class="h3_home wow fadeIn" data-wow-delay="0.6s">Middlesex University, London, UK</h3>
-        <ul class="list-inline intro-social-buttons">
-            <li><a href="#newsletter" class="btn  btn-lg mybutton_cyano wow fadeIn"
-                   data-wow-delay="0.8s"><span class="network-name">Newsletter</span></a>
-            </li>
-            <li id="download"><a href="#projects" class="btn  btn-lg mybutton_standard wow swing wow fadeIn"
-                                 data-wow-delay="1.2s"><span class="network-name">Recent Projects</span></a>
-            </li>
-        </ul>
-    </div>
-     /.container 
-    <div class="col-xs-12 text-center abcen wow fadeIn">
-        <div class="button_down ">
-            <a class="imgcircle wow bounceInUp" data-wow-duration="1.5s" href="#about-us"> <img
-                    class="img_scroll"
-                    src="img/icon/circle.png"
-                    alt=""> </a>
-        </div>
-    </div>
-</div>
--->
 
 <!-- NavBar-->
 <nav class="navbar-default" role="navigation">
@@ -115,36 +81,38 @@
         <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
             <ul class="nav navbar-nav">
 
-                <li class="menuItem"><a href="#about">About</a></li>
+                <li class="menuItem"><a href="#about-us">About</a></li>
                 <li class="menuItem"><a href="#projects">Projects</a></li>
-                <li class="menuItem"><a href="#people">People</a></li>
-                <li class="menuItem"><a href="#people">Contact</a></li>
+                <li class="menuItem"><a href="#people">People</a></li>                
+                <li class="menuItem"><a href="#contact">Contact</a></li>
             </ul>
         </div>
 
     </div>
 </nav>
 
-<!-- About -->
-<div id="about" class="content-section-c" style="border:0; color:white">
+<!-- What is -->
+<div id="about-us" class="content-section-b" style="border-top: 0">
     <div class="container">
         <div class="row">
+        <div class="col-md-12">
+            
+            <img class="img-responsive" src="http://vis4sense.github.io/sensepath/teaser.png">
+            
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 wow fadeInDown text-center">
-                <h1 class="h1_home wow fadeIn" data-wow-delay="0.4s">Data Visualization for Sensemaking</h1>
+                <h3>About Us</h3>
 
-                <h3 class="h3_home wow fadeIn" data-wow-delay="0.6s">Middlesex University, London, UK</h3>
-
-
-                <p class="lead">What is sensemaking? It is the process that people make sense of data, usually with the help of some tools such as Excel, R, and Tableau.</p>
-                <p class="lead">Different from these data analysis tools, a sensemaking tool help users to collect data, organise findings, form hypothesis, and share analysis process.</p>
-                <p class="lead">We focus on designing such sensemaking tools that are based on data visualisation.</p>
+                <p class="lead">What is sensemaking? It is the process that people make sense of data, usually with the help of some tools such as Excel, R, and Tableau.
+                    Different from these data analysis tools, a sensemaking tool help users to collect data, organise findings, form hypothesis, and share analysis process.
+                    We focus on designing new sensemaking tools that are based on data visualisation.
+                </p>
             </div>
         </div>
     </div>
 </div>
-    
-<!--list of publications-->
-
 <div hidden id="recent_publication" class="content-section-b" style="border-top: 0">
     <div class="container">
 
@@ -241,7 +209,8 @@
     </div>
 </div>
 
-<div id="projects" class="content-section-a">
+
+<div hidden id="useit" class="content-section-a">
 
     <div class="container">
 
@@ -260,29 +229,45 @@
                     Provenance
                 </div>
                 <p class="lead">
-                    Make everyone sensemaking tasks, such as finding the best camera, more efficient and less frustrating.
+                    Sensemaking is described as the process of comprehension, finding meaning
+                    and gaining insight from information, producing new knowledge and informing further action. Very
+                    often, users get lost when solving a complicated task using a big dataset over a long period of
+                    exploration and analysis
                 </p>
 
-                <p><a class="btn btn-embossed btn-primary" href="http://vis4sense.github.io/sensemap/" role="button">Details</a>
-                    <a class="btn btn-embossed btn-info" target="_blank" href="https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb" role="button">Chrome extension</a></p>
+                <p><a class="btn btn-embossed btn-primary" href="#" role="button">View Details</a>
+                    <a class="btn btn-embossed btn-info" href="#" role="button">Visit Website</a></p>
             </div>
         </div>
     </div>
     <!-- /.container -->
 </div>
 
-<div class="content-section-b">
+<div id="projects" class="content-section-b">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 fadeInLeftBig">
-<!--                <div id="owl-demo-2" class="owl-carousel">-->
-                    <a href="http://vis4sense.github.io/sensepath/index.html">
-<!--                        <div class="item">-->
+            <div class="col-sm-6 wow fadeInLeftBig">
+                <div id="owl-demo-2" class="owl-carousel">
+                    <a href="http://vis4sense.github.io/sensepath/index.html" class="image-link">
+                        <div class="item">
                             <img class="img-responsive img-rounded"
                                  src="http://vis4sense.github.io/sensepath/teaser.png" alt="">
-<!--                        </div>-->
+                        </div>
                     </a>
-<!--                </div>-->
+                    <a href="http://vis4sense.github.io/sensepath/index.html" class="image-link">
+                        <div class="item">
+                            <iframe src="https://player.vimeo.com/video/144641566" width="500" height="281"
+                                    frameborder="0" webkitallowfullscreen="" mozallowfullscreen=""
+                                    allowfullscreen=""></iframe>
+                        </div>
+                    </a>
+                    <a href="http://vis4sense.github.io/sensepath/index.html" class="image-link">
+                        <div class="item">
+                            <img class="img-responsive img-rounded"
+                                 src="http://vis4sense.github.io/sensepath/teaser.png" alt="">
+                        </div>
+                    </a>
+                </div>
             </div>
 
             <div class="col-sm-6 wow fadeInRightBig" data-animation-delay="200">
@@ -292,87 +277,110 @@
                     Provenance
                 </div>
                 <p class="lead">
-                    Transcription and coding no longer takes days or weeks, so you can have time for the actual research.
+                    Sensemaking is described as the process of comprehension, finding meaning and gaining insight from
+                    information, producing new knowledge and informing further action
                 </p>
 
-                <p><a class="btn btn-embossed btn-primary" href="http://vis4sense.github.io/sensepath/index.html" role="button">Details</a>
-                    <a target="_blank" class="btn btn-embossed btn-info" href="https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk" role="button">Chrome extension</a></p>
+                <p><a class="btn btn-embossed btn-primary" href="http://vis4sense.github.io/sensepath/index.html" role="button">View Details</a>
+                    <a target="_blank" class="btn btn-embossed btn-info" href="https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk" role="button">Visit Demo</a></p>
             </div>
         </div>
     </div>
 </div>
-    
+
 <div class="content-section-a">
     <div class="container">
         <div class="row">
             <div class="col-sm-6 wow fadeInLeftBig" data-animation-delay="200">
-                <h3 class="section-heading">SAVI and SenseMAP</h3>
-
-                <div class="sub-title lead3">isual Analysis of Streaming Data with SAVI and SenseMAP
-                </div>
-                <p class="lead">
-                    Social Analytics VIsualiszation (SAVI) and Sense Making with Analytic Provenance (SenseMAP): Social media analysis made easier. Honourable mention at VAST Challenge 2014 MC3.
-                </p>
-
-                <p><a class="btn btn-embossed btn-primary" href="#" role="button">Details</a>
-                    <a target="_blank" class="btn btn-embossed btn-info" href="http://bigdata.mdx.ac.uk:443/mc3" role="button">Online demo</a></p>
-            </div>
-            
-            <div class="col-sm-6 wow fadeInRightBig">
-                    <a href="http://vis4sense.github.io/vast2014mc3/" class="image-link">
-                        <div class="item">
-                            <img class="img-responsive img-rounded"
-                                 src="http://vis4sense.github.io/vast2014mc3/savi-timeline.png" alt="">
-                        </div>
-                    </a>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
-
-<div class="content-section-b">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 wow fadeInLeftBig">
-<!--                <div id="owl-demo-1" class="owl-carousel">-->
-
-                <a href="http://vis4sense.github.io/timesets/index.html" class="image-link">
-                    <div class="item">
-                        <img class="img-responsive"
-                             src="timesets-cia.png" alt="">
-                    </div>
-                </a>
-
-<!--                </div>-->
-            </div>
-            
-            <div class="col-sm-6 wow fadeInRightBig" data-animation-delay="200">
                 <h3 class="section-heading">TimeSets</h3>
 
                 <div class="sub-title lead3">Timeline Visualization with Set Relations
                 </div>
                 <p class="lead">
-                    Timeline visualization with sets, so you can easily track a person/organisation and see who is interacting with whom. 
+                    We introduce a novel timeline visualization technique, TimeSets, that helps make sense of complex
+                    temporal datasets by showing the set relationships among individual events
                 </p>
 
-                <p><a class="btn btn-embossed btn-primary" href="#" role="button">Details</a>
-                    <a target="_blank" class="btn btn-embossed btn-info" href="http://vis4sense.github.io/timesets/demo/index.html" role="button">Online demo</a></p>
+                <p><a class="btn btn-embossed btn-primary" href="#" role="button">View Details</a>
+                    <a target="_blank" class="btn btn-embossed btn-info" href="http://vis4sense.github.io/timesets/demo/index.html" role="button">Visit Demo</a></p>
             </div>
 
+            <div class="col-sm-6 wow fadeInRightBig">
+                <div id="owl-demo-1" class="owl-carousel">
+                    <a href="img/iphone.png" class="image-link">
+                        <div class="item">
+                            <iframe src="https://player.vimeo.com/video/144646446" width="500" height="281"
+                                    frameborder="0" webkitallowfullscreen="" mozallowfullscreen=""
+                                    allowfullscreen=""></iframe>
+                        </div>
+                    </a>
+                    <a href="img/iphone.png" class="image-link">
+                        <div class="item">
+                            <img class="img-responsive img-rounded"
+                                 src="http://vis4sense.github.io/timesets/teaser.png" alt="">
+                        </div>
+                    </a>
+                    <a href="img/iphone.png" class="image-link">
+                        <div class="item">
+                            <iframe src="https://player.vimeo.com/video/144644488" width="500" height="281"
+                                    frameborder="0" webkitallowfullscreen="" mozallowfullscreen=""
+                                    allowfullscreen=""></iframe>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
+        </div>
+    </div>
+</div>
 
+<div class="content-section-b">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 wow fadeInLeftBig">
+                <div id="owl-demo-2" class="owl-carousel">
+                    <a href="img/iphone.png" class="image-link">
+                        <div class="item">
+                            <img class="img-responsive img-rounded"
+                                 src="http://vis4sense.github.io/vast2014mc3/savi-map.jpg" alt="">
+                        </div>
+                    </a>
+                    <a href="img/iphone.png" class="image-link">
+                        <div class="item">
+                            <iframe src="https://player.vimeo.com/video/144674076" width="500" height="281"
+                                    frameborder="0" webkitallowfullscreen="" mozallowfullscreen=""
+                                    allowfullscreen=""></iframe>
+                        </div>
+                    </a>
+                    <a href="img/iphone.png" class="image-link">
+                        <div class="item">
+                            <img class="img-responsive img-rounded"
+                                 src="http://vis4sense.github.io/vast2014mc3/savi-timeline.png" alt="">
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6 wow fadeInRightBig" data-animation-delay="200">
+                <h3 class="section-heading">SAVI and SenseMAP</h3>
+
+                <div class="sub-title lead3">isual Analysis of Streaming Data with SAVI and SenseMAP
+                </div>
+                <p class="lead">
+                    Two tools were developed for the analysis tasks in the VAST Challenge 2014 Mini-Challenge 3: Social
+                    Analytics VIsualiszation (SAVI) and Sense Making with Analytic Provenance (SenseMAP).
+                </p>
+
+                <p><a class="btn btn-embossed btn-primary" href="#" role="button">View Details</a>
+                    <a target="_blank" class="btn btn-embossed btn-info" href="http://vis4sense.github.io/vast2014mc3/index.html" role="button">Visit Demo</a></p>
+            </div>
         </div>
     </div>
 </div>
 
 
 
-
 <!-- Screenshot -->
-<!--
 <div hidden id="screen" class="content-section-b">
     <div class="container">
         <div class="row">
@@ -426,16 +434,14 @@
 
 
 </div>
--->
 
-<!--
 <div id="newsletter" class="content-section-c ">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center white">
                 <h2>Get Live Updates</h2>
 
-                <p class="lead" style="margin-top:0">A special thanks to Death.</p>
+                <!--<p class="lead" style="margin-top:0">A special thanks to Death.</p>-->
             </div>
             <div class="col-md-6 col-md-offset-3 text-center">
                 <div class="mockup-content">
@@ -462,15 +468,16 @@
         </div>
     </div>
 </div>
--->
 
 <!-- people -->
-<div  id="people" class="content-section-a">
+<div  id="credits" class="content-section-a">
     <div class="container">
         <div class="row">
 
             <div class="col-md-6 col-md-offset-3 text-center wrap_title">
-                <h2>People</h2>                
+                <h2>People</h2>
+
+                <p class="lead" style="margin-top:0">A special thanks to the hardworking team</p>
             </div>
 
             <div class="col-sm-6  block wow bounceIn">
@@ -481,26 +488,24 @@
                     <div class="col-md-8 box-ct">
                         <h3> Dr Kai Xu </h3>
 
-                        <p> Team leader <br>
-                            Associate Professor in Data Analytics <br>
-                            Middlesex University <br>
-                            k.xu@mdx.ac.uk </p>
+                        <p> BEng, PhD <br>
+                            ROLE:Associate Professor in Data Analytics <br>
+                            SCHOOL: Science & Technology <br>
+                            DEPARTMENT: Computer Science <br>
+                            TELEPHONE:+44 (0)20 8411 5510 <br>
+                            EMAIL:K.Xu@mdx.ac.uk </p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 block wow bounceIn">
                 <div class="row">
                     <div class="col-md-4 ">
-                        <img class="img-circle img-responsive" src="phong.jpeg">
+                        <i class="fa fa-picture-o fa-4x "> </i>
                     </div>
                     <div class="col-md-8 box-ct">
-                        <h3> Phong Hai Nguyen </h3>
+                        <h3> Owl-Carousel </h3>
 
-                        <p> Lead developer <br>
-                            PhD student <br>
-                            Middlesex University <br>
-                            p.nguyen@mdx.ac.uk
-                        </p>
+                        <p> Nullam mo arcu ac molestie scelerisqu vulputate, molestie ligula gravida, tempus ipsum.</p>
                     </div>
                 </div>
             </div>
@@ -510,25 +515,32 @@
             <div class="col-sm-6  block wow bounceIn">
                 <div class="row">
                     <div class="col-md-4 ">
-                        <img class="img-circle img-responsive" src="saminu.jpg">
+                        <i class="fa fa-magic fa-4x "> </i>
                     </div>
                     <div class="col-md-8 box-ct">
-                        <h3> Saminu Salisu </h3>
+                        <h3> Codrops </h3>
 
-                        <p> Research Assistant <br>
-                            Middlesex University <br>
-                            s.salisu@live.co.uk <br>
-                        </p>
+                        <p> Lorem ipsum dolor sit ametconsectetur adipiscing elit. Suspendisse orci quam. </p>
                     </div>
                 </div>
             </div>
-            
+            <div class="col-sm-6 block wow bounceIn">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <i class="fa fa-heart fa-4x "> </i>
+                    </div>
+                    <div class="col-md-8 box-ct">
+                        <h3> Lorem Ipsum</h3>
+
+                        <p> Nullam mo arcu ac molestie scelerisqu vulputate, molestie ligula gravida, tempus ipsum.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Banner Download -->
-<!-- 
 <div hidden id="downloadlink" class="banner">
     <div class="container">
         <div class="row">
@@ -542,10 +554,8 @@
         </div>
     </div>
 </div>
--->
-    
+
 <!-- Contact -->
-<!--
 <div id="contact" class="content-section-a">
     <div class="container">
         <div class="row">
@@ -553,7 +563,7 @@
             <div class="col-md-6 col-md-offset-3 text-center wrap_title">
                 <h2>Contact Us</h2>
 
-                <p class="lead" style="margin-top:0">A special thanks to Death.</p>
+                <!--<p class="lead" style="margin-top:0">A special thanks to Death.</p>-->
             </div>
 
             <form role="form" action="" method="post">
@@ -615,7 +625,7 @@
         </div>
     </div>
 </div>
--->
+
 
 <footer>
     <div hidden class="container">
