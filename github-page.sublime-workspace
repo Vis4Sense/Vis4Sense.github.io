@@ -1,0 +1,438 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"li",
+				"link\tTag"
+			],
+			[
+				"time",
+				"timesets-cia.png\t(index.html)"
+			],
+			[
+				"tim",
+				"timesets\t(index.html)"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
+				"lgo",
+				"logo-small"
+			],
+			[
+				"logo",
+				"logo-small"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"col",
+				"col-sm-4"
+			],
+			[
+				"gl",
+				"glyphicon-globe"
+			],
+			[
+				"gly",
+				"glyphicon"
+			],
+			[
+				"text",
+				"text-center"
+			],
+			[
+				"conta",
+				"container-fluid"
+			],
+			[
+				"col-sm",
+				"col-sm-4"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 12548,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "new-index.html",
+			"settings":
+			{
+				"buffer_size": 4449,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/my-style.css",
+			"settings":
+			{
+				"buffer_size": 408,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"PdfLaTeX"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 173.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"discover",
+				"Package Control: Discover Packages"
+			]
+		],
+		"width": 416.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io",
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/css",
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/sensemap"
+	],
+	"file_history":
+	[
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/github-page.sublime-project",
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/sensemap/index.html",
+		"/C/Users/Kai/AppData/Roaming/Sublime Text 3/Packages/User/View In Browser.sublime-settings",
+		"/C/Users/Kai/AppData/Roaming/Sublime Text 3/Packages/View In Browser/View In Browser.sublime-settings",
+		"/C/Users/Kai/Documents/Teaching/CSD2500/textbook/head-first-html5-programming-code/chapter6/mightygumball.js",
+		"/C/Users/Kai/Documents/Teaching/CSD2500/textbook/head-first-html5-programming-code/chapter6/mightygumball.html",
+		"/C/Users/Kai/Documents/Teaching/CSD2500/textbook/head-first-html5-programming-code/chapter6/sales.json",
+		"/C/Users/Kai/Documents/Teaching/CSD2500/textbook/head-first-javascript-my-code/my-js-learning.sublime-project",
+		"/C/Users/Kai/Documents/Teaching/CSD2500/textbook/head-first-html5-programming-code/chapter6/mightygumball.css",
+		"/C/Users/Kai/Documents/Teaching/CSD2500/textbook/head-first-html5-programming-code/chapter6/my-js-learning.sublime-project",
+		"/C/Users/Kai/Documents/Teaching/CSD2500/textbook/head-first-javascript-my-code/web-service.html",
+		"/C/Users/Kai/Documents/Personal/Prototype/sensemap-seven/src/pages/knowledge-map.html",
+		"/C/Users/Kai/Documents/Personal/Prototype/sensemap-seven/src/js/content-scripts/highlight.js",
+		"/C/Users/Kai/Documents/Personal/Prototype/sensemap-seven/src/js/content-scripts/content.js",
+		"/C/Users/Kai/Documents/Personal/Prototype/sensemap-seven/src/pages/history-map.html",
+		"/C/Users/Kai/Documents/Personal/Prototype/sensemap-seven/bower.json",
+		"/C/Users/Kai/Documents/Personal/Prototype/sensemap-seven/options.html",
+		"/C/Users/Kai/Documents/Publications/cgi/final-report/acm-tiis.sublime-project"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"bootst"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12548,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8175,
+								8182
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3322.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "new-index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4449,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								82,
+								82
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 54.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "css/my-style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CSS Extended Completions":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latextools":
+	{
+		"height": 118.0
+	},
+	"pinned_build_system": "",
+	"project": "github-page.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 261.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+        "sublime-view-in-browser": {
+            "baseUrl": "http://localhost:8080",
+            "basePath": "C:\\Users\\Kai\\Documents\\Publications\\github-webpage\\Vis4Sense.github.io"
+        }
+    }
+}

@@ -1,0 +1,71 @@
+@charset utf-8;
+
+p {
+	font-size: 1.2em;
+}
+
+img {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.jumbotron h2 {
+	font-style: italic;
+}
+
+h2, h3 {
+	color: #e25b32;
+}
+
+h2 {
+	margin-bottom: 20px;
+}
+
+.jumbotron {
+  background-color: #e25b32;
+  color: #fff;
+  padding: 100px 25px;
+  margin: 0;
+}
+
+.bg-grey {
+	  background-color: #f6f6f6;
+}
+
+.container-fluid {
+	padding: 30px 30px;
+}
+
+.logo {
+	font-size: 100px;
+	color: #e25b32;
+}
+
+.logo-small {
+	color: #e25b32;
+	font-size: 50px;
+}
+
+@media screen and (max-width: 768px) {
+	.col-sm-4 {
+	text-align: center;
+	margin: 25px, 0;
+	}
+}
+
+.navbar {
+	border: 0;
+	background-color: #e25b32;
+	font-size: 15px !important;
+	line-height: 1.4285 !important;
+	letter-spacing: 4px;
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+	color: #fff !important;
+}
