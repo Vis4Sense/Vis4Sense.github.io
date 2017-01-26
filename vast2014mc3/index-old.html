@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Visual Analysis of Streaming Data with SAVI and SenseMAP</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    <style>
+        header {
+            text-align: center;
+            font-family: Georgia;
+        }
+        #carousel-example-generic {
+            margin: 40px 0px;
+        }
+        video {
+            height: 300px;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Visual Analysis of Streaming Data with SAVI and SenseMAP</h1>
+            </header>
+<!--            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">-->
+                <!-- Indicators -->
+<!--
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+-->
+
+                <!-- Wrapper for slides -->
+<!--
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="savi-timeline.png" class="img-responsive center-block">
+                    </div>
+                    <div class="item">
+                        <img src="savi-map.png" class="img-responsive center-block">
+                    </div>
+                    <div class="item">
+                        <img src="sensemap.png" class="img-responsive center-block">
+                    </div>
+                </div>
+-->
+
+                <!-- Controls -->
+<!--
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+-->
+			<img src="savi-timeline.png" width="100%">
+            <img src="savi-map.jpg" width="80%" class="img-responsive center-block">
+            <img src="sensemap.png" width="100%">
+			
+            <section>
+                <h1 id="description">Project Description</h1>
+                <p>Two tools were developed for the analysis tasks in the <a href="http://vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+3">VAST Challenge 2014 Mini-Challenge 3</a>: Social Analytics VIsualiszation (SAVI) and Sense Making with Analytic Provenance (SenseMAP). </p>
+
+                <p>SAVI provides linked timeline and geospatial view of the message streams. It allows search and filter based on text analysis, such as named entity extraction and sentiment analysis, and enable analyst to identity interesting events, tracking them temporally and geospatially, and find related information. </p>
+
+                <p>SenseMAP allows analysts to record finding, together with the visualisations that lead to it, and generate hypotheses and construct narratives. The entire sense making process is captured so it is possible to go back to any previous reasoning state and share or playback the process.</p>
+
+                <p>The fact that complex investigations are often carried out by several people working collaboratively is supported in our tools by allowing several people to use SAVI concurrently on the same dataset. Used in this mode, each users analyses are kept separate. However, the SenseMap tool supports collaboration and sharing of hypothesis and narrative structures. Each user’s findings are available to others, and the findings of different users can be compared, combined, merged, and so on, to produce a collective analytic result.</p>
+
+            </section>
+            <section>
+                <h1 id="participants">Participants</h1>
+                <ul>
+                    <li><a target='_blank' href="http://kaixu.me">Kai Xu</a></li>
+                    <li><a target='_blank' href="http://scholar.google.co.uk/citations?user=rg2lIjsAAAAJ&hl=en">Phong Nguyen</a></li>
+                    <li><a target='_blank' href="http://www.eis.mdx.ac.uk/staffpages/bobf/">Bob Fields</a></li>
+                </ul>
+                Email <a href="mailto:k.xu@mdx.ac.uk">Kai Xu</a>
+            </section>
+            <section>
+                <h1 id="video">Videos</h1>
+                <iframe src="https://player.vimeo.com/video/144674076" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </section>
+            <section>
+                <h1 id="papers">Papers</h1>
+                <ul>
+                    <li>K. Xu, P. H. Nguyen, and B. Fields. Visual analysis of streaming data with SAVI and SenseMAP. <i>IEEE Conference on Visual Analytics Science and Technology, pp. 389-390, Oct. 2015 </i><a href="paper.pdf" title='Download full paper'><i class="fa fa-file-pdf-o"></i></a></li>
+                </ul>
+            </section>
+            <section>
+                <h1 id="papers">SenseMAP User Guide</h1>
+                <h3 style="color:red">NOTE: only support Chrome</h3>
+                <h3>User Registration</h3>
+                There is no authentication in this prototype. A new user simply enters their name and clicks <strong>Register</strong> to create a new one. If you're already registered, simply select your name on the list.
+                <img src="help/user-registration.png" class="img-responsive center-block">
+
+                <h3>Sensemap Creation</h3>
+                Enter a name to create a new sensemap, such as "VAST Challenge 2014 MC1". An empty space will be displayed on the right side. If you want to open an existing sensemap, simply select it on the list.
+                <img src="help/user-registration.png" class="img-responsive center-block">
+
+                <h3>Interface Overview</h3>
+                The left panel shows all findings that have been captured (by you or other users). The right panel shows the opening sensemap. The bottom panel shows the provenance of the opening sensemap (all past interactions).
+                <img src="help/interface-overview.png" class="img-responsive center-block">
+
+                <h3>Finding Creation</h3>
+                The atomic element of SenseMap is a <strong>finding</strong>. It can be created by clicking <strong>Add</strong> in the finding store. Fields in the dialog:
+                <ul>
+                    <li>Image: you can copy an image and paste (Ctrl + V) to the dialog. <strong>Hint</strong>: use <a href="https://chrome.google.com/webstore/detail/lightshot-screenshot-tool/mbniclmhobmnbdlbpiphghaielnnpgdp?hl=en">this Chrome extension</a> to capture and edit screenshot. There's a function to copy image as well.</li>
+                    <li>Note: a short thought of what you found</li>
+                    <li>Description: a long description of what you found, can use to store extra information</li>
+                    <li>Tags: separated by hitting <em>tab</em>, <em>enter</em>, or <em>comma</em></li>
+                </ul>
+                <img src="help/finding-add.png" class="img-responsive center-block">
+
+                <h3>Use a Finding in a Sensemap</h3>
+                Simply drag a finding from the left panel and drop it to the sensemap.
+
+                <h3>Interaction</h3>
+                <ul>
+                    <li>Mouse wheel and drag to zoom and pan the whole sensemap</li>
+                    <li>Freely move individual nodes (the findings dropped from the store) by mouse holding and dragging</li>
+                    <li>Draw links between nodes: <em>right mouse</em> click onto the source node and drag to the target node.</li>
+                    <li>View/Edit node by clicking it, the content will be shown in the finding store. Save/Cancel or simply clicking onto the empty space in the sensemap to close the content dialog.</li>
+                    <li>Four menu buttons
+                        <ul>
+                            <li>Show full-screen captured image</li>
+                            <li>Show provenance: nothing happens if the finding is captured in the server. Otherwise, it will open the visualization in the client when the finding was captured. Sound cool, isn't it? Please use the finding named "Finding from TimeSets" and see its provenance.</li>
+                            <li>Collapse its children</li>
+                            <li>Remove the node and its links</li>
+                        </ul>
+                    </li>
+                    <li>On the left side, above the finding store, there is an option to turn on/off the automatic layout. If <strong>on</strong>, the system will automatically arrange nodes and links.</li>
+                </ul>
+
+                <h3>NOTE</h3>
+                In this guide, finding and node refer to the same thing: a <strong>finding</strong>. But we use 'finding' when mentioning them on the left side - the finding store. And 'node' is used in the sensemap, together with links.
+
+                <h3>Provenance Panel</h3>
+                The bottom panel records all actions happened in the sensemap such as a new finding is added or a new link is drawn. Each action is shown using different symbols such as 'a' means 'a finding is added to the sensemap'. The user can click onto a circle to revert the sensemap to that state.
+
+                <h3>Findings Assembly from Multiple Sources [advanced]</h3>
+                Through the <strong>Add</strong> button mentioned above, you create a finding in the <strong>server</strong>. You can create findings from other sources, which are called <strong>clients</strong>. Each client needs to implement the capture feature and send to the server. At this status, there is no client yet, except the experimental <a href="http://www.invisque.com/timesets/cialeakcase/">TimeSets</a>. You can try to zoom/pan that timeline visualization and click the <strong>Capture</strong> button at the bottom-right corner of the screen. Then, you should see a new finding in the store. 
+
+                <h3>Asynchronous Collaboration</h3>
+                Different users capture findings themselves and the findings will be stored in the central place where others can see and use. The username is implicitly captured when he/see creates a new finding. So, we know who contributes what.
+
+                <h3>Synchronous Collaboration [advanced]</h3>
+                Please try scenario:
+                <ol>
+                    <li>Register one user, say <strong>user1</strong></li>
+                    <li>Create a sensemap, say <strong>sensemap1</strong>. Add nodes and links to this.</li>
+                    <li>Open a new browser window, put it side-by-side with the previous one. </li>
+                    <li>In the new window, register another user, say <strong>user2</strong>. Then, click onto <strong>sensemap1</strong> to open that sensemap using <strong>user2</strong>. You should see exactly as in the other window, the <strong>sensemap1</strong>.</li>
+                    <li>Play with <strong>sensemap1</strong> on one window, you should see update immediately in another one. Try even add new finding or edit.</li>
+                </ol>
+                <strong>Summary</strong>: Two users open the same sensemap and collaborate in real-time.
+
+                <h3>Settings</h3>
+                Click onto the three-bar icon to open user/sensemap selection page.
+
+            </section>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    </body>
+</html>
