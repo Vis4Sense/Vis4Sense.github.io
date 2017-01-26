@@ -1,73 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SensePath: Understanding the Sensemaking Process through Analytic Provenance</title>
+<head>
+	<title>SensePath for Sensemaking Research</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    </head>
-    <style>
-        header {
-            text-align: center;
-            font-family: Georgia;
-        }
-        header img {
-            max-width: 800px;
-        }
-    </style>
-    <body>
-        <div class="container">
-            <header>
-                <h1>SensePath: Understanding the Sensemaking Process through Analytic Provenance</h1>
-                <a href="https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk"><img src="teaser.png"></a>
-            </header>
-            <section>
-                <h1 id="description">Project Description</h1>
-                Sensemaking is described as the process of comprehension, finding meaning and gaining insight from information, producing new knowledge and informing further action. Understanding the sensemaking process allows building effective visual analytics tools to make sense of large and complex datasets. Currently, it is often a manual and time-consuming undertaking to comprehend this: researchers collect observation data, transcribe screen capture videos and think-aloud recordings, identify recurring patterns, and eventually abstract the sensemaking process into a general model. In this paper, we propose a general approach to facilitate such a qualitative analysis process, and introduce a prototype, SensePath, to demonstrate the application of this approach with a focus on browser-based online sensemaking. The approach is based on a study of a number of qualitative research sessions including observations of users performing sensemaking tasks and post hoc analyses to uncover their sensemaking processes. Based on the study results and a follow-up participatory design session with HCI researchers, we decided to focus on the transcription and coding stages of thematic analysis. SensePath automatically captures user's sensemaking actions, i.e., analytic provenance, and provides multi-linked views to support their further analysis. A number of other requirements elicited from the design session are also implemented in SensePath, such as easy integration with existing qualitative analysis workflow and non-intrusive for participants. The tool was used by an experienced HCI researcher to analyze two sensemaking sessions. The researcher found the tool intuitive and considerably reduced analysis time, allowing better understanding of the sensemaking process.
-            </section>
-            <section>
-                <h1>Live Demo</h1>
-                SensePath is available as <a href='https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk'>a Chrome extension</a>. Please watch the second video below to know how to use it.
-            </section>
-            <section>
-                <h1 id="participants">Participants</h1>
-                <ul>
-                    <li><a target='_blank' href="http://scholar.google.co.uk/citations?user=rg2lIjsAAAAJ&hl=en">Phong Nguyen</a></li>
-                    <li><a target='_blank' href="http://kaixu.me">Kai Xu</a></li>
-                    <li><a target='_blank' href="http://www.ashleyjwheat.com/">Ashley Wheat</a></li>
-                    <li><a target='_blank' href="http://www.mdx.ac.uk/about-us/our-people/staff-directory/wong-william">William Wong</a></li>
-                    <li><a target='_blank' href="http://www.eis.mdx.ac.uk/staffpages/simonattfield/">Simon Attfield</a></li>
-                    <li><a target='_blank' href="http://www.eis.mdx.ac.uk/staffpages/bobf/">Bob Fields</a></li>
-                </ul>
-                Email <a href="mailto:p.nguyen@mdx.ac.uk">Phong Nguyen</a>
-            </section>
-            <section>
-                <h1 id="video">Videos</h1>
-                <h4>Shows the background of SensePath and features in analysis mode</h4>
-                <iframe src="https://player.vimeo.com/video/144641566" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                <br><br>
-                <h4>Shows two modes of SensePath: capture and analysis</h4>
-                <iframe src="https://player.vimeo.com/video/144640338" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            </section>
-            <section>
-                <h1 id="papers">Papers</h1>
-                <ul>
-                    <li>P. H. Nguyen, K. Xu, A. Wheat, B. L. William Wong, S. Attfield, and B. Fields. SensePath: Understanding the Sensemaking Process through Analytic Provenance. <i>IEEE Transactions on Visualization and Computer Graphics, 22(1):41-50, Jan. 2016. </i><a href="paper.pdf" title='Download full paper'><i class="fa fa-file-pdf-o"></i></a></li>
-                </ul>
-            </section>
-            <section>
-                <h1 id="imp">Implementation</h1>
-                <ul>
-                    <li>SensePath is available as a Chrome Extension in the <a href='https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk'>Chrome Web Store</a></li>
-                    <li>Source code is available in <a href="https://github.com/phongvis/SensePath">github</a></li>
-                </ul>
-            </section>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="\css\my-style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+	<!-- nav bar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="..\" class="navbar-brand"><em>vis</em><span style="color: blue">4</span><span style="font-weight: bolder">sense</span></a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#about">Overview</a></li>
+					<li><a href="#demo">Demo</a></li>
+					<li><a href="#guide">Guide</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- header -->
+	<div class="jumbotron text-center">
+		<h1>SensePath for Sensemaking Research</h1> 
+	</div>
+
+	<!-- about -->
+
+	<div id="about" class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6">
+				<h2>What are the chanllenges in sensemaking research?</h2>
+				<p>The analysis of the experiment data collected from sensemaking study is often a manual and time-consuming undertaking.</p> 
+				<p>For example, transcribing and coding one hour of video recording can take 5-10 hours.</p> 
+			</div>
+
+			<div class="col-sm-6">
+				<h2>SensePath</h2>
+				<p>Sensepath automatically captures and visualises the sensemaking actions, and</p>
+				<ul>
+					<li>(Semi-)automate the transcription,</li>
+					<li>(Semi-)automate the coding,</li>
+					<li>Export result file for further analysis,</li>
+					<li>And many other things ...</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- demo -->
+
+	<div id="demo" class="container-fluid bg-grey">
+		<div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10"><a href="https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk"><img  src="teaser.png" class="thumbnail img-responsive"/></a></div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    </body>
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-3">
+				<h3>Chrome Extension</h3>
+                <p>SensePath is available as a <a href='https://chrome.google.com/webstore/detail/sensepath/dfdhiidbggkijecneejnnmbfenenkmnk' target="_blank">Chrome extension</a></p>
+			</div>
+			<div class="col-sm-7">
+				<h3>Paper</h3>
+                <p>P. H. Nguyen, K. Xu, A. Wheat, B. L. William Wong, S. Attfield, and B. Fields, <strong>SensePath: Understanding the Sensemaking Process through Analytic Provenance</strong>, <em>IEEE Transactions on Visualization and Computer Graphics, 22(1):41-50, Jan. 2016</em> <a href="http://vis4sense.github.io/sensepath/paper.pdf" target="_blank">. PDF</a></p>
+			</div>
+		</div>
+		
+	</div>
+
+	<!-- guide -->
+	<div id="guide" class="container-fluid">
+		<h2>User Guide</h2>
+		
+		<div class="row text-center">
+			<div class="col-sm-6">				
+				<h3>Background and features</h3>
+				<iframe src="https://player.vimeo.com/video/144641566" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			</div>
+			<div class="col-sm-6">
+				<h3>Two examples</h3>
+				<iframe src="https://player.vimeo.com/video/144640338" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			</div>
+		</div>
+	
+	</div>	
+
+</body>
 </html>
