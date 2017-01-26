@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>VAST Challenge 2014 - Social Media Analysis</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="\css\my-style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+	<!-- nav bar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="..\" class="navbar-brand"><em>vis</em><span style="color: blue">4</span><span style="font-weight: bolder">sense</span></a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#about">Overview</a></li>
+					<li><a href="#demo">Demo</a></li>
+					<li><a href="#guide">Guide</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- header -->
+	<div class="jumbotron text-center">
+		<h1>SAVI: Social Analytics VIsulisation</h1> 
+	</div>
+
+	<!-- about -->
+
+	<div id="about" class="container-fluid">
+		<div class="col-sm-6">
+			<h2>VAST Challenge 2014</h2>
+			<p>This is a entry to the <a href="http://vacommunity.org/VAST+Challenge+2014%3A+Mini-Challenge+3" target="_blank">VAST Challenge 2014 Mini-Challenge 3</a> and won an <strong>Honourable Mention</strong>.</p>
+			<p>The challenge provides a collect of tweets (micro blogs) and the task is to create a narrative describing the criminal activities hidden within.</p>
+		</div>
+
+		<div class="col-sm-6">
+			<h2>SAVI: Social Analytics VIsulisation</h2>
+			<p>SAVI is the visual analytics tool we developed. It has three components:</p>
+			<ul>
+				<li>A timeline visualisation tool that integrates natural language processing,</li>
+				<li>A map tool showing information with geospatial information,</li>
+				<li>A sensemaking tool for collecting, organising, and sharing findings.</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- demo -->
+
+	<div id="demo" class="container-fluid bg-grey">
+		<div class="row">
+            <div class="col-sm-3">
+            	<h2>Timeline visualisation</h2>
+            	<p>Each line is a tweet.</p> 
+            	<p>Tweets about the same person or organisation are grouped together with the same-coloured background. This colour matches to the selection in the entity list on the right.</p> 
+            	<p>At the bottom is a histogram showing tweet frequency over time.</p>
+            </div>
+            <div class="col-sm-9">
+            	<img  src="savi-timeline.png" class="thumbnail img-responsive"/>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+    	<div class="row">
+            <div class="col-sm-9">
+            	<img  src="savi-map.jpg" class="thumbnail img-responsive"/>
+            </div>
+            <div class="col-sm-3">
+            	<h2>Map visualisation</h2>
+            	<p>Each circle on the map is an event with location information.</p>
+            	<p>The circle colour indicates event time, as shown on the right.</p>
+            	<p>The blue circles are user selected events, whose details are shown in the table below the map.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-grey">
+		<div class="row">
+            <div class="col-sm-3">
+            	<h2>Sensemaking tool</h2>
+            	<p>Each card is a finding: including a thumbnail of the visualisation that led to the discovery and a text description.</p>
+            	<p>Finding cards can be arranged to form groups, or connected showing temporal and/or logical connections.</p>
+            	<p>Findings can be shared among the users (the left list) and the tool also tracks all the changes in the workspace (the bottom diagram).</p>
+            </div>
+            <div class="col-sm-9">
+            	<img  src="sensemap.png" class="thumbnail img-responsive"/>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+        	<div class="col-sm-1"></div>
+			<div class="col-sm-6">				
+				<h3>Video</h3>
+				<iframe src="https://player.vimeo.com/video/144674076" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			</div>
+			<div class="col-sm-4">				
+				<h3>Paper</h3>
+                <p>K. Xu, P. H. Nguyen, and B. Fields, <strong>Visual analysis of streaming data with SAVI and SenseMAP</strong>, <em>IEEE Conference on Visual Analytics Science and Technology</em>. 2015. <a href="paper.pdf" title='Download full paper' target="_blank">PDF</i></a></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- guide -->
+	<div id="guide" class="container-fluid bg-grey">
+		<h2>User Guide</h2>
+		
+		<div class="col-sm-4">
+			<div class="panel-heading">
+				<h3>User and Registration</h3>
+			</div>
+			<div class="panel-body">
+				<p>There is no authentication yet. A new user simply enters their name and clicks <strong>Register</strong> to create a new account. If you're already registered, select your name on the list to start.</p>
+				<img src="help/user-registration.png" class="img-responsive">
+			</div>
+		</div>
+		
+		<div class="col-sm-4">
+			<div class="panel-heading">
+				<h3>Workspace</h3>
+			</div>
+			<div class="panel-body">
+				<p>Enter a name to create a new <em>workspace</em>, such as "VAST Challenge 2014 MC1". An empty workspace will be displayed on the right side. If you want to open an existing one, simply select it on the list.</p>
+				<img src="help/sensemap-new-open.png" class="img-responsive">
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="panel-heading">
+				<h3>Findings</h3>
+			</div>
+			<div class="panel-body">
+				<p>A finding can be created by clicking the <strong>Add</strong> button.</p>
+                <p>You can copy and paste an image  (Ctrl + V) to a finding. (<em>Hint</em>: this <a href="https://chrome.google.com/webstore/detail/lightshot-screenshot-tool/mbniclmhobmnbdlbpiphghaielnnpgdp?hl=en">Chrome extension</a> can capture and edit screenshot.)</p>
+                <p><strong>Note</strong>: the text description appears in the workspace under the screenshot.</p>
+                <p><strong>Description</strong>: a more detailed description </p>
+                <p><strong>Tags</strong>: does what the name says; separated by hitting <em>tab</em>, <em>enter</em> or <em>comma</em>.</p>
+                <img src="help/finding-add.png" class="img-responsive center-block">
+			</div>
+		</div>
+
+		<div class="col-sm-8">
+			<div class="panel-heading">
+				<h3>Workspace</h3>
+			</div>
+			<div class="panel-body">
+				<p><strong>Drag</strong> a finding from the left panel to add it to the workspace.</p>
+				<p><strong>Mouse wheel</strong> to zoom and <strong>drag</strong> to pan the workspace.</p>
+                <p>Move an individual nodes within the workspace by <strong>dragging</strong> it.</p>
+                <p>Draw links between nodes by <strong>righting click</strong> the source node and then drag it to the target node.</p>
+                <p>To edit a finding card, click it and then edit the contents on the left pane.</p>
+                <p>In the top-left corner, there is an option to turn on/off the <strong>automatic layout</strong>. If <strong>on</strong>, the system will automatically arrange nodes and links using a hierarchical layout.</p>
+                <p>The bottom panel records all editing happened in the workspace such as a new finding is added or a new link is drawn. Each editing is shown using different symbols such as <strong>'a'</strong> means 'a finding is added'. Click a symbol to revert the workspace to that state.</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="panel-heading">
+				<h3>Collaboration</h3>		
+			</div>
+			<div class="panel-body">
+				<p>All findings are visible to all users, no matter who created it. The username indicates the author of the finding.</p>
+				<p>All workspaces are also visible to all users. Two users can collaborate on the same workspace in real-time. There is no indication of who is working on a workspace yet.</p>
+			</div>
+		</div>
+	
+	</div>	
+
+</body>
+</html>
