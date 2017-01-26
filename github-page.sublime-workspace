@@ -4,16 +4,48 @@
 		"selected_items":
 		[
 			[
-				"min",
-				"min-height"
-			],
-			[
-				"li",
-				"link\tTag"
+				"times",
+				"timesets\t(index.html)"
 			],
 			[
 				"time",
-				"timesets-cia.png\t(index.html)"
+				"timesets\t(index.html)"
+			],
+			[
+				"a",
+				"a\tTag"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"font-s",
+				"font-style"
+			],
+			[
+				"li",
+				"li\tTag"
+			],
+			[
+				"ty",
+				"type=\"button\t(index.html)"
+			],
+			[
+				"navbar-f",
+				"navbar-fixed-top\t bootstrap.min.css"
+			],
+			[
+				"contain",
+				"container-fluid"
+			],
+			[
+				"min",
+				"min-height"
 			],
 			[
 				"tim",
@@ -67,16 +99,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 12548,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "new-index.html",
-			"settings":
-			{
-				"buffer_size": 4449,
+				"buffer_size": 5927,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -85,7 +108,7 @@
 			"file": "css/my-style.css",
 			"settings":
 			{
-				"buffer_size": 408,
+				"buffer_size": 864,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -184,11 +207,13 @@
 	"expanded_folders":
 	[
 		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io",
-		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/css",
-		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/sensemap"
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/css"
 	],
 	"file_history":
 	[
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/css/my-style.css",
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/new-index.html",
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/index.html",
 		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/github-page.sublime-project",
 		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/sensemap/index.html",
 		"/C/Users/Kai/AppData/Roaming/Sublime Text 3/Packages/User/View In Browser.sublime-settings",
@@ -224,6 +249,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"logo",
+			"dc5e38",
+			"rgba(221, 75, 29, 0.9)",
+			"h3",
+			"rgba(221, 75, 29, 0.9)",
+			"rgba(221, 75, 29, 0.5)",
+			"rgb(221, 75, 29)",
 			"bootst"
 		],
 		"highlight": true,
@@ -232,6 +264,12 @@
 		"regex": false,
 		"replace_history":
 		[
+			"e25b32",
+			"#dc5e38",
+			"p",
+			"rgba(221, 75, 29, 0.8)",
+			"rgba(221, 75, 29, 0.9)",
+			"rgba(221, 75, 29, 0.5)"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -242,7 +280,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -251,15 +289,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12548,
+						"buffer_size": 5927,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8175,
-								8182
+								1267,
+								1267
 							]
 						],
 						"settings":
@@ -276,67 +314,50 @@
 								}
 							],
 							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3322.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "new-index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4449,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								82,
-								82
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 54.0,
+						"translation.y": 108.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "css/my-style.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 408,
+						"buffer_size": 864,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								408,
-								408
+								635,
+								635
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -392,7 +413,7 @@
 	"project": "github-page.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
