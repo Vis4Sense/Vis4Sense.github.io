@@ -79,3 +79,11 @@ h4 {
 	border-width: 1px;
 	border-color: #e25b32;
 }
+
+.navbar-nav > li > .dropdown-menu { 
+	background-color: #e25b32; 
+}
+
+.navbar-nav > li > .dropdown-menu > li > a:hover {
+	color: #e25b32;  
+}
