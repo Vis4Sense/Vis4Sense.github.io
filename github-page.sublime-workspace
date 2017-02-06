@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"drop",
+				"dropdown-menu\t(index.html)"
+			],
+			[
 				"a",
 				"a\tTag"
 			],
@@ -103,7 +107,25 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 6285,
+				"buffer_size": 6301,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "css/my-style.css",
+			"settings":
+			{
+				"buffer_size": 1132,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dropdown-test.html",
+			"settings":
+			{
+				"buffer_size": 1748,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -207,13 +229,14 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Kai/Documents/Publications/graph-schematisation/.gitignore",
+		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/css/my-style.css",
 		"/C/Users/Kai/Documents/Talks/bio&cv/abstracts.txt",
 		"/C/Users/Kai/Documents/Talks/bio&cv/bio.txt",
 		"/C/Users/Kai/Documents/Personal/Prototype/first-contact.txt",
 		"/C/Users/Kai/Documents/Teaching/CSD2500/week15-css-layout/stylesheet-lab.css",
 		"/C/Users/Kai/Downloads/csd3335cw2/stylesheet-lab.css",
 		"/C/Users/Kai/Documents/Teaching/CSD2500/week15-css-layout/stylesheet.css",
-		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/css/my-style.css",
 		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/timesets/index.html",
 		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/timesets/index-old.html",
 		"/C/Users/Kai/Documents/Publications/github-webpage/Vis4Sense.github.io/vast2014mc3/index-old.html",
@@ -245,7 +268,7 @@
 	],
 	"find":
 	{
-		"height": 44.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -259,6 +282,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"mydropdown",
 			"16",
 			"menu",
 			"li",
@@ -303,15 +327,103 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6285,
+						"buffer_size": 6301,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1262,
-								1262
+								537,
+								187
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "css/my-style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1132,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								629,
+								629
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "dropdown-test.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1270,
+								1280
 							]
 						],
 						"settings":
@@ -331,10 +443,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 237.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -425,7 +537,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 491.0,
+	"side_bar_width": 221.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

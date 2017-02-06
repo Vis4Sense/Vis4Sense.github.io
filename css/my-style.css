@@ -84,6 +84,8 @@ h4 {
 	background-color: #e25b32; 
 }
 
-.navbar-nav > li > .dropdown-menu > li > a:hover {
-	color: #e25b32;  
+.navbar-nav > li > .dropdown-menu > li > a:hover {	
+	text-decoration: none;
+	background-color: #f5f5f5;
+	color: #e25b32 !important;
 }
