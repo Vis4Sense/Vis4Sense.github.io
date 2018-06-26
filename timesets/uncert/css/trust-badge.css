@@ -1,0 +1,11 @@
+.trust-badge {
+    position: absolute;
+    left: 190px;
+    width: 45px;
+    height: 45px;
+    padding: 4px;
+}
+
+.trust-badge img {
+    width: 100%;
+}

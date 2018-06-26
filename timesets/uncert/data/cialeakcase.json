@@ -1,0 +1,423 @@
+{
+  "themes": [
+    "White House",
+    "Judith Miller & NYT",
+    "Matt Copper & Time Mag.",
+    "Courts & Judges",
+    "Libby",
+    "Wilson"
+  ],
+  "events": [
+    {
+      "time": "February 6, 2002",
+      "title": "Wilson's factfinding mission to Niger",
+      "content": "Former ambassador Joseph C. Wilson travels to Niger at the CIA's request to check for evidence that Iraq bought uranium \"yellowcake\" from the African country that could be used for production of a nuclear weapon.",
+      "themes": ["Wilson"]
+    },
+    {
+      "time": "January 28, 2003",
+      "title": "Bush's State of the Union with \"16 words\"",
+      "content": "President Bush delivers his State of the Union address.   In the speech he includes the following sentence: \"The British government has learned that Saddam Hussein recently sought significant quantities of uranium from Africa.\" Those 16 words contradicted what Wilson had reported upon his return from Niger to check out the claim. Months later they would be retracted by the White House.",
+      "themes": [
+        "White House",
+        "Wilson"
+      ]
+    },
+    {
+      "ignored": "true",
+      "time": "May 6, 2003",
+      "title": "Kristof's NYT Column disputes accuracy of 16 words",
+      "content": "The New York Times publishes a column by Nicholas Kristof disputing the accuracy of the 16 words in the president's State of the Union address. The column reports that, following up on a request from the vice president's office, an unnamed ambassador investigated the allegations regarding Iraq's efforts to buy uranium from Niger. Kristoff writes that in early 2002, the ambassador had reported to the CIA and State Department that the allegations were unequivocally wrong.",
+      "themes": [
+        "White House",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "July 6, 2003",
+      "title": "Wilson's \"What I didn't find in Africa\" published in NYT",
+      "content": "Wilson's op-ed column, \"What I Didn't Find in Africa,\" is published in The New York Times. In it he concludes, \"some of the intelligence related to Iraq's nuclear weapons program was twisted to exaggerate the Iraqi threat.\"",
+      "themes": ["Wilson"]
+    },
+    {
+      "time": "July 7, 2003",
+      "title": "Air Force One, Briefing Book",
+      "content": "President Bush boards Air Force One at Andrews Air Force Base outside Washington en route to Dakar, Senegal. It is the start of a weeklong tour of the continent that become overshadowed by questions about alleged Iraqi WMD. Also onboard is a top-secret briefing book containing a memo prepared by the State Department identifying Valerie Wilson (Plame's married name) as a CIA officer and as the wife of former Ambassador Joseph Wilson.",
+      "themes": [
+        "White House",
+        "Wilson"
+      ]
+    },
+    {
+      "ignored": "true",
+      "time": "July 9, 2003",
+      "title": "White House comments on the State of the Union address",
+      "content": "Speaking to a White House press pool in Pretoria, South Africa, the second stop on the president's Africa tour, Press Secretary Ari Fleischer says the State of the Union address should not have included the reference to Iraqi attempts to acquire uranium from Niger. Fleischer says: \"With the advantage of hindsight, it's known now what was not known by the White House prior to the speech. This information should not have risen to the level of a presidential speech.\"",
+      "themes": ["White House"]
+    },
+    {
+      "time": "July 14, 2003",
+      "title": "Novak's Column \"outs\" Plame",
+      "content": "Robert Novak, in his syndicated commentary, reveals that Wilson's wife, Valerie Plame, is a CIA operative. Novak attributes the information to \"two senior administration officials.\"",
+      "themes": ["Wilson"]
+    },
+    {
+      "time": "July 17, 2003",
+      "title": "Time: government officials had disclosed Plame's identity",
+      "content": "Time magazine publishes an online article by Matthew Cooper, Massimo Calabresi, and John F. Dickerson indicating that government officials had disclosed Plame's identity to them",
+      "themes": [
+        "Matt Copper & Time Mag.",
+        "White House"
+      ]
+    },
+    {
+      "time": "July 22, 2003",
+      "title": "McClellan: \"...not the way this president or this White House operates.\"",
+      "content": "At a White House news briefing, McClellan, when asked about the administration leaking Plame's name, states: \"That is not the way this president or this White House operates.\"",
+      "themes": ["White House"]
+    },
+    {
+      "time": "September 14, 2003",
+      "title": "Cheney: \"No. I don't know Joe Wilson\"",
+      "content": "Vice President Cheney, on NBC's Meet the Press, is asked if he had been briefed on Wilson's findings when Wilson returned from Niger. Cheney responds: \"No. I don't know Joe Wilson. I've never met Joe Wilson.\"   Cheney adds moments later, \"I don't know who sent Joe Wilson. He never submitted a report that I ever saw when he came back.",
+      "themes": [
+        "White House",
+        "Wilson"
+      ]
+    },
+    {
+      "time": "September 16, 2003",
+      "title": "McClellan answers about Rove",
+      "content": "McClellan calls \"totally ridiculous\" the allegation that presidential adviser Karl Rove was the source of the leak.",
+      "themes": ["White House"]
+    },
+    {
+      "time": "September 29, 2003",
+      "title": "McClellan reiterates his earlier defense of Rove",
+      "content": "McClellan reiterates his earlier defense of Rove, adding that he had spoken to Rove about the leak.",
+      "themes": ["White House"]
+    },
+    {
+      "time": "September 30, 2003",
+      "title": "DOJ launches investigation",
+      "content": "The Justice Department launches a full criminal investigation into the leaking of Plame's name. President Bush, speaking to reporters in Chicago, says, \"If there is a leak out of my administration, I want to know who it is. And if the person has violated the law, the person will be taken care of...\"",
+      "themes": ["Courts & Judges"]
+    },
+    {
+      "time": "October 24, 2003",
+      "title": "FBI interviews White House officials",
+      "content": "FBI agents begin interviewing White House administration officials about the leak. Interviewees include Karl Rove and Scott McClellan.",
+      "themes": [
+        "Courts & Judges",
+        "White House"
+      ]
+    },
+    {
+      "ignored": "true",
+      "time": "December 30, 2003",
+      "title": "Ashcroft recuses himself, Fitzgerald Takes over",
+      "content": "Attorney General John Ashcroft recuses himself from the leak investigation and U.S. Attorney Patrick J. Fitzgerald takes over the probe.",
+      "themes": ["Courts & Judges"]
+    },
+    {
+      "time": "January 22, 2004",
+      "endTime": "February 28, 2004",
+      "title": "Grand Jury questions administration officials",
+      "content": "A federal grand jury questions White House administration officials, including Scott McClellan, Mary Matalin and Adam Levine.",
+      "themes": [
+        "Courts & Judges",
+        "White House"
+      ]
+    },
+    {
+      "time": "May 21, 2004",
+      "title": "Time's Cooper are subpoenaed",
+      "content": "Tim Russert, host of NBC's Meet the Press, and Time's Cooper are subpoenaed for the grand jury investigation. Both Time and NBC say that they would fight the subpoenas.",
+      "themes": [
+        "Matt Copper & Time Mag.",
+        "Courts & Judges"
+      ]
+    },
+    {
+      "time": "June 18, 2004",
+      "title": "Gonzales testifies before federal grand jury",
+      "content": "White House Counsel Alberto R. Gonzales testifies before the federal grand jury.",
+      "themes": [
+        "Courts & Judges",
+        "White House"
+      ]
+    },
+    {
+      "time": "June 24, 2004",
+      "title": "Bush questioned by prosecutors",
+      "content": "Prosecutors question President Bush in the Oval Office. The questioning takes over an hour, and the president is not under oath.",
+      "themes": [
+        "Courts & Judges",
+        "White House"
+      ]
+    },
+    {
+      "time": "August 9, 2004",
+      "title": "Cooper ordered to jail",
+      "content": "Cooper, refusing to reveal his confidential source, is held in contempt of court and ordered to jail by a federal judge in Washington. Judge Thomas F. Hogan also orders Time  to pay $1,000 per day until the source is revealed. The decision is stayed pending an appeal.",
+      "themes": [
+        "Courts & Judges",
+        "Matt Copper & Time Mag."
+      ]
+    },
+    {
+      "time": "August 12, 2004",
+      "title": "Judith Miller subpoenaed",
+      "content": "New York Times reporter Judith Miller is subpoenaed by a grand jury.",
+      "themes": [
+        "Courts & Judges",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "August 24, 2004",
+      "title": "Cooper's jail order canceled",
+      "content": "The order to jail Cooper is canceled after he submits to questioning by Justice Department prosecutors.",
+      "themes": [
+        "Courts & Judges",
+        "Matt Copper & Time Mag."
+      ]
+    },
+    {
+      "time": "October 7, 2004",
+      "title": "Miller held in contempt of court",
+      "content": "Miller is held in contempt of court for refusing to name confidential sources. Miller has not published any articles about the Plame case. Judge Hogan stays the order pending appeals.",
+      "themes": [
+        "Courts & Judges",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "October 13, 2004",
+      "title": "Cooper held in contempt again",
+      "content": "Cooper is again held in contempt of court for refusing to identify a confidential source who informed him about Plame's identity.",
+      "themes": [
+        "Courts & Judges",
+        "Matt Copper & Time Mag."
+      ]
+    },
+    {
+      "time": "October 15, 2004",
+      "title": "Rove testifies before grand jury",
+      "content": "Rove testifies before a federal grand jury for two hours. Fitzgerald assures Rove that he is not a target of the probe.",
+      "themes": [
+        "Courts & Judges",
+        "White House"
+      ]
+    },
+    {
+      "time": "June 30, 2005",
+      "title": "Time agrees to turn over Cooper's notes and e-mails",
+      "content": "Time  agrees to turn over Cooper's notes and e-mails.",
+      "themes": ["Matt Copper & Time Mag."]
+    },
+    {
+      "time": "July 3, 2005",
+      "title": "Washington Post: Rove = Cooper's source",
+      "content": "The Washington Post  reports that Karl Rove spoke with Matthew Cooper in July 2003 when Cooper was reporting on Plame's husband. Rove's attorney, Robert Luskin, states, \"Karl did nothing wrong.\"",
+      "themes": [
+        "Matt Copper & Time Mag.",
+        "White House"
+      ]
+    },
+    {
+      "time": "July 6, 2005",
+      "title": "Cooper cooperates, avoids jail",
+      "content": "Miller is jailed for refusing to reveal her confidential source. Judge Hogan declares that she was \"defying the law.\" The same day, Cooper agrees to cooperate with the investigation, saying his confidential source granted him permission to comply.",
+      "themes": [
+        "Matt Copper & Time Mag.",
+        "Courts & Judges"
+      ]
+    },
+    {
+      "time": "July 6, 2005",
+      "endTime": "September 29, 2005",
+      "title": "Judith Miller jailed",
+      "content": "Miller is jailed for refusing to reveal her confidential source. Judge Hogan declares that she was \"defying the law.\" The same day, Cooper agrees to cooperate with the investigation, saying his confidential source granted him permission to comply.",
+      "themes": [
+        "Courts & Judges",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "July 10, 2005",
+      "title": "Newsweek: Rove was Cooper's source",
+      "content": "Newsweek cites Rove as Cooper's source for the leak.",
+      "themes": ["White House"]
+    },
+    {
+      "time": "July 11, 2005",
+      "title": "McClellan refuses to discuss Rove involvement",
+      "content": "During a contentious White House press briefing, McClellan is asked to reconcile his statements from 2003 that Rove had no involvement in the leak with new revelations that Rove had spoken to reporters about Plame. McClellan refuses to discuss the matter, citing the ongoing investigation.",
+      "themes": ["White House"]
+    },
+    {
+      "ignored": "true",
+      "time": "July 15, 2005",
+      "title": "Rove before grand jury",
+      "content": "Rove attorney Robert Luskin tells the Associated Press that Rove made three appearances before the grand jury and answered all questions.  Luskin also says he has been assured that his client is not a target of the investigation.",
+      "themes": ["White House"]
+    },
+    {
+      "time": "July 17, 2005",
+      "title": "Cooper: \"What I Told the Grand Jury\"",
+      "content": "In Time magazine, Matt Cooper discusses his testimony before the grand jury investigating the leak. He says Rove never referred to Valerie Plame by name, but that Cooper did learn from that conversation with Rove that Wilson's wife worked for the CIA and was involved in WMD issues.",
+      "themes": [
+        "Courts & Judges",
+        "Matt Copper & Time Mag."
+      ]
+    },
+    {
+      "ignored": "true",
+      "time": "July 18, 2005",
+      "title": "Bush: If someone \"committed a crime\"...",
+      "content": "President Bush, during a White House appearance with India's Prime Minister Singh is asked if, regardless of whether a crime was committed, he still intends to fire anyone found to be involved in the CIA leak case. The president replies that if someone \"committed a crime, they will no longer work in my administration.\"",
+      "themes": ["White House"]
+    },
+    {
+      "time": "September 29, 2005",
+      "title": "Judith Miller is released",
+      "content": "Reporter Judith Miller is released from the Alexandria Detention Center in Virginia. Editors at The New York Times say she reached a deal with U.S. Attorney Patrick J. Fitzgerald to testify. The editors say her source in the leak probe offered assurances that he wanted her to testify and was not coerced into releasing her from a promise of confidentiality.",
+      "themes": [
+        "Courts & Judges",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "September 30, 2005",
+      "title": "NYT: Miller's Source was Libby",
+      "content": "The Times identifies Miller's source as I. Lewis Libby, Cheney's chief of staff. In Washington, Miller testifies before the grand jury. Afterwards, she declines to confirm that Libby was her source, but says the source sent her a letter and called her in prison. \"I concluded from this that my source genuinely wanted me to testify,\" she says.",
+      "themes": [
+        "Libby",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "October 14, 2005",
+      "title": "Rove's 4th grand jury appearance",
+      "content": "Presidential adviser Karl Rove makes his fourth appearance before the federal grand jury. Rove's appearance was voluntary, but at the request of Special Counsel Patrick Fitzgerald. In a statement afterwards, Rove's lawyer Robert Luskin said Fitzgerald \"has not advised Mr. Rove that he is a target of the investigation and affirmed that he has made no decision concerning charges. The special counsel has indicated that he does not anticipate the need for Mr. Rove's further cooperation.\"",
+      "themes": [
+        "Courts & Judges",
+        "White House"
+      ]
+    },
+    {
+      "time": "October 16, 2005",
+      "title": "Miller implicates Libby",
+      "content": "In a New York Times article recounting her testimony before the grand jury, Judith Miller writes that notes of her conversations with Lewis Libby, Vice President Dick Cheney's chief of staff, suggested that the two had discussed Plame's job at the CIA but not her name. Miller wrote Plame's name in the same notebook she used when taking notes during her interviews with Libby, but said she cannot remember who gave her the CIA operative's name.",
+      "themes": [
+        "Libby",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "October 25, 2005",
+      "title": "NYT: Libby learned about Plame from Cheney",
+      "content": "Citing lawyers connected to the case, The New York Times reports that Lewis Libby, Vice President Dick Cheney's chief of staff, first learned about Plame from a conversation with Cheney in the weeks before her identity became public in 2003. Libby's notes from that conversation, which took place June 12, 2003, contradict Libby's testimony to a federal grand jury that he first learned about Plame from journalists, lawyers told the paper. The previously undisclosed notes are now in the possession of prosecutors.",
+      "themes": [
+        "Libby",
+        "Judith Miller & NYT"
+      ]
+    },
+    {
+      "time": "October 28, 2005",
+      "title": "Libby Indicted for obstruction of justice, false statements, perjury",
+      "content": "Vice presidential adviser I. Lewis Libby is indicted on obstruction of justice, false statement and perjury charges in the CIA leak case. Libby resigns as Vice President Cheney's chief of staff.",
+      "themes": [
+        "Courts & Judges",
+        "Libby"
+      ]
+    },
+    {
+      "time": "November 3, 2005",
+      "title": "Libby pleads not guilty",
+      "content": "Libby pleads not guilty in federal court to the five-count indictment against him.",
+      "themes": [
+        "Courts & Judges",
+        "Libby"
+      ]
+    },
+    {
+      "ignored": "true",
+      "time": "November 15, 2005",
+      "title": "Bob Woodward testifies before grand jury",
+      "content": "Washington Post editor Bob Woodward testifies that a \"senior administration official\" told him about Valerie Plame and her job at the CIA nearly a month before she was first named in Robert Novak's column. The revelation would make the source, who Woodward refused to identify, the first official to reveal Plame's identity to a reporter.",
+      "themes": ["Courts & Judges"]
+    },
+    {
+      "time": "April 26, 2006",
+      "title": "Rove testifies for 5th time",
+      "content": "Presidential adviser Karl Rove testifies for a fifth time before a grand jury. Fitzgerald says he is investigating whether Rove lied or obstructed justice in failing to initially disclose his conversation with Time magazine reporter Matt Cooper.  Rove blamed a faulty memory.",
+      "themes": [
+        "White House",
+        "Matt Copper & Time Mag."
+      ]
+    },
+    {
+      "time": "June 13, 2006",
+      "title": "Rove informed that he won't be charged",
+      "content": "A lawyer for Rove says his client has been informed by prosecutors he won't be charged with any crimes in the investigation, ending months of speculation.",
+      "themes": ["White House"]
+    },
+    {
+      "time": "January 6, 2007",
+      "title": "Libby's criminal trial",
+      "endTime": "March 6, 2007",
+      "content": "Libby's criminal trial begins.",
+      "themes": [
+        "Courts & Judges",
+        "Libby"
+      ]
+    },
+    {
+      "time": "February 21, 2007",
+      "title": "Jury receives Libby case for deliberation.",
+      "content": "Jury receives case for deliberation.",
+      "themes": [
+        "Courts & Judges",
+        "Libby"
+      ]
+    },
+    {
+      "time": "March 6, 2007",
+      "title": "Libby found guilty on 4/5 counts",
+      "content": "Jury returns guilty verdict on four of five counts, convicting Libby of obstruction, perjury and lying to the FBI.",
+      "themes": [
+        "Courts & Judges",
+        "Libby"
+      ]
+    },
+    {
+      "time": "June 5, 2007",
+      "title": "Libby sentenced to 30 months, fined $250,000",
+      "content": "Libby is sentenced to 30 months in prison and fined $250,000.",
+      "themes": [
+        "Courts & Judges",
+        "Libby"
+      ]
+    },
+    {
+      "time": "June 14, 2007",
+      "title": "Judge denies delay in Libby's sentencing",
+      "content": "U.S. District Judge Reggie Walton denies request to delay Libby's sentence.",
+      "themes": [
+        "Courts & Judges",
+        "Libby"
+      ]
+    },
+    {
+      "time": "July 2, 2007",
+      "title": "Bush commutes Libby's prison sentence",
+      "content": "A federal appeals court rejects Libby's request to remain free on bail while pursuing appeals — meaning Libby would likely have to report to prison soon. Hours later, President Bush commutes Libby's prison sentence, leaving the $250,000 fine and two years probation intact. \"I respect the jury's verdict,\" Bush says in a statement. \"But I have concluded that the prison sentence given to Mr. Libby is excessive.\"",
+      "themes": [
+        "Libby",
+        "White House"
+      ]
+    }
+  ]
+}

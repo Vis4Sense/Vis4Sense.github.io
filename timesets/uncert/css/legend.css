@@ -1,0 +1,123 @@
+.sm-legend-table {
+    font-family: Verdana, Helvetica, sans-serif;
+    border-spacing: 1px;
+    font-weight: bolder;
+}
+
+.sm-legend-table td {
+    padding: 0 4px 0 4px;
+}
+
+.sm-legend-list {
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 14px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.sm-legend-list li {
+    padding: 6px 8px 6px 8px;
+    margin: 0;
+}
+
+.sm-legend-list li .handle {
+    float:left;
+    padding-right:3px;
+    cursor:move;
+}
+
+.sm-legend-list li .ui-icon {
+    background-image: url("theme/images/ui-icons_555555_256x240.png");
+}
+
+.sm-legend-list-delete {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.sm-legend-list-delete li {
+    padding: 6px 0px 6px 0px;
+    margin: 0px;
+}
+
+.sm-legend-list-delete li .glyphicon {
+    color: #eeeeee;
+    margin-top: 0px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.sm-legend-list-delete li .glyphicon:hover {
+    color: black;
+}
+
+.sm-legend-button {
+    text-align: center;
+    margin: 2px;
+}
+
+.sm-legend-button .ui-button-text-only .ui-button-text {
+    line-height: 0.8;
+}
+
+.sm-legend-button .ui-button {
+    border-radius: 8px;
+}
+
+.sm-legend-list li span {
+    float: left;
+    margin-top: 3px;
+    margin-right: 8px;
+}
+
+.sm-legend-list li img {
+    float: right;
+}
+
+.sm-legend-list li .glyphicon {
+    float: right;
+    color: #eeeeee;
+    margin-top: 3px;
+}
+
+.sm-legend-list li .glyphicon:hover {
+    color: black;
+}
+
+.themes-header {
+    font-size: 16px;
+    padding-left: 4px;
+    padding-top: 6px;
+    padding-bottom: 3px;
+    background-color: #d2d2d2;
+    font-weight: 500;
+    color: #6d6b6b;
+}
+
+.themes-header img {
+    float: right;
+    height: 15px;
+    margin-top: 2px;
+    margin-right: 3px;
+}
+
+.themes input#newTheme {
+    font-family: Verdana, Helvetica, sans-serif;
+    border: none;
+    color: #aaaaaa;
+    font-size: 15px;
+    padding: 6px 8px 3px 8px;
+    width: 100%;
+}
+
+/*
+.themes .ui-state-disabled {
+    opacity: 1.0;
+    background-color: white;
+}
+*/

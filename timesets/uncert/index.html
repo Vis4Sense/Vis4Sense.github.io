@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    -->
+    <title>TimeSets</title>
+
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="css/theme/jquery-ui.min.css" type="text/css" rel="stylesheet"/>
+
+    <link href="css/core.css" type="text/css" rel="stylesheet"/>
+    <link href="css/timesets.css" type="text/css" rel="stylesheet"/>
+    <link href="css/article-viewer.css" type="text/css" rel="stylesheet"/>
+    <link href="css/trust-viewer.css" type="text/css" rel="stylesheet"/>
+    <link href="css/legend.css" type="text/css" rel="stylesheet"/>
+    <link href="css/trust-filter.css" type="text/css" rel="stylesheet"/>
+    <link href="css/trust-matrix.css" type="text/css" rel="stylesheet"/>
+    <link href="css/trust-badge.css" type="text/css" rel="stylesheet"/>
+    <link href="css/slider-styling.css" rel="stylesheet">
+
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/d3.layout.cloud.js"></script>
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+
+    <script src="js/core.js"></script>
+    <script src="js/compatibility.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/vis/timesets.js"></script>
+    <script src="js/misc/article-viewer.js"></script>
+    <script src="js/misc/trust-viewer.js"></script>
+    <script src="js/misc/legend.js"></script>
+    <script src="js/misc/trust-filter.js"></script>
+    <script src="js/misc/trust-metrics.js"></script>
+    <script src="js/misc/trust-matrix.js"></script>
+    <script src="js/misc/trust-badge.js"></script>
+    <script src="js/misc/word-cloud.js"></script>
+    <script src="js/layout/timesets-outline.js"></script>
+
+    <script>
+        let newArray = [];
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1690250247719286',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v2.12'
+            });
+
+            let accessToken = "EAACEdEose0cBACsLk0woZCEt7mCgyf7wOMc1c90SCLEcF2gkZCLmKtMLPYQXGLBiyLy23Pu31vusS24sOosKSsB3IVElcMXuUVEWTrsB1Kvat6sou2ZBPli9ZB6JKyhvhKRRGitSCkKEQAqTRaAZBApZChFx3hL5ZBHantUQtzQb7mwFwZA4zT2oODB506SUpvMZD"
+//
+//                FB.api(
+//                    '/389658314427637_1541285255931598?fields=created_time,description,shares,full_picture,caption,type,coordinates,story,name,picture,from,sharedposts',
+//                    'GET',
+//                    {access_token: accessToken},
+//                    function(response) {
+//                        // Insert your code here
+//                        console.log(response)
+//                    }
+//                );
+//
+
+//            function getFBData(accID, pstID) {
+//                FB.api(
+//                    '/' + accID + '_' + pstID + '?fields=created_time,description,shares,full_picture,caption,type,coordinates,story,name,picture,from,sharedposts',
+//                    'GET',
+//                    {access_token: accessToken},
+//                    function (response) {
+//                        if (response.error) {
+//                            return console.log(response.error)
+//                        } else {
+//                            // Insert your code here
+////                            console.log(response)
+//                            newArray.push(response)
+//
+//                        }
+//                    }
+//                );
+//            }
+
+//            d3.csv("data/fbData.csv", function (d) {
+//                data = d;
+//
+//                data.forEach(function (d) {
+//
+////                        console.log(d);
+//
+//                    getFBData(d.account_id, d.post_id);
+//
+////                        console.log(getFBData(d.account_id,d.post_id))
+//
+////                        d.SourceType = "Article";
+////                        d.SourceImageUrl = fbdata.full_picture;
+////                        d.From = fbdata.from.name;
+////                        d.Content = fbdata.description;
+////                        d.Subject = fbdata.name;
+////                        d.Trust = "C3";
+////                        d.Relevance = 4;
+////                        d.shares = fbdata.shares;
+//                });
+//
+//
+////                    console.log(data)
+//            });
+
+
+        };
+
+
+//        d3.queue()
+//            .defer(d3.csv, 'data/fbData.csv')
+//            .defer(d3.json, 'data/cleanFbCall.json')
+//            .await(makeMyMap);
+//
+//        function makeMyMap(error, csv, fbdata) {
+//            fbdata.forEach(function (data) {
+//                let id = data.id;
+////                console.log(id);
+//                csv.forEach(function (d) {
+//                   let  csvId = `${d.account_id}_${d.post_id}`;
+//                   if (id === csvId){
+//                       data.Rating = d.Rating;
+//                       data.comment_count = d.comment_count;
+//                       data.reaction_count = d.reaction_count;
+//                       data.share_count = d.share_count;
+//
+////                       console.log(data);
+//                       newArray.push(data)
+//                   }
+//                })
+//            });
+//
+////            console.log(csv)
+//        }
+//
+        setTimeout(function () {
+            console.log(JSON.stringify(newArray));
+        }, 3000);
+
+
+
+
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        svg {
+            cursor: w-resize;
+        }
+
+        text {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body style="visibility: hidden">
+
+<div class="middle">
+    <aside>
+        <div class="panes">
+            <section class="themes"></section>
+            <section class="trust-filter"></section>
+            <section class="trust-matrix"></section>
+            <section class="word-cloud">
+                <div class="word-cloud-graph-container"></div>
+                <div class="button-bar"></div>
+            </section>
+        </div>
+    </aside><!--
+            -->
+    <div class="sidebar-resizer"><span class="glyphicon glyphicon-option-vertical"></span></div><!--
+            -->
+    <div class="sm-timesets-doc-container">
+        <svg>
+            <g class="sm-timesets-demo"></g>
+        </svg>
+    </div>
+</div>
+<footer>
+    <ul>
+        <li class="event-viewer"></li>
+        <li class="trust-viewer"></li>
+    </ul>
+</footer>
+</body>
+</html>
