@@ -1,0 +1,41 @@
+.trust-viewer {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.trust-viewer article {
+    overflow: hidden;
+}
+
+.sm-trustViewer-icon-container {
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sm-trustViewer-sourceimage {
+    display: block;
+    width: 100%;
+}
+
+.sm-trustViewer-rating {
+    width: 100%;
+    position: relative;
+    font-size: 18px;
+    text-align: center;
+    top: -28px;
+}
+
+.sm-trustViewer-override {
+    display: inline-block;
+    width: 150px;
+    margin-left: 16px;
+    margin-top: 10px;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.sm-trustViewer-override span{
+    margin-bottom: 10px;
+}

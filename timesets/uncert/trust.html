@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <!--
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        -->
+        <title>TimeSets</title>
+
+        <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="css/theme/jquery-ui.min.css" type="text/css" rel="stylesheet" />
+        <link href="css/core.css" type="text/css" rel="stylesheet" />
+        <link href="css/timesets.css" type="text/css" rel="stylesheet" />
+        <link href="css/article-viewer.css" type="text/css" rel="stylesheet" />
+        <link href="css/trust-viewer.css" type="text/css" rel="stylesheet" />
+        <link href="css/legend.css" type="text/css" rel="stylesheet" />
+        <link href="css/trust-matrix.css" type="text/css" rel="stylesheet" />
+        <link href="css/trust-badge.css" type="text/css" rel="stylesheet" />
+        <link href="css/slider-styling.css" rel="stylesheet">
+
+        <script src="lib/jquery.min.js"></script>
+        <script src="lib/bootstrap.min.js"></script>
+        <script src="lib/jquery-ui.min.js"></script>
+        <script src="lib/d3.min.js"></script>
+        <script src="lib/d3.layout.cloud.js"></script>
+
+        <script src="js/core.js"></script>
+        <script src="js/compatibility.js"></script>
+        <script src="js/index-trust.js"></script>
+        <script src="js/vis/timesets.js"></script>
+        <script src="js/misc/article-viewer.js"></script>
+        <script src="js/misc/trust-viewer.js"></script>
+        <script src="js/misc/legend.js"></script>
+        <script src="js/misc/trust-metrics.js"></script>
+        <script src="js/misc/trust-matrix.js"></script>
+        <script src="js/misc/trust-badge.js"></script>
+        <script src="js/misc/word-cloud.js"></script>
+        <script src="js/layout/timesets-outline.js"></script>
+
+        <style>
+            body {
+                margin:0;
+                overflow-x:hidden;
+            }
+            svg {
+                cursor: w-resize;
+            }
+            text {
+                font-size: 14px;
+            }
+        </style>
+    </head>
+
+    <body style="visibility: hidden">
+        <div class="middle">
+            <aside>
+                <div class="panes">
+                    <section class="themes"></section>
+                    <section class="trust-matrix"></section>
+                    <section class="word-cloud">
+                        <div class="word-cloud-graph-container"></div>
+                        <div class="button-bar"></div>
+                    </section>
+                </div>
+            </aside><!--
+            --><div class="sidebar-resizer"><span class="glyphicon glyphicon-option-vertical"></span></div><!--
+            --><div class="sm-timesets-doc-container">
+                <svg><g class="sm-timesets-demo"></g></svg>
+            </div>
+        </div>
+        <footer><ul><li class="event-viewer"></li><li class="trust-viewer"></li></ul></footer>
+    </body>
+</html>

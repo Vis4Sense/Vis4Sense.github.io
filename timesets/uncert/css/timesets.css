@@ -1,0 +1,325 @@
+@font-face {
+	font-family: Hammersmith One;
+	src: url(fonts/HammersmithOne.ttf);
+}
+
+/*
+@media only screen and (orientation: portrait) {
+
+    .middle {
+    }
+}
+*/
+
+/*
+@media only screen and (orientation: landscape) {
+
+    .middle {
+    }
+}
+*/
+
+text {
+    dominant-baseline: text-after-edge;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.sm-timeSets-circle-border {
+    /*stroke: white;*/
+}
+
+.sm-timeSets-svg-axis path {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.sm-timeSets-svg-axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.sm-timeSets-svg-axis-dashed line {
+    fill: none;
+    stroke: gray;
+    shape-rendering: crispEdges;
+    stroke-opacity: 0.6;
+    stroke-dasharray: 5,5;
+}
+
+.sm-timeSets-svg-event-picture-text {
+    font-size:7pt;
+    font-family: Verdana, sans-serif;
+    line-height:100%;
+    text-align:center;
+}
+
+.sm-timeSets-svg-event-selection {
+    fill: #BFEFFC;
+    stroke: #5F92B0;
+    stroke-width: 2;
+}
+
+.sm-timeSets-svg-event-text:hover {
+    cursor: pointer;
+}
+
+.sm-timeSets-svg-cluster-rect {
+    stroke-width: 2;
+}
+
+.sm-timeSets-svg-cluster-range {
+    fill: #BFEFFC;
+    stroke-width: 2;
+}
+
+.sm-timeSets-svg-path {
+    stroke-width: 2;
+    stroke-opacity: 1;
+}
+
+.sm-timeSets-svg-path-border {
+    stroke-width: 2;
+    stroke-opacity: 1;
+}
+
+.sm-timeSets-svg-line {
+    fill: none;
+    stroke-width: 4;
+    stroke-opacity: 0.6;
+}
+
+.sm-timeSets-reset-button {
+    position: absolute;
+}
+
+.today {
+    fill: none;
+    stroke: gray;
+    shape-rendering: crispEdges;
+    stroke-opacity: 0.6;
+    stroke-dasharray: 5,5;
+}
+
+.sm-timeSets-link {
+    fill: none;
+    stroke-width: 2;
+    stroke: steelblue;
+    stroke-opacity: 0.5;
+}
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
+}
+
+.no-padding .ui-dialog-content {
+    padding: 0;
+    overflow: hidden;
+}
+
+.ui-dialog {
+    border: hidden;
+    box-shadow: 4px 4px 16px 4px #bbbbbb;
+    padding: 0;
+}
+
+.title-center .ui-dialog-titlebar {
+    border: hidden;
+    background-color: #ffb55a;
+    text-align: center;
+    padding: 0.1em 0 0.1em 0;
+}
+
+.ui-state-disabled {
+    cursor: pointer;
+}
+
+.ui-widget {
+    font-size: 14px;
+}
+
+#settings {
+    margin-left: 8px;
+}
+
+#settings .ui-button-text-only .ui-button-text {
+    padding: .2em .5em;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+section {
+    display: block;
+}
+
+.middle {
+    display: inline-block;
+}
+
+aside {
+    position: fixed;
+    display: inline-block;
+    width: 235px;
+    overflow: auto;
+    background-color: white;
+}
+
+aside .panes {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #eeeeee;
+}
+
+.sidebar-resizer {
+    height: 40px;
+    position: absolute;
+    display: inline-flex;
+    display: -webkit-inline-flex;
+    align-items: center;
+    width: 14px;
+    background-color: #eeeeee;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.sidebar-resizer span {
+    position: relative;
+    top: -1px;
+}
+
+.sm-timesets-doc-container {
+    display: inline-block;
+}
+
+footer {
+    height: 237px;
+    max-height: 237px;
+}
+
+footer ul {
+    display: -webkit-flex;
+    display:  flex;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    width: 100%;
+}
+
+footer ul li {
+    list-style-type: none;
+}
+
+.detail-pane {
+    height: 237px;
+    border-right: 3px solid #eeeeee;
+    margin: 0px 3px 0px 3px;
+}
+
+.detail-pane-title {
+    font-size: 16px;
+    padding-left: 13px;
+    padding-top: 6px;
+    padding-bottom: 3px;
+    background-color: #d2d2d2;
+    font-weight: 500;
+    color: #6d6b6b;
+}
+
+article {
+    margin: 8px 8px 0px 12px;
+    max-height: 198px;
+    overflow: auto;
+}
+
+.button {
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+    display: inline-block;
+    text-align: center;
+    margin: 2px 2px 2px 9px;
+    padding: 2px;
+}
+
+.button:hover {
+    background-color: black;
+    color: white;
+}
+
+.word-cloud-button {
+    width: 8em;
+    max-width: 100px;
+}
+
+.word-cloud-graph-container {
+    display: block;
+    height: 120px;
+}
+
+/* Checkbox and radio button styles */
+
+input[type=checkbox]:not(old),
+input[type=radio   ]:not(old) {
+    padding   : 0;
+    font-size : 1em;
+}
+
+label input[type=checkbox]:not(old) + span,
+label input[type=radio   ]:not(old) + span {
+    font-family: "Hammersmith One", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-right: 6px;
+}
+
+/* jQuery UI theme overrides */
+/* Corner radius */
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-left,
+.ui-corner-tl {
+	border-top-left-radius: 0px;
+}
+.ui-corner-all,
+.ui-corner-top,
+.ui-corner-right,
+.ui-corner-tr {
+	border-top-right-radius: 0px;
+}
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-left,
+.ui-corner-bl {
+	border-bottom-left-radius: 0px;
+}
+.ui-corner-all,
+.ui-corner-bottom,
+.ui-corner-right,
+.ui-corner-br {
+	border-bottom-right-radius: 0px;
+}
+
+.ui-dialog {
+    border-radius: 0px 0px 16px 16px;
+}
+
+.ui-dialog-title {
+    font-family: Arial, Tahoma;
+    font-size: 14px;
+    text-align: center;
+}
+
+.ui-dialog-content .ui-corner-left {
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+
+
+.ui-dialog-content .ui-corner-right {
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
