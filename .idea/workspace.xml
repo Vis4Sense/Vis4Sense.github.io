@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e4d5599b-d0bc-46c2-a481-4d06bc9d5778" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sensemap/demo.mp4" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/analysis/spacy.ipynb" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/spacy.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/data/facebook-with-themes.json" afterPath="$PROJECT_DIR$/timesets/uncert/data/facebook-with-themes.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/index.html" afterPath="$PROJECT_DIR$/timesets/uncert/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/core.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/index.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/misc/article-viewer.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/article-viewer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-viewer.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-viewer.js" />
-    </list>
+    <list default="true" id="e4d5599b-d0bc-46c2-a481-4d06bc9d5778" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +17,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/timesets/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="118" column="14" lean-forward="false" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
+            <state relative-caret-position="690">
+              <caret line="114" column="34" lean-forward="true" selection-start-line="114" selection-start-column="34" selection-end-line="114" selection-end-column="34" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -249,12 +239,12 @@
       <updated>1512081425853</updated>
       <workItem from="1512081426699" duration="1257000" />
       <workItem from="1529989666554" duration="1171000" />
-      <workItem from="1533236834107" duration="173000" />
+      <workItem from="1533236834107" duration="878000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2601000" />
+    <option name="totallyTimeSpent" value="3306000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="23" width="1348" height="797" extended-state="0" />
@@ -269,7 +259,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2777778" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2777778" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24961714" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -337,8 +327,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/timesets/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="118" column="14" lean-forward="false" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
+        <state relative-caret-position="690">
+          <caret line="114" column="34" lean-forward="true" selection-start-line="114" selection-start-column="34" selection-end-line="114" selection-end-column="34" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />

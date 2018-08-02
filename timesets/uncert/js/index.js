@@ -27,7 +27,12 @@ $(function () {
         function consume_table(data, tabletop) {
             googleSheetName = tabletop.googleSheetName;
             let newdata = data.data.elements;
-            init(newdata)
+            init(newdata);
+
+            //hide loader
+            if (document.getElementById("loading")) {
+                document.getElementById("loading").style.display = "none"
+            }
         }
         function init(d) {
             var format = d3.time.format("%Y-%m-%dT%H:%M:%S+0000");
