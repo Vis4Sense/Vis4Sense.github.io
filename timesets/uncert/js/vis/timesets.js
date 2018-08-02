@@ -335,7 +335,9 @@ sm.vis.timesets = function() {
                     activeMetrics = trustMetrics(activeData, activeTheme);
                     trustMatrix(activeMetrics, activeTheme);
                     trustBadge(activeMetrics);
+
                     wordCloud(activeMetrics, activeData, activeTheme);
+
                 });
             parent.datum( { data: legendData, background: applyLayout || setMode === "background", title: "Themes" }).call(legend);
 		}
@@ -437,8 +439,8 @@ sm.vis.timesets = function() {
         trustBadge(activeMetrics);
 
         // Remove word cloud
-        //wordCloud.removeVis();
-        wordCloud(activeMetrics, activeData, activeTheme);
+        // wordCloud.removeVis();
+        // wordCloud(activeMetrics, activeData, activeTheme);
 
         return this;
     };

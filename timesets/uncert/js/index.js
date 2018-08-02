@@ -606,7 +606,6 @@ $(function () {
         });
         data = {themes: extThemes || themes, events: events};
 
-        console.log(data);
     }
 
 });
