@@ -28,8 +28,8 @@
     <script src="lib/jquery-ui.min.js"></script>
     <script src="lib/d3.min.js"></script>
     <script src="lib/d3.layout.cloud.js"></script>
-    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
-
+    <script src="//d3js.org/d3-queue.v3.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
 
     <script src="js/core.js"></script>
     <script src="js/compatibility.js"></script>
@@ -44,125 +44,9 @@
     <script src="js/misc/trust-badge.js"></script>
     <script src="js/misc/word-cloud.js"></script>
     <script src="js/layout/timesets-outline.js"></script>
-
     <script>
-        let newArray = [];
 
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '1690250247719286',
-                autoLogAppEvents: true,
-                xfbml: true,
-                version: 'v2.12'
-            });
-
-            let accessToken = "EAACEdEose0cBACsLk0woZCEt7mCgyf7wOMc1c90SCLEcF2gkZCLmKtMLPYQXGLBiyLy23Pu31vusS24sOosKSsB3IVElcMXuUVEWTrsB1Kvat6sou2ZBPli9ZB6JKyhvhKRRGitSCkKEQAqTRaAZBApZChFx3hL5ZBHantUQtzQb7mwFwZA4zT2oODB506SUpvMZD"
-//
-//                FB.api(
-//                    '/389658314427637_1541285255931598?fields=created_time,description,shares,full_picture,caption,type,coordinates,story,name,picture,from,sharedposts',
-//                    'GET',
-//                    {access_token: accessToken},
-//                    function(response) {
-//                        // Insert your code here
-//                        console.log(response)
-//                    }
-//                );
-//
-
-//            function getFBData(accID, pstID) {
-//                FB.api(
-//                    '/' + accID + '_' + pstID + '?fields=created_time,description,shares,full_picture,caption,type,coordinates,story,name,picture,from,sharedposts',
-//                    'GET',
-//                    {access_token: accessToken},
-//                    function (response) {
-//                        if (response.error) {
-//                            return console.log(response.error)
-//                        } else {
-//                            // Insert your code here
-////                            console.log(response)
-//                            newArray.push(response)
-//
-//                        }
-//                    }
-//                );
-//            }
-
-//            d3.csv("data/fbData.csv", function (d) {
-//                data = d;
-//
-//                data.forEach(function (d) {
-//
-////                        console.log(d);
-//
-//                    getFBData(d.account_id, d.post_id);
-//
-////                        console.log(getFBData(d.account_id,d.post_id))
-//
-////                        d.SourceType = "Article";
-////                        d.SourceImageUrl = fbdata.full_picture;
-////                        d.From = fbdata.from.name;
-////                        d.Content = fbdata.description;
-////                        d.Subject = fbdata.name;
-////                        d.Trust = "C3";
-////                        d.Relevance = 4;
-////                        d.shares = fbdata.shares;
-//                });
-//
-//
-////                    console.log(data)
-//            });
-
-
-        };
-
-
-//        d3.queue()
-//            .defer(d3.csv, 'data/fbData.csv')
-//            .defer(d3.json, 'data/cleanFbCall.json')
-//            .await(makeMyMap);
-//
-//        function makeMyMap(error, csv, fbdata) {
-//            fbdata.forEach(function (data) {
-//                let id = data.id;
-////                console.log(id);
-//                csv.forEach(function (d) {
-//                   let  csvId = `${d.account_id}_${d.post_id}`;
-//                   if (id === csvId){
-//                       data.Rating = d.Rating;
-//                       data.comment_count = d.comment_count;
-//                       data.reaction_count = d.reaction_count;
-//                       data.share_count = d.share_count;
-//
-////                       console.log(data);
-//                       newArray.push(data)
-//                   }
-//                })
-//            });
-//
-////            console.log(csv)
-//        }
-//
-        setTimeout(function () {
-            console.log(JSON.stringify(newArray));
-        }, 3000);
-
-
-
-
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
     </script>
-
-
     <style>
         body {
             margin: 0;

@@ -8,6 +8,7 @@ sm.misc.articleViewer = function(title) {
      */
     function module(selection) {
         selection.each(function(d) {
+
 			$("li.event-viewer .detail-pane").remove();
 
 			var pane = $("<div class='detail-pane'></div>").appendTo($("li.event-viewer"))
@@ -25,6 +26,10 @@ sm.misc.articleViewer = function(title) {
 			}
 
 			articles.forEach(function(article, i) {
+
+				console.log(article);
+
+
 				// Image
 				if (article.sourceImageUrl !== undefined) {
 					// container.append("<img class='sm-articleViewer-sourceimage' src='data/img/" + article.sourceImageUrl + "' />");
@@ -42,6 +47,16 @@ sm.misc.articleViewer = function(title) {
 					timeText += " -- " + d3.time.format("%d-%m-%Y")(article.endTime);
 				}
 				$("<div class='sm-articleViewer-time'></div>").appendTo(container).html(timeText);
+
+				//SHARE COUNT
+				if(article.shareCount){
+                    $("<div class='sm-articleViewer-time'></div>").appendTo(container).html("Shares: " + article.shareCount);
+                }
+
+                //AVERAGE SOURCE RATING
+                if(article.sourceAvgRating){
+                    $("<div class='sm-articleViewer-time'></div>").appendTo(container).html('Source: ' + article.source + ", Average Rating: " + sm.reverseRating(article.sourceAvgRating));
+                }
 
 				// Article separator, if not the last article
 				if (i !== articles.length - 1) {

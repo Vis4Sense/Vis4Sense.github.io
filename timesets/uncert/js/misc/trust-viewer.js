@@ -9,6 +9,9 @@ sm.misc.trustViewer = function () {
      */
     function module(selection) {
         selection.each(function(d) {
+
+            // console.log(d);
+
             $("li.trust-viewer .detail-pane").remove();
 
             var pane = $("<div class='detail-pane'></div>").appendTo($("li.trust-viewer"))
@@ -65,6 +68,7 @@ sm.misc.trustViewer = function () {
             var iconContainer = $("<div class='sm-trustViewer-icon-container'></div>").appendTo(container);
             iconContainer.append("<img class='sm-trustViewer-sourceimage' src='" + iconUrl + "' />");
 
+
             // Trust label
 			var ratingText = "";
 			if (rating) {
@@ -95,6 +99,7 @@ sm.misc.trustViewer = function () {
                         $("#trust-rating").html(newRating);
                     });
             }
+
         });
     }
 

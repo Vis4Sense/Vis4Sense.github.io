@@ -2,193 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4d5599b-d0bc-46c2-a481-4d06bc9d5778" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/cia-8-topics" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/cia-8-topics.expElogbeta.npy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/cia-8-topics.id2word" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/cia-8-topics.state" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics-non-filter" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics-non-filter.expElogbeta.npy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics-non-filter.id2word" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics-non-filter.state" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics.expElogbeta.npy" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics.id2word" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda_models/fb-8-topics.state" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/fonts/HammersmithOne.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/fonts/glyphicons-halflings-regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/fonts/glyphicons-halflings-regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-bg_glass_40_ffc73d_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-bg_highlight-soft_80_eeeeee_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-icons_222222_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-icons_4b8e0b_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-icons_555555_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-icons_a83300_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-icons_cccccc_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/images/ui-icons_ffffff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Ada Campo-Corrente.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Adan Morlun.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Adra Nubarron.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Albina Hafon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Anda Ribera.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Axel Calzas.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Benito Hawelon.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Bertrand Ovan.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Birgitta Frente.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Brand Tempestad.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Carla Forluniau.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Cecilia Morluniau.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Claudio Hawelon.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Cornelia Lais.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Dante Coginian.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Dylan Scozzese.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Edvard Vann.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Elsa Orilla.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Emile Arpa.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Felix Balas.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Felix Resumir.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Gustav Cazar.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Henk Mies.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Hennie Osvaldo.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Hideki Cocinaro.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Inga Ferro.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Ingrid Barranco.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Irene Nant.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Isak Baza.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Isande Borrasca.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Isia Vann.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Kanon Herrero.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Karre Orilla.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Lars Azada.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Lidelse Dedos.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Linda Lagos.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Linnea Bergen.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Loreto Bodrogi.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Lucas Alacazar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Marin Onda.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Mat Bramar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Nils Calixto.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Orhan Strum.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Rachel Pantanal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Ruscella Mies-Haber.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Sten Sanjorge.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Stenig Fusil.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Sven Flecha.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Valeria Morlun.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Varja Lagos.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Varro Awelon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Vira Frente.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Gastech - Willem Vasco-Pais.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - All News Today.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Athena Speaks.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Central Bulletin.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Centrum Sentinel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Daily Pegasus.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Everyday News.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Gastech.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Homeland Illumination.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - International News.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - International Times.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Kronos Star.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Modern Rubicon.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - News Desk.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - News Online Today.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Tethys News.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Abila Post.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Continent.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Explainer.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The General Post.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Guide.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Light of Truth.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Orb.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Truth.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Tulip.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The World.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - The Wrap.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Who What News.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - World Journal.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Logo - Worldwise.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Unknown man.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/img/Unknown woman.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/empty-theme.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/handshake.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/high-theme.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/high.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/low-theme.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/low.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/medium-theme.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/medium.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/runnable-track.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/img/undefined-level.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda-cialeakcase.ipynb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/lda-facebook.ipynb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/spacy.ipynb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/article-viewer.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap-theme.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap-theme.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap-theme.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap-theme.min.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/bootstrap/bootstrap.min.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/core.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/fonts/SIL Open Font License.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/fonts/glyphicons-halflings-regular.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/legend.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/slider-styling.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/jquery-ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/jquery-ui.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/jquery-ui.theme.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/theme/jquery-ui.theme.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/timesets.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/trust-badge.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/trust-filter.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/trust-matrix.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/css/trust-viewer.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/FBv2.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/MC1data.tsv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/cialeakcase.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/citations.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/cleanFbCall.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/detailedFbData.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/email headers.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/facebook-with-themes.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/fbData.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/fbv3.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/data/newFB.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/compatibility.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/core.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/index-trust.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/layout/timesets-outline.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/article-viewer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/legend.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/sugar.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-badge.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-filter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-matrix.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-metrics.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-viewer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/widgets.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/word-cloud.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/js/vis/timesets.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/lib/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/lib/d3.layout.cloud.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/lib/d3.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/lib/jquery-ui.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/lib/jquery.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/script/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/script/app.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/timesets/uncert/trust.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/sensemap/demo.mp4" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/index.html" afterPath="$PROJECT_DIR$/timesets/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/analysis/spacy.ipynb" afterPath="$PROJECT_DIR$/timesets/uncert/analysis/spacy.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/data/facebook-with-themes.json" afterPath="$PROJECT_DIR$/timesets/uncert/data/facebook-with-themes.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/index.html" afterPath="$PROJECT_DIR$/timesets/uncert/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/core.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/core.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/index.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/misc/article-viewer.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/article-viewer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-viewer.js" afterPath="$PROJECT_DIR$/timesets/uncert/js/misc/trust-viewer.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -205,8 +27,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/timesets/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="113" column="18" lean-forward="true" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="18" />
+            <state relative-caret-position="258">
+              <caret line="118" column="14" lean-forward="false" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -275,7 +97,8 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -292,8 +115,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -426,16 +248,16 @@
       <option name="presentableId" value="Default" />
       <updated>1512081425853</updated>
       <workItem from="1512081426699" duration="1257000" />
-      <workItem from="1529989666554" duration="717000" />
+      <workItem from="1529989666554" duration="1171000" />
+      <workItem from="1533236834107" duration="173000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1974000" />
+    <option name="totallyTimeSpent" value="2601000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="23" width="1348" height="797" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -447,7 +269,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4074074" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2777778" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24961714" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -491,20 +313,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/timesets/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/timesets/uncert/img/empty-theme.png" />
     <entry file="file://$PROJECT_DIR$/timesets/uncert/img/handshake.png" />
     <entry file="file://$PROJECT_DIR$/timesets/index-old.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/timesets/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="113" column="18" lean-forward="true" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="18" />
+        <state relative-caret-position="258">
+          <caret line="118" column="14" lean-forward="false" selection-start-line="118" selection-start-column="14" selection-end-line="118" selection-end-column="14" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />

@@ -3,79 +3,93 @@ $(function () {
     // var colors = ["#a50026","#d73027","#f46d43","#fdae61","#fee090","#ffffbf","#e0f3f8","#abd9e9","#74add1","#4575b4","#313695"];
     // var colors = ["#a50026","#f46d43","#fee090","#e0f3f8","#74add1","#313695"];
     var colors = ["#fccde5", "#ffffb3", "lightblue", "#fb8072", "#fdb462", "#bebada", "#b3de69", "#d9d9d9", "#bc80bd", "#ccebc5", "#8dd3c7", "#ffed6f", "#80b1d3"];
-    var dataset = "mc1data"; // cialeakcase, citations, inception, minich1newsart, minich1emails, mc1data
+    // var dataset = "mc1data"; // cialeakcase, citations, inception, minich1newsart, minich1emails, mc1data
+    var dataset = "facebookUNC"; // cialeakcase, citations, inception, minich1newsart, minich1emails, mc1data
     //var dataset =  'cialeakcase'; //citations, inception, minich1newsart, minich1emails, mc1data
 
     //new data push
     let newArray = [];
 
-    var loadData = function () {
-        if (dataset === "cialeakcase" || dataset === "citations") {
-            d3.json("data/" + dataset + ".json", function (d) {
-                data = d;
+    let loadData = function () {
 
-                // Convert to TimeSets format
-                if (dataset === "citations") {
-                    formatCitations();
-                }
+        let query = getUrlQueryByName('url');
 
-                updateVis();
+        let publicSpreadsheetUrl = query || window.sessionStorage.getItem("timesetDataSheet");
+        let googleSheetName;
+
+        function init_table() {
+            Tabletop.init({
+                key: publicSpreadsheetUrl,
+                callback: consume_table,
+                simpleSheet: false
             });
         }
-        else if (dataset === "mc1data") {
-            // var format = d3.time.format("%d/%m/%Y %H:%M:%S");
+        function consume_table(data, tabletop) {
+            googleSheetName = tabletop.googleSheetName;
+            let newdata = data.data.elements;
+            init(newdata)
+        }
+        function init(d) {
             var format = d3.time.format("%Y-%m-%dT%H:%M:%S+0000");
 
-            // d3.tsv("data/MC1data.tsv", function (d) {
-            //     data = d;
-            //
-            //     console.log(d);
-            //     // Convert to TimeSets format
-            //     formatMC1Data();
-            //
-            //     // Create the trust filter.
-            //     var trustFilter = sm.misc.trustFilter()
-            //         .on("trustfilterchanged", function (trustFilter) {
-            //             timesets.trustFilter(trustFilter);
-            //             timesets.update(null, false);
-            //         });
-            //     trustFilter();
-            //
-            //     timesets.trustFilter(trustFilter.filter());
-            //
-            //     updateVis();
-            // });
+            data = d;
+            data.forEach(function (d) {
 
+                d.SourceType = "Article";
 
+                d.Content = d.name || d.description;
 
-            // d3.json("data/detailedFbData.json", function (d) {
+                if (d.description === "" || " ") {
+                    d.Content = d.message;
+                }
+                d.from = d.from;
+                d.Subject = d.name;
+                d.Trust = "C3";
+                d.Relevance = 4;
+                if (d.created_time) {
+                    d.time = format.parse(d.created_time)
+                } else {
+                    d.time = format.parse("2016-09-19T03:00:51+0000")
+                }
+
+                //rating conversion from string to values
+                d.Rating = sm.convertRating(d.Rating);
+                // rating setup
+                // console.log(d);
+            });
+            // Convert to TimeSets format
+            formatFacebookUNCData();
+
+            // Create the trust filter.
+            var trustFilter = sm.misc.trustFilter()
+                .on("trustfilterchanged", function (trustFilter) {
+                    timesets.trustFilter(trustFilter);
+                    timesets.update(null, false);
+                });
+            trustFilter();
+
+            timesets.trustFilter(trustFilter.filter());
+
+            updateVis();
+        }
+        if (query) {
+            documentReady(function () {
+                init_table();
+            });
+        } else {
+            var format = d3.time.format("%Y-%m-%dT%H:%M:%S+0000");
             d3.json("data/fbv3.json", function (d) {
-                // d3.csv("data/fbData.csv", function (d) {
                 data = d;
-
-                // console.log(data);
-
                 data.forEach(function (d) {
 
                     d.SourceType = "Article";
-                    // d.SourceImageUrl = "Gastech - Ingrid Barranco.jpg";
-                    // d.SourceImageUrl = d.full_picture;
-                    //
-                    // if (d.from) {
-                    //     // d.From = d.from["name"];
-                    //     d.From = d.Subject || d.message;
-                    // } else {
-                    //     d.From = "Facebook";
-                    // }
 
-                    // d.From = d.name || d.subject;
-
-                    // d.Content = d.description;
                     d.Content = d.name || d.description;
 
                     if (d.description === "" || " ") {
                         d.Content = d.message;
                     }
+                    d.from = d.from.name;
                     d.Subject = d.name;
                     d.Trust = "C3";
                     d.Relevance = 4;
@@ -85,10 +99,11 @@ $(function () {
                         d.time = format.parse("2016-09-19T03:00:51+0000")
                     }
 
-                    // console.log(d.type);
-                    //push new data
+                    //rating conversion from string to values
+                    d.Rating = sm.convertRating(d.Rating);
+                    // rating setup
+                    // console.log(d);
                 });
-
 
                 // Convert to TimeSets format
                 formatFacebookUNCData();
@@ -106,18 +121,7 @@ $(function () {
                 updateVis();
             });
         }
-        else {
-            var fileName = dataset === "inception" ? "Inception_interaction_sessions" : "";
-            d3.text("data/" + fileName + ".txt", function (text) {
-                // Convert to TimeSets format
-                formatMovie(text);
-                updateVis();
-            });
-        }
     };
-
-
-
     $(".sidebar-resizer").bind("click", function () {
         var aside = $("aside");
         aside.toggle();
@@ -446,10 +450,16 @@ $(function () {
     }
 
     function formatFacebookUNCData() {
-
         var events = [];
         //var themes = ["fire", "incident", "inspection", "kidnap", "patch"/*, "ransom"*/, "security"/*, "vip", "POK", "tiskele", "government"*/];
-        var themes = ["donald trump", "hillary clinton", "president", "debate", "presidential", "obama", "first"];
+        var themes = ["Clinton",
+            "Trump",
+            "Obama",
+            "Charlotte",
+            "GOP",
+            "Republicans",
+            "Democrats",
+            "FBI"];
         // var themes = ["news", "left"];
         var format = d3.time.format("%Y-%d-%m");
 
@@ -497,19 +507,23 @@ $(function () {
             searchTerms.push(d.toLowerCase());
             //console.log(searchTerms)
         });
+
+
+        //get average uncertainty by news source group
+        let groupUncAverage = sm.groupArrBy(data, 'from');
+
         data.forEach(function (d, i) {
             //var rating = d.Trust;
             // Invent a confidence rating
 
-            var rating;
-            if (random() > 0.15) {
-                rating = String.fromCharCode(65 + Math.floor((random() * 5)));
-                rating += 1 + Math.floor((random() * 5));
-            }
+            // rating and uncertainty applied here using the average, rating and group data
+            let rating;
+            rating = sm.ratingCalc(d.from, d.Rating, d.comment_count, groupUncAverage);
+
+            // console.log(d);
 
             var e = {
                 id: i,
-                // title: d.From,
                 title: d.Subject || d.name,
                 // title: d.name,
                 // time: format.parse(d["Date Published"]),
@@ -517,10 +531,13 @@ $(function () {
                 sourceType: d.SourceType,
                 // sourceImageUrl: d.SourceImageUrl,
                 sourceImageUrl: d.full_picture,
-                confidence: rating,
-                trust: trustOpacity(rating),
+                confidence: rating.rating,
+                trust: trustOpacity(rating.rating),
                 relevance: d.Relevance,
-                themes: []
+                themes: [],
+                shareCount: d.share_count,
+                source: d.from,
+                sourceAvgRating: rating.groupAvg
             };
 
             if (e.sourceType === "Article") {
@@ -567,7 +584,6 @@ $(function () {
 
             events.push(e);
         });
-        //themes.push("other");
         data = {themes: themes, events: events};
     }
 
