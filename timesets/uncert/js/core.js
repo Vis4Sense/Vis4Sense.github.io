@@ -107,6 +107,9 @@ var sm = function() {
                 break;
             case 'mostly false':
                 value = 4;
+                break;
+            case 'undefined':
+                value = 0;
         }
         return value
     };

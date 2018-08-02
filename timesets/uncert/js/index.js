@@ -27,21 +27,30 @@ $(function () {
         function consume_table(data, tabletop) {
             googleSheetName = tabletop.googleSheetName;
             let newdata = data.data.elements;
-            init(newdata);
+            let themes = data.themes.elements;
+            let newThemes = [];
+            themes.forEach(function (d) {
+                newThemes.push(d.theme)
+            });
 
             //hide loader
             if (document.getElementById("loading")) {
                 document.getElementById("loading").style.display = "none"
             }
+
+            init(newdata, newThemes);
+
         }
-        function init(d) {
+        function init(d, themes) {
             var format = d3.time.format("%Y-%m-%dT%H:%M:%S+0000");
 
             data = d;
             data.forEach(function (d) {
 
-                d.SourceType = "Article";
+                // let test = moment(d.created_time).format();
+                // console.log(test);
 
+                d.SourceType = "Article";
                 d.Content = d.name || d.description;
 
                 if (d.description === "" || " ") {
@@ -52,10 +61,12 @@ $(function () {
                 d.Trust = "C3";
                 d.Relevance = 4;
                 if (d.created_time) {
-                    d.time = format.parse(d.created_time)
+                    d.time = moment(d.created_time).format();
                 } else {
                     d.time = format.parse("2016-09-19T03:00:51+0000")
                 }
+
+                // console.log(d.time);
 
                 //rating conversion from string to values
                 d.Rating = sm.convertRating(d.Rating);
@@ -63,7 +74,7 @@ $(function () {
                 // console.log(d);
             });
             // Convert to TimeSets format
-            formatFacebookUNCData();
+            formatFacebookUNCData(themes);
 
             // Create the trust filter.
             var trustFilter = sm.misc.trustFilter()
@@ -89,7 +100,6 @@ $(function () {
                 if (document.getElementById("loading")) {
                     document.getElementById("loading").style.display = "none"
                 }
-
                 data = d;
                 data.forEach(function (d) {
 
@@ -460,10 +470,10 @@ $(function () {
         data = {themes: themes, events: events};
     }
 
-    function formatFacebookUNCData() {
+    function formatFacebookUNCData(extThemes) {
         var events = [];
         //var themes = ["fire", "incident", "inspection", "kidnap", "patch"/*, "ransom"*/, "security"/*, "vip", "POK", "tiskele", "government"*/];
-        var themes = ["Clinton",
+        var themes = extThemes || ["Clinton",
             "Trump",
             "Obama",
             "Charlotte",
@@ -518,7 +528,6 @@ $(function () {
             searchTerms.push(d.toLowerCase());
             //console.log(searchTerms)
         });
-
 
         //get average uncertainty by news source group
         let groupUncAverage = sm.groupArrBy(data, 'from');
@@ -595,7 +604,9 @@ $(function () {
 
             events.push(e);
         });
-        data = {themes: themes, events: events};
+        data = {themes: extThemes || themes, events: events};
+
+        console.log(data);
     }
 
 });
