@@ -84,6 +84,12 @@ $(function () {
         } else {
             var format = d3.time.format("%Y-%m-%dT%H:%M:%S+0000");
             d3.json("data/fbv3.json", function (d) {
+
+                //hide loader
+                if (document.getElementById("loading")) {
+                    document.getElementById("loading").style.display = "none"
+                }
+
                 data = d;
                 data.forEach(function (d) {
 

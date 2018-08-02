@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4d5599b-d0bc-46c2-a481-4d06bc9d5778" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/timesets/index.html" afterPath="$PROJECT_DIR$/timesets/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,8 +19,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/timesets/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="113" column="18" lean-forward="true" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="18" />
+            <state relative-caret-position="163">
+              <caret line="112" column="185" lean-forward="false" selection-start-line="112" selection-start-column="178" selection-end-line="112" selection-end-column="185" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -45,6 +45,7 @@
       <find>online demo</find>
       <find>timesets/</find>
       <find>uncert</find>
+      <find>uncert/</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -243,12 +244,12 @@
       <updated>1512081425853</updated>
       <workItem from="1512081426699" duration="1257000" />
       <workItem from="1529989666554" duration="1171000" />
-      <workItem from="1533236834107" duration="1017000" />
+      <workItem from="1533236834107" duration="1201000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3445000" />
+    <option name="totallyTimeSpent" value="3629000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="23" width="1348" height="797" extended-state="0" />
@@ -340,8 +341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/timesets/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="113" column="18" lean-forward="true" selection-start-line="113" selection-start-column="18" selection-end-line="113" selection-end-column="18" />
+        <state relative-caret-position="163">
+          <caret line="112" column="185" lean-forward="false" selection-start-line="112" selection-start-column="178" selection-end-line="112" selection-end-column="185" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#nav#0;n#body#0;n#html#0;n#!!top" expanded="false" />
