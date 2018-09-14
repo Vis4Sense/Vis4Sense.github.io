@@ -24,6 +24,7 @@ $(function () {
                 simpleSheet: false
             });
         }
+
         function consume_table(data, tabletop) {
             googleSheetName = tabletop.googleSheetName;
             let newdata = data.data.elements;
@@ -41,6 +42,7 @@ $(function () {
             init(newdata, newThemes);
 
         }
+
         function init(d, themes) {
             var format = d3.time.format("%Y-%m-%dT%H:%M:%S+0000");
 
@@ -88,6 +90,15 @@ $(function () {
 
             updateVis();
         }
+
+        //hide and update iframe, and buttons
+        if (query) {
+            d3.selectAll('#datamodalbutton').classed('hide', false);
+            document.getElementById('sheetIframe').src = query;
+        } else {
+            d3.selectAll('#datamodalbutton').classed('hide', true);
+        }
+
         if (query) {
             documentReady(function () {
                 init_table();
