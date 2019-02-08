@@ -5,24 +5,32 @@
  * .title: String
  * .content: String
  * .themes: an array of themes; e.g., ["Information Visualisation", "Visual Analytics"]
+ * .influence: a number
  */
-sm.vis.timesets = function() {
-    var width = 800, height = 500,
-        margin = { top: 20, right: 30, bottom: 20, left: 20 },
+//todo: update
+
+sm.vis.timesets = function () {
+    var width = 600, height = 500,
+        margin = {top: 20, right: 30, bottom: 20, left: 20},
         THEME_CIRCLE_RADIUS = 6,
         TIME_BAR_HEIGHT = 6,
         DARKER_RATIO = 0.5,
         LEGIBILITY_PADDING = 5, // Minimum void space between two events (text end of the first and start of the second) in the same level
-        LEVEL_HEIGHT = 26, // Height of each level 26px:16pt-font
-        // LEVEL_HEIGHT = 100,
+        LEVEL_HEIGHT = 30, // Height of each level 26px:16pt-font
         CORNER_RADIUS = 10,
         CLUSTER_HEIGHT = LEVEL_HEIGHT - 4, // Should be smaller than LEVEL_HEIGHT
         MAX_NUM_CHARS = 50, // The maximum characters to display for 'alwaysTrim' events
         minEventWidth = 50, // An event has to be aggregated if the remaining space for it less than this value
-        trimThresholdRatio = 0.1; // Can only trim an event so that a new event can stay in the same row if the remaining part is larger than this value
+        trimThresholdRatio = 0.1, // Can only trim an event so that a new event can stay in the same row if the remaining part is larger than this value
+        minFontSize = 14,
+        maxFontSize = minFontSize * 2,
+        fontScale = d3.scale.linear().range([minFontSize, maxFontSize]),
+        topOnly = true,
+        numHighlights = 10,
+        highlightData;
 
-	var EVENT_TEXT_DY = timesetsProperties.eventText_dy? timesetsProperties.eventText_dy : 9; // Amount to offset the y-value of the event title. Depends on font size and rendering engine.
-	var EVENT_SELECTION_TIME_TEXT_dy = timesetsProperties.eventSelectionTimeText_dy? timesetsProperties.eventSelectionTimeText_dy : ".71em";
+    var EVENT_TEXT_DY = timesetsProperties.eventText_dy ? timesetsProperties.eventText_dy : 9; // Amount to offset the y-value of the event title. Depends on font size and rendering engine.
+    var EVENT_SELECTION_TIME_TEXT_dy = timesetsProperties.eventSelectionTimeText_dy ? timesetsProperties.eventSelectionTimeText_dy : ".71em";
 
     var data, layerisedData, nonSetData, allData,
         activeData, activeNonSetData, allActiveData,
@@ -95,11 +103,11 @@ sm.vis.timesets = function() {
     var settingsUi;
 
     // Key function based on "id" property, used when binding data
-    var key = function(d) {
+    var key = function (d) {
         return d.id;
     };
 
-    var linkKey = function(d) {
+    var linkKey = function (d) {
         return d.source.id + "#" + d.target.id;
     };
 
@@ -107,10 +115,10 @@ sm.vis.timesets = function() {
      * Main entry of the module.
      */
     function module(selection) {
-        selection.each(function(theData) {
+        selection.each(function (theData) {
             // Initialise
             data = theData.events;
-            data.forEach(function(d) {
+            data.forEach(function (d) {
                 if (!(d.time instanceof Date)) {
                     d.time = new Date(d.time);
                 }
@@ -125,7 +133,9 @@ sm.vis.timesets = function() {
             parent = d3.select(this);
             container = parent.append("g");
             xScale
-                .domain(d3.extent(data, function(d) { return d.time; }))
+                .domain(d3.extent(data, function (d) {
+                    return d.time;
+                }))
                 .rangeRound([0, width - margin.left - margin.right]);
 
             // Update the inner dimensions
@@ -136,8 +146,8 @@ sm.vis.timesets = function() {
             outlineBorderGroup = container.append("g");
             outlineGroup.attr("transform", "translate(" + -margin.left + ",0)"); // Use absolute coordinates later
             outlineBorderGroup.attr("transform", "translate(" + -margin.left + ",0)"); // Messed up with margin.top, not translate it!
-            clusterGroup = container.append("g");
-            eventGroup = container.append("g");
+            eventGroup = container.append("g").attr("class", "events");
+            clusterGroup = container.append("g").attr("class", "clusters");
             linkGroup = container.append("g");
             boundaryGroup = container.append("g");
 
@@ -150,7 +160,7 @@ sm.vis.timesets = function() {
                 .attr("transform", "translate(0," + (-margin.bottom - 20 - height) + ")");
 
             // Zoom/pan
-            zoom.on("zoom", function() {
+            zoom.on("zoom", function () {
                 if (scale === d3.event.scale) { // Pan
                     module.update(null, false); // Should update immediately to sync. with the axis
                 } else { // Zoom
@@ -166,10 +176,10 @@ sm.vis.timesets = function() {
                 .on("dblclick.zoom", null);
 
             // Assign theme ids
-            data.forEach(function(d) {
-                var themeIds = d.themes.filter(function(t) {
+            data.forEach(function (d) {
+                var themeIds = d.themes.filter(function (t) {
                     return themes.indexOf(t) !== -1;
-                }).map(function(t) {
+                }).map(function (t) {
                     return themes.indexOf(t);
                 });
 
@@ -180,7 +190,7 @@ sm.vis.timesets = function() {
             createTimeAxisTooltip();
 
             // Add the generate word cloud button
-            wordCloud.addButton("Generate", "", function() {
+            wordCloud.addButton("Generate", "", function () {
                 wordCloud(activeMetrics, activeData, activeTheme);
             });
 
@@ -208,7 +218,7 @@ sm.vis.timesets = function() {
     /**
      * Updates the timeSets with new data.
      */
-    module.update = function(theData, transitionEffect) {
+    module.update = function (theData, transitionEffect) {
         // Update with new data
         xScale.rangeRound([0, width - margin.left - margin.right]);
 
@@ -216,13 +226,21 @@ sm.vis.timesets = function() {
             data = theData.events;
             themes = theData.themes;
             numThemes = themes.length;
-            activeThemeIds = d3.range(numThemes).map(function() { return true; });
+            activeThemeIds = d3.range(numThemes).map(function () {
+                return true;
+            });
 
-            var domain = d3.extent(data, function(d) { return d.time; });
+            var domain = d3.extent(data, function (d) {
+                return d.time;
+            });
             xScale.domain(domain);
 
+            // Phong: update font scale
+            fontScale.domain(d3.extent(data, d => d.influence));
+            highlightData = data.slice().sort((a, b) => d3.descending(a.influence, b.influence)).slice(0, numHighlights);
+
             // Sort data by time ascendingly for easy computing layout
-            data.sort(function(a, b) {
+            data.sort(function (a, b) {
                 if (a.time.getTime() === b.time.getTime()) {
                     return d3.ascending(a.title.length, b.title.length);
                 }
@@ -261,14 +279,16 @@ sm.vis.timesets = function() {
 
             // Create links
             links = theData.links || [];
-            links.forEach(function(l) {
+            links.forEach(function (l) {
                 l.source = data[+l.source];
                 l.target = data[+l.target];
             });
-            links = links.filter(function(d) { return d.source && d.target; });
+            links = links.filter(function (d) {
+                return d.source && d.target;
+            });
 
             // Legend
-            var legendData = themes.map(function(d, i) {
+            var legendData = themes.map(function (d, i) {
                 var themeId = applyLayout ? orderToId[i] : i;
                 return {
                     color: cScale(themeId),
@@ -282,11 +302,11 @@ sm.vis.timesets = function() {
 
             legend = sm.misc.legend()
                 .sortable(applyLayout)
-                .on("selected", function(e) {
+                .on("selected", function (e) {
                     if (applyLayout) {
                         // Reverse and convert from index to id
                         e.reverse();
-                        e.forEach(function(d, i) {
+                        e.forEach(function (d, i) {
                             activeThemeIds[orderToId[i]] = d;
                         });
 
@@ -305,7 +325,7 @@ sm.vis.timesets = function() {
                 // }).on("mouseout", function() {
                 //     dehighlightEvents();
                 // })
-                .on("changed", function(e) {
+                .on("changed", function (e) {
                     // Update orderToId
                     var indices = d3.range(numThemes);
                     var startIndex = numThemes - e.startIndex - 1;
@@ -321,7 +341,7 @@ sm.vis.timesets = function() {
                     layeriseEvents();
                     module.update(null, true);
                 })
-                .on("badgeclicked", function(theme) {
+                .on("badgeclicked", function (theme) {
 
                     if (arguments.length >= 1 && theme !== undefined) {
                         if (activeTheme === theme) {
@@ -339,15 +359,21 @@ sm.vis.timesets = function() {
                     wordCloud(activeMetrics, activeData, activeTheme);
 
                 });
-            parent.datum( { data: legendData, background: applyLayout || setMode === "background", title: "Themes" }).call(legend);
-		}
+            parent.datum({
+                data: legendData,
+                background: applyLayout || setMode === "background",
+                title: "Themes"
+            }).call(legend);
+        }
 
         // Display only data in the active (visible) time range and not filtered
         var sourceData = applyLayout ? layerisedData : data;
 
-        activeData = sourceData.filter(function(d) {
+        activeData = sourceData.filter(function (d) {
             // OR condition, at least one active theme exists
-            if (!d.themeIds.some(function(i) { return activeThemeIds[i]; })) {
+            if (!d.themeIds.some(function (i) {
+                    return activeThemeIds[i];
+                })) {
                 return false;
             }
 
@@ -392,8 +418,10 @@ sm.vis.timesets = function() {
 
         // Organise events by its layer
         if (applyLayout) {
-            layerEvents = d3.range(numLayers).map(function() { return []; });
-            activeData.forEach(function(d) {
+            layerEvents = d3.range(numLayers).map(function () {
+                return [];
+            });
+            activeData.forEach(function (d) {
                 try {
                     layerEvents[d.layer].push(d);
                 } catch (e) {
@@ -454,12 +482,16 @@ sm.vis.timesets = function() {
         var enterGroup = events.enter().append("g");
         enterGroup
             .classed("sm-timeSets-svg-event", true)
-            .attr("transform", function() { return "translate(" + -width + ", 0)"; });
+            .attr("transform", function () {
+                return "translate(" + -width + ", 0)";
+            });
 
         // - Background for individual events
         enterGroup.append("rect")
             .classed("sm-timeSets-svg-event-background", true)
-            .attr("x", function (d) { return getGlyphPadding(d); } )
+            .attr("x", function (d) {
+                return getGlyphPadding(d);
+            })
             .attr("y", -CLUSTER_HEIGHT / 2)
             // .attr("rx", 8)
             // .attr("ry", 8)
@@ -469,23 +501,27 @@ sm.vis.timesets = function() {
         // - Selection border
         enterGroup.append("rect")
             .classed("sm-timeSets-svg-event-selection", true)
-            .attr("x", function (d) { return getGlyphPadding(d) - 2; } )
+            .attr("x", function (d) {
+                return getGlyphPadding(d) - 2;
+            })
             .attr("y", -CLUSTER_HEIGHT / 2)
             .attr("rx", 8)
             .attr("ry", 8)
-            .attr("height", CLUSTER_HEIGHT)
+            .attr("height", CLUSTER_HEIGHT - 2)
             .style("display", "none");
 
         // - Selection text, overwrite existing text
         enterGroup.append("text")
             .classed("sm-timeSets-svg-event-selection-text", true)
-            .text(function(d) { return d.originalTitle; } )
+            .text(function (d) {
+                return d.originalTitle;
+            })
             .attr("x", getGlyphPadding)
-            .attr("dy", EVENT_TEXT_DY)
+            // .attr("dy", EVENT_TEXT_DY) // Phong: don't need it anymore due to vertical middle alignment
             .style("display", "none");
 
         // - Theme glyphs
-        enterGroup.each(function(d) {
+        enterGroup.each(function (d) {
             if (usePicture && d.image) {
                 return;
             }
@@ -493,7 +529,7 @@ sm.vis.timesets = function() {
             var self = this;
             if (!d.endTime || showCirleForIntervals) {
                 if (elementMode === "rings") { // One concentric rings circle
-                    d.themeIds.forEach(function(themeId, i) {
+                    d.themeIds.forEach(function (themeId, i) {
                         d3.select(self).append("circle")
                             .attr("cx", 0)
                             .attr("r", THEME_CIRCLE_RADIUS * (d.themeIds.length - i + 0.25))
@@ -506,7 +542,7 @@ sm.vis.timesets = function() {
                         .attr("r", THEME_CIRCLE_RADIUS * 0.5)
                         .attr("fill", "white");
                 } else if (elementMode === "circles") { // Replicate circles for each theme
-                    d.themeIds.forEach(function(themeId, i) {
+                    d.themeIds.forEach(function (themeId, i) {
                         var color = cScale(themeId);
                         if (applyLayout) {
                             color = d3.rgb(color).darker(DARKER_RATIO);
@@ -522,7 +558,9 @@ sm.vis.timesets = function() {
                     d3.select(self).append("circle")
                         .attr("cx", 0)
                         .attr("r", THEME_CIRCLE_RADIUS)
-                        .attr("fill", function(d) { return d.hasSet && applyLayout ? dotColor : "steelblue"; });
+                        .attr("fill", function (d) {
+                            return d.hasSet && applyLayout ? dotColor : "steelblue";
+                        });
                 }
             }
 
@@ -533,38 +571,68 @@ sm.vis.timesets = function() {
                     .attr("y", -CLUSTER_HEIGHT / 2 - TIME_BAR_HEIGHT + 5)
                     .attr("width", xScale(d.endTime) - xScale(d.time))
                     .attr("height", TIME_BAR_HEIGHT)
-                    .attr("fill", function(d) { return d.hasSet && applyLayout ? dotColor : "steelblue"; });
+                    .attr("fill", function (d) {
+                        return d.hasSet && applyLayout ? dotColor : "steelblue";
+                    });
             }
         });
 
         // - Text or Image
-        enterGroup.each(function(d) {
+        enterGroup.each(function (d) {
             if (!usePicture || !d.image) {
                 d3.select(this).append("text")
                     .classed("sm-timeSets-svg-event-text", true)
-                    .style("font-style", function(d) { return d.isParent ? "italic" : "normal"; })
-                    .style("opacity", function(d) { return d.trust; })
-                    .text(function(d) { return d.title; } )
+                    .classed("highlight", topOnly && highlightData.includes(d))
+                    .style("font-style", function (d) {
+                        return d.isParent ? "italic" : "normal";
+                    })
+                    .style("font-size", fontScale(d.influence))
+                    .style("opacity", function (d) {
+                        return d.trust;
+                    })
+                    .text(function (d) {
+                        return d.title;
+                    })
                     .attr("x", getGlyphPadding)
-                    .attr("dy", EVENT_TEXT_DY) // 9 for 26px level-height?
-                    .on("mouseover", function(d) {
+                    // .attr("dy", EVENT_TEXT_DY) // Phong: don't need it anymore due to vertical middle alignment
+                    .on("mouseover", function (d) {
+                        if (d.cluster || isNaN(d.top)) return; // Phong: to fix invisible tooltip at the bottom of time axis
+
                         // highlightLayer(d.layer);
-						if (timesetsProperties.platform !== "IE") {
-							showHideTooltip(true, this, d);
-						}
-                    }).on("mouseout", function(d) {
-                        dehighlightEvents();
-                        showHideTooltip(false, this, d);
-                        legend.dehighlightRows();
-                    }).on("click", function(d) {
-                        d.x = d3.event.pageX;
-                        d.y = d3.event.pageY;
-                        d3.select(this).call(eventViewer).call(trustViewer);
-                    }).on("touchend", function(d) {
-                        d.x = d3.event.pageX;
-                        d.y = d3.event.pageY;
-                        d3.select(this).call(eventViewer).call(trustViewer);
-                    });
+                        if (timesetsProperties.platform !== "IE") {
+                            showHideTooltip(true, this, d);
+                        }
+
+                        // console.log(d)
+
+                    }).on("mouseout", function (d) {
+                    dehighlightEvents();
+                    showHideTooltip(false, this, d);
+                    legend.dehighlightRows();
+                }).on("click", function (d) {
+
+                    //flush
+                    d3.selectAll(".stayHighlighted").classed("stayHighlighted", false);
+
+                    d.x = d3.event.pageX;
+                    d.y = d3.event.pageY;
+                    d3.select(this).call(eventViewer).call(trustViewer);
+
+                    //keep highlighted on click
+                    // console.log(this);
+                    //     d3.select(this)
+                    //         .classed("stayHighlighted", true);
+
+                    d3.select(this)
+                        .classed("highlight", true);
+
+                    // showHideTooltip(true, this, d);
+
+                }).on("touchend", function (d) {
+                    d.x = d3.event.pageX;
+                    d.y = d3.event.pageY;
+                    d3.select(this).call(eventViewer).call(trustViewer);
+                });
             } else {
                 var textHeight = 20;
                 var imageHeight = LEVEL_HEIGHT - textHeight - 4;
@@ -573,27 +641,33 @@ sm.vis.timesets = function() {
                     .attr("y", -LEVEL_HEIGHT / 2 + 2)
                     .attr("height", imageHeight)
                     .attr("width", imageHeight)
-                    .attr("xlink:href", function(d) { return d.image; })
-                    .on("mouseover", function(d) {
+                    .attr("xlink:href", function (d) {
+                        return d.image;
+                    })
+                    .on("mouseover", function (d) {
                         d3.select(this).style("cursor", "pointer");
-                    }).on("mouseout", function(d) {
-                        d3.select(this).style("cursor", "default");
-                    }).on("click", function(d) {
-                        d.x = d3.event.pageX;
-                        d.y = d3.event.pageY;
-                        d3.select(this).call(eventViewer).call(trustViewer);
-                    });
+                    }).on("mouseout", function (d) {
+                    d3.select(this).style("cursor", "default");
+                }).on("click", function (d) {
+                    d.x = d3.event.pageX;
+                    d.y = d3.event.pageY;
+                    d3.select(this).call(eventViewer).call(trustViewer);
+                });
 
                 // Title text
                 d3.select(this).append("foreignObject")
                     .classed("sm-timeSets-svg-event-picture-text", true)
                     .attr("x", getGlyphPadding)
                     // .attr("y", -LEVEL_HEIGHT / 2 + imageHeight + 1)
-                    .attr("y", function(d) { return -LEVEL_HEIGHT / 2 + (d.image ? imageHeight : 1) + 1; })
+                    .attr("y", function (d) {
+                        return -LEVEL_HEIGHT / 2 + (d.image ? imageHeight : 1) + 1;
+                    })
                     .attr("width", imageHeight)
                     .attr("height", "1.9em")
-                        .append("xhtml:div")
-                        .text(function(d) { return d.title; } )
+                    .append("xhtml:div")
+                    .text(function (d) {
+                        return d.title;
+                    })
             }
         });
 
@@ -602,8 +676,10 @@ sm.vis.timesets = function() {
 
         // ENTER + UPDATE
         // - Update contents
-        events.each(function(d) { // Data is bounded to the container, so it stores up-to-date data.
-            d3.select(this).selectAll(".sm-timeSets-svg-event-text").text(function() { return d.title; } );
+        events.each(function (d) { // Data is bounded to the container, so it stores up-to-date data.
+            d3.select(this).selectAll(".sm-timeSets-svg-event-text").text(function () {
+                return d.title;
+            });
         });
 
         // - Update events location
@@ -621,7 +697,7 @@ sm.vis.timesets = function() {
         var g = allLinks.enter().append("g");
         g.attr("class", "sm-timeSets-link");
 
-        g.each(function(d) {
+        g.each(function (d) {
             var source = d.source;
             var target = d.target;
 
@@ -640,11 +716,11 @@ sm.vis.timesets = function() {
     function updateTimeCircles() {
         // Circles
         events.selectAll("circle").remove();
-        events.each(function(d) {
+        events.each(function (d) {
             var self = this;
             if (!d.endTime || showCirleForIntervals) {
                 if (elementMode === "rings") { // One concentric rings circle
-                    d.themeIds.forEach(function(themeId, i) {
+                    d.themeIds.forEach(function (themeId, i) {
                         d3.select(self).append("circle")
                             .attr("cx", 0)
                             .attr("r", THEME_CIRCLE_RADIUS * (d.themeIds.length - i + 0.25))
@@ -657,7 +733,7 @@ sm.vis.timesets = function() {
                         .attr("r", THEME_CIRCLE_RADIUS * 0.5)
                         .attr("fill", "white");
                 } else if (elementMode === "circles") { // Replicate circles for each theme
-                    d.themeIds.forEach(function(themeId, i) {
+                    d.themeIds.forEach(function (themeId, i) {
                         var color = cScale(themeId);
                         if (applyLayout) {
                             color = d3.rgb(color).darker(DARKER_RATIO);
@@ -672,7 +748,9 @@ sm.vis.timesets = function() {
                     d3.select(self).append("circle")
                         .attr("cx", 0)
                         .attr("r", THEME_CIRCLE_RADIUS)
-                        .attr("fill", function(d) { return d.hasSet && applyLayout ? dotColor : "steelblue"; });
+                        .attr("fill", function (d) {
+                            return d.hasSet && applyLayout ? dotColor : "steelblue";
+                        });
                 }
             }
 
@@ -683,25 +761,33 @@ sm.vis.timesets = function() {
                     .attr("y", -CLUSTER_HEIGHT / 2 - TIME_BAR_HEIGHT + 5)
                     .attr("width", xScale(d.endTime) - xScale(d.time))
                     .attr("height", TIME_BAR_HEIGHT)
-                    .attr("fill", function(d) { return d.hasSet && applyLayout ? dotColor : "steelblue"; });
+                    .attr("fill", function (d) {
+                        return d.hasSet && applyLayout ? dotColor : "steelblue";
+                    });
             }
         });
 
         // Text
-        events.selectAll("text.sm-timeSets-svg-event-text").each(function(d) {
+        events.selectAll("text.sm-timeSets-svg-event-text").each(function (d) {
             if (!usePicture || !d.image) {
-                d3.select(this).text(function(d) { return d.title; } )
+                d3.select(this).text(function (d) {
+                    return d.title;
+                })
                     .attr("x", getGlyphPadding);
             }
         });
 
         // Background for individual events
         events.selectAll(".sm-timeSets-svg-event-background")
-            .attr("x", function (d) { return getGlyphPadding(d); } );
+            .attr("x", function (d) {
+                return getGlyphPadding(d);
+            });
 
         // Selection border
         events.selectAll(".sm-timeSets-svg-event-selection")
-            .attr("x", function (d) { return getGlyphPadding(d) - 2; } );
+            .attr("x", function (d) {
+                return getGlyphPadding(d) - 2;
+            });
 
         // Selection text, overwrite existing text
         events.selectAll(".sm-timeSets-svg-event-selection-text")
@@ -736,32 +822,32 @@ sm.vis.timesets = function() {
             .attr("y", 2)
             .attr("rx", 8)
             .attr("ry", 8)
-            .attr("height", CLUSTER_HEIGHT);
+            .attr("height", CLUSTER_HEIGHT - 6);
 
         timeTooltipGroup.append("text")
             .classed("sm-timeSets-svg-event-selection-text", true)
             .classed("startTime", true)
-            .attr("y", 11)
-            .attr("dy", EVENT_SELECTION_TIME_TEXT_dy);
+            .attr("y", CLUSTER_HEIGHT / 2);
+        // .attr("dy", EVENT_SELECTION_TIME_TEXT_dy); // Phong: don't need it anymore due to vertical middle alignment
 
-        // End time
-        timeTooltipGroup.append("rect")
-            .classed("sm-timeSets-svg-event-selection", true)
-            .classed("endTime", true)
-            .attr("y", -CLUSTER_HEIGHT)
-            .attr("rx", 8)
-            .attr("ry", 8)
-            .attr("height", CLUSTER_HEIGHT);
+        // // End time Phong: merge start and end time so that the entire tooltip is below axis
+        // timeTooltipGroup.append("rect")
+        //     .classed("sm-timeSets-svg-event-selection", true)
+        //     .classed("endTime", true)
+        //     .attr("y", -CLUSTER_HEIGHT)
+        //     .attr("rx", 8)
+        //     .attr("ry", 8)
+        //     .attr("height", CLUSTER_HEIGHT);
 
-        timeTooltipGroup.append("text")
-            .classed("sm-timeSets-svg-event-selection-text", true)
-            .classed("endTime", true)
-            .attr("y", -CLUSTER_HEIGHT + 8)
-            .attr("dy", EVENT_SELECTION_TIME_TEXT_dy);
+        // timeTooltipGroup.append("text")
+        //     .classed("sm-timeSets-svg-event-selection-text", true)
+        //     .classed("endTime", true)
+        //     .attr("y", -CLUSTER_HEIGHT / 2)
+        // .attr("dy", EVENT_SELECTION_TIME_TEXT_dy);// Phong: don't need it anymore due to vertical middle alignment
     }
 
     /**
-     * Shows/Hides inline tooltip.
+     * Shows/Hides inline tooltip. todo: use this for the select
      */
     function showHideTooltip(visible, ref, d) {
         if (visible) {
@@ -775,7 +861,7 @@ sm.vis.timesets = function() {
                 showHideFullText(true, ref);
 
                 // Highlight replicated events
-                events.each(function(d2) {
+                events.each(function (d2) {
                     if (d2.oID && d2.oID === d.oID && d2.id !== d.id) {
                         showHideFullText(true, d3.select(this).select(".sm-timeSets-svg-event-text").node());
                     }
@@ -783,39 +869,55 @@ sm.vis.timesets = function() {
             } else {
                 startTime = d[0].time;
                 endTime = startTime;
-                d.forEach(function(d2) {
+                d.forEach(function (d2) {
                     endTime = Math.max(endTime, d2.time);
                     if (d2.endTime) {
                         endTime = Math.max(endTime, d2.endTime);
                     }
                 });
                 endTime = new Date(endTime);
+
+                // Text
+                showHideFullText(true, ref, true);
             }
 
             // Time
             timeTooltipGroup.style("display", "block");
             timeTooltipGroup.attr("transform", "translate(" + xScale(startTime) + "," + (-margin.bottom - 30) + ")");
-            timeTooltipGroup.select("text.startTime").attr("x", getGlyphPadding(d)).text(d3.time.format("%d-%m-%Y")(startTime));
-            timeTooltipGroup.select("rect.startTime").attr("x", getGlyphPadding(d) - 2).attr("width", timeTooltipGroup.select("text").node().getBoundingClientRect().width + 5);
+            timeTooltipGroup.select("text.startTime").attr("x", getGlyphPadding(d));
+            timeTooltipGroup.select("rect.startTime").attr("x", getGlyphPadding(d) - 2);
 
+            var w = 90;
+            var t = d3.time.format("%d-%m-%Y")(startTime);
             if (endTime) {
-                timeTooltipGroup.selectAll(".endTime").style("display", "block");
-                timeTooltipGroup.select("text.endTime").attr("x", getGlyphPadding(d) + xScale(endTime) - xScale(startTime)).text(d3.time.format("%d-%m-%Y")(endTime));
-                timeTooltipGroup.select("rect.endTime").attr("x", getGlyphPadding(d) + xScale(endTime) - xScale(startTime) - 2).attr("width", timeTooltipGroup.select("text").node().getBoundingClientRect().width + 5);
-            } else {
-                timeTooltipGroup.selectAll(".endTime").style("display", "none");
+                w = 190;
+                t += ' → ' + d3.time.format("%d-%m-%Y")(endTime);
             }
+
+            timeTooltipGroup.select("text.startTime").text(t);
+            timeTooltipGroup.select("rect.startTime").attr('width', w);
+
+            // if (endTime) {
+            // timeTooltipGroup.selectAll(".endTime").style("display", "block");
+            // timeTooltipGroup.select("text.endTime").attr("x", getGlyphPadding(d) + xScale(endTime) - xScale(startTime)).text(d3.time.format("%d-%m-%Y")(endTime));
+            // timeTooltipGroup.select("rect.endTime").attr("x", getGlyphPadding(d) + xScale(endTime) - xScale(startTime) - 2).attr("width", timeTooltipGroup.select("text").node().getBoundingClientRect().width + 5);
+            // } else {
+            // timeTooltipGroup.selectAll(".endTime").style("display", "none");
+            // }
         } else {
             if (!d.length) {
                 // Text
                 showHideFullText(visible, ref);
 
                 // De-highlight replicated events
-                events.each(function(d2) {
+                events.each(function (d2) {
                     if (d2.oID && d2.oID === d.oID && d2.id !== d.id) {
                         showHideFullText(false, d3.select(this).select(".sm-timeSets-svg-event-text").node());
                     }
                 });
+            } else {
+                // Text
+                showHideFullText(visible, ref, true);
             }
 
             // Time
@@ -826,16 +928,19 @@ sm.vis.timesets = function() {
     /**
      * Shows/Hides full text.
      */
-    function showHideFullText(visible, ref) {
+    function showHideFullText(visible, ref, isCluster) {
         if (!ref || !ref.parentNode || !ref.parentNode.parentNode || ref.clustered) {
             return;
         }
 
         if (visible) {
             d3.select(ref.parentNode).moveToFront();
+            d3.select(ref.parentNode.parentNode).moveToFront();
             d3.select(ref.parentNode).select(".sm-timeSets-svg-event-selection-text").style("display", "block");
             d3.select(ref.parentNode).select(".sm-timeSets-svg-event-selection").style("display", "block")
-                .attr("width", function() { return d3.select(ref.parentNode).select(".sm-timeSets-svg-event-selection-text").node().getComputedTextLength() + 5; });
+                .attr("width", function () {
+                    return d3.select(ref.parentNode).select(".sm-timeSets-svg-event-selection-text").node().getComputedTextLength() + 5 + (isCluster ? 15 : 0);
+                });
             d3.select(ref).style("opacity", 0);
         } else {
             d3.select(ref.parentNode).select(".sm-timeSets-svg-event-selection-text").style("display", "none");
@@ -848,7 +953,7 @@ sm.vis.timesets = function() {
      * De-highlights events.
      */
     function dehighlightEvents() {
-        activeData.forEach(function(d) {
+        activeData.forEach(function (d) {
             d3.select(d.ref).select(".sm-timeSets-svg-event-text").style("opacity", d.trust).style("font-weight", "normal");
         });
 
@@ -946,7 +1051,7 @@ sm.vis.timesets = function() {
         clusterGroup.selectAll("g").remove();
 
         // Reset
-        activeData.forEach(function(d) {
+        activeData.forEach(function (d) {
             d.originalTranslate = null;
             d.level = undefined;
         });
@@ -978,12 +1083,56 @@ sm.vis.timesets = function() {
         }
 
         // Translate to new level
-        events.each(function(d) {
+        events.each(function (d) {
             translateEvent(d, d.cluster ? 0 : transitionDuration);
         });
 
         // Draw outlines
         drawSets();
+
+        adjustClusterText();
+    }
+
+    // Update cluster text according to the events on the right of it
+    function adjustClusterText() {
+        const allCoords = [];
+        eventGroup.selectAll('.sm-timeSets-svg-event')
+            .filter(function(d) { return !d.cluster && d3.select(this).style('opacity') > 0; })
+            .each(function(d) {
+                allCoords.push(this.getBoundingClientRect());
+            });
+
+        clusterGroup.selectAll('.a-cluster').each(function(d) {
+            allCoords.push(this.getBoundingClientRect());
+        });
+
+        // For each cluster, find the one at the same level that is closest to the right.
+        // That is the maximum width it can take
+        clusterGroup.selectAll('.a-cluster').each(function(d) {
+            const rect = this.getBoundingClientRect();
+            const minX = d3.min(allCoords.filter(d => d.y === rect.y && d.x > rect.x), d => d.x);
+            const allowX = minX - 10;
+            // How to map the text to a max width in pixel?
+            // Test one by one
+            const textElement = d3.select(this).select(".sm-timeSets-svg-event-text");
+            let numChars = 1;
+            // while (true) {
+            //     if (numChars > MAX_NUM_CHARS) break;
+
+            //     let text = d.fullTitle.substring(0, numChars++);
+            //     text = text.substring(0, text.lastIndexOf(' ') + 1); // Trim at space for readability
+            //     text += '...';
+            //     textElement.text(text);
+            //     if (this.getBoundingClientRect().right > allowX) break;
+            // }
+        });
+        // cluster
+        // d.originalTitle = d.title;
+        //     if (d.title.length > MAX_NUM_CHARS) {
+        //         d.title = d.title.substring(0, MAX_NUM_CHARS);
+        //         d.title = d.title.substring(0, d.title.lastIndexOf(' ') + 1); // Trim at space for readability
+        //         d.title += '...';
+        //     }
     }
 
     /**
@@ -991,28 +1140,28 @@ sm.vis.timesets = function() {
      */
     function computeLayerLayout(startLevel, endLevel, layerId) {
         // Remove cluster
-        clusterGroup.selectAll("g").each(function(d) {
+        clusterGroup.selectAll("g").each(function (d) {
             if (d[0].layer === layerId) {
                 d3.select(this).remove();
             }
         });
 
         // Recover trimmed text
-        events.each(function(d) {
+        events.each(function (d) {
             if (d.layer === layerId) {
                 d3.select(this).select(".sm-timeSets-svg-event-text").text(d.title);
             }
         });
 
         var rightmostEvents = {};
-        var extremeLevels = { low: 0, high: 0 };
+        var extremeLevels = {low: 0, high: 0};
         var prevEvent = null;
 
-        events.each(function(d) {
+        events.each(function (d) {
             if (d.hasSet && (!applyLayout || d.layer === layerId)) {
                 d.prevDir = null;
                 prevEvent = layoutMode === "middle" ? computeEventLayoutMiddle(d, this, startLevel, endLevel, prevEvent, rightmostEvents, extremeLevels)
-                                                    : computeEventLayoutBottom(d, this, startLevel, endLevel, prevEvent, rightmostEvents, extremeLevels);
+                    : computeEventLayoutBottom(d, this, startLevel, endLevel, prevEvent, rightmostEvents, extremeLevels);
             }
         });
 
@@ -1022,7 +1171,7 @@ sm.vis.timesets = function() {
         // Translate to the startLevel
         if (layoutMode === "middle") {
             var offset = startLevel - extremeLevels.low;
-            events.each(function(d) {
+            events.each(function (d) {
                 if (!applyLayout || d.layer === layerId) {
                     d.level += offset;
                 }
@@ -1039,15 +1188,21 @@ sm.vis.timesets = function() {
      */
     function computeNonSetEventsLayout() {
         // TODO: Only support 'background' mode
-        if (setMode !== "background") { return; }
+        if (setMode !== "background") {
+            return;
+        }
 
-        nonSetData.forEach(function(d) { d.level = undefined; });
+        nonSetData.forEach(function (d) {
+            d.level = undefined;
+        });
         var count = 0;
         var numTests = 412;
         var prevEvent = null;
 
-        events.each(function(d) {
-            if (d.hasSet) { return; }
+        events.each(function (d) {
+            if (d.hasSet) {
+                return;
+            }
 
             if (count < numTests) {
                 prevEvent = computeNonSetSingleEvent(d, this, prevEvent);
@@ -1077,7 +1232,11 @@ sm.vis.timesets = function() {
                 if (rects[j]) {
                     occupiedRows[rects[j].level].push(rects[j]);
                     // Assign events to extreme rects so that we know which events inside it
-                    rects[j].dataEvents = eventRects.filter(function(d) { return d.level === rects[j].level; }).sort(function(a, b) { return a.left > b.left; });
+                    rects[j].dataEvents = eventRects.filter(function (d) {
+                        return d.level === rects[j].level;
+                    }).sort(function (a, b) {
+                        return a.left > b.left;
+                    });
                 }
             }
         }
@@ -1091,15 +1250,17 @@ sm.vis.timesets = function() {
         }
 
         // Add clusters: TODO: if clusters are bands, no need for this separate addition
-        events.each(function(d) {
+        events.each(function (d) {
             if (d.hasSet && d.cluster) {
                 occupiedRows[d.level].push(d);
             }
         });
 
         // Make rects in it row follow ascending order
-        occupiedRows.forEach(function(r) {
-            r.sort(function(a, b) { return a.left > b.left; });
+        occupiedRows.forEach(function (r) {
+            r.sort(function (a, b) {
+                return a.left > b.left;
+            });
         });
 
         // Try trim a bit for better layout (trimThresholdRatio)
@@ -1206,7 +1367,9 @@ sm.vis.timesets = function() {
         }
 
         // Find the display boundary of the event
-        d3.select(self).attr("transform", function(d) { return "translate(" + xScale(d.time) + ", 0)"; });
+        d3.select(self).attr("transform", function (d) {
+            return "translate(" + xScale(d.time) + ", 0)";
+        });
         var location = self.getBoundingClientRect();
 
         d.ref = self;
@@ -1225,6 +1388,8 @@ sm.vis.timesets = function() {
         }
         numAvailableLevels = Math.max(numNotProcessedLayers, numAvailableLevels);
 
+        const avgEventsPerLevel = d3.sum(layerEvents, x => x.length) / numAvailableLevels;
+
         // Arrange events in each layer by applying events-only layout
         var highestLevel = 0;
         for (var i = 0; i < numLayers; i++) {
@@ -1232,25 +1397,32 @@ sm.vis.timesets = function() {
                 continue;
             }
 
-            // Find proportional height
-            var heightOfNotProcessedLayers = 0;
-            for (var j = i; j < numLayers; j++) {
-                heightOfNotProcessedLayers += layerEvents[j].length;
-            }
-            var layerHeight = Math.max(1, Math.round(layerEvents[i].length / heightOfNotProcessedLayers * numAvailableLevels));
+            var layerHeight = 1;
 
-            // Adjust if there is not enough at least one level for the rest layers
+            // If the number of events in a layer is less than the avg, it should only be one row.
+            if (layerEvents[i].length > avgEventsPerLevel && numAvailableLevels > numNotProcessedLayers) {
+                // If greater, set it proportional to the size
+                // Adjust if there is not enough at least one level for the rest layers
+                // Find proportional height
+                var totalSize = 0
+                for (var j = i; j < numLayers; j++) {
+                    if (layerEvents[j].length > avgEventsPerLevel) {
+                        totalSize += layerEvents[j].length;
+                    }
+                }
+
+                var extraLevels = Math.floor(layerEvents[i].length / totalSize * (numAvailableLevels - numNotProcessedLayers));
+                extraLevels = Math.min(extraLevels, numAvailableLevels - layerHeight - numNotProcessedLayers + 1);
+                layerHeight += extraLevels;
+            }
+
             numNotProcessedLayers--;
-            if (numAvailableLevels - layerHeight < numNotProcessedLayers) {
-                layerHeight--;
-            }
-
             var startLevel = highestLevel;
             var endLevel = startLevel + layerHeight;
             highestLevel = computeLayerLayout(startLevel, endLevel, i) + 1;
 
             numAvailableLevels -= (highestLevel - startLevel);
-            assignedLayers[i] =  { index: i };
+            assignedLayers[i] = {index: i};
             assignedLayers[i].ratio = computeLegibilityRatio(i);
             assignedLayers[i].startLevel = startLevel;
             assignedLayers[i].endLevel = highestLevel;
@@ -1266,7 +1438,9 @@ sm.vis.timesets = function() {
      * Incrementally improve the layout legibility.
      */
     function balanceLayers() {
-        if (assignedLayers.every(function(d) { return d.ratio === 1; })) {
+        if (assignedLayers.every(function (d) {
+                return d.ratio === 1;
+            })) {
             return;
         }
 
@@ -1290,7 +1464,7 @@ sm.vis.timesets = function() {
             }
         }
 
-        var distance = function(key) {
+        var distance = function (key) {
             var tokens = key.split("#");
             var ratio1 = assignedLayers[+tokens[0]].ratio;
             var ratio2 = assignedLayers[+tokens[1]].ratio;
@@ -1300,7 +1474,7 @@ sm.vis.timesets = function() {
         var bestDev = computeLegibilityRatioDeviation();
 
         while ((new Date()).getTime() - startTime < maxOptimizationTime && unAdjustedPairs.length > 0) {
-            unAdjustedPairs.sort(function(a, b) {
+            unAdjustedPairs.sort(function (a, b) {
                 return d3.descending(distance(a), distance(b));
             });
 
@@ -1322,12 +1496,16 @@ sm.vis.timesets = function() {
                 }
             }
 
-            if (idx === -1) { return; }
+            if (idx === -1) {
+                return;
+            }
 
             var highestLevel = 0;
 
             for (var i = 0; i < numLayers; i++) {
-                if (!assignedLayers[i]) { continue; }
+                if (!assignedLayers[i]) {
+                    continue;
+                }
 
                 // Plus one height for the lowest, same for others
                 var layerHeight = assignedLayers[i].endLevel - assignedLayers[i].startLevel;
@@ -1382,7 +1560,9 @@ sm.vis.timesets = function() {
             return null;
         }
 
-        var rects = source.filter(function(d) { return d.ref; });
+        var rects = source.filter(function (d) {
+            return d.ref;
+        });
         var shapeOutline = sm.layout.timesetsOutline().rects(rects).verticalMode(verticalMode).fillHorizontalGap(intersectionMode.substring(0, 8) === "gradient");
         shapeOutline.call();
 
@@ -1403,7 +1583,9 @@ sm.vis.timesets = function() {
             }
         }
 
-        var beforeHeight = d3.max(assignedLayers, function(d) { return d ? d.endLevel : 0; });
+        var beforeHeight = d3.max(assignedLayers, function (d) {
+            return d ? d.endLevel : 0;
+        });
 
         for (var i = 1; i < numLayers; i++) {
             if (!assignedLayers[i]) {
@@ -1435,7 +1617,7 @@ sm.vis.timesets = function() {
 
                     if (!intersected) {
                         // Stay here, update
-                        layerEvents[i].forEach(function(d) {
+                        layerEvents[i].forEach(function (d) {
                             d.level -= j;
                         });
 
@@ -1497,7 +1679,7 @@ sm.vis.timesets = function() {
                 }
 
                 if (lastFit) {
-                    layerEvents[i].forEach(function(d) {
+                    layerEvents[i].forEach(function (d) {
                         d.level -= lastFit;
                     });
 
@@ -1516,7 +1698,9 @@ sm.vis.timesets = function() {
             }
         }
 
-        var afterHeight = d3.max(assignedLayers, function(d) { return d ? d.endLevel : 0; });
+        var afterHeight = d3.max(assignedLayers, function (d) {
+            return d ? d.endLevel : 0;
+        });
         return (afterHeight < beforeHeight && afterHeight < maxLevel);
     }
 
@@ -1816,55 +2000,122 @@ sm.vis.timesets = function() {
      */
     function createNewCluster(theData) {
         var cluster = clusterGroup.append("g").datum(theData)
-            .attr("transform", function() { return "translate(" + xScale(theData[0].time) + ", 0)"; });
+
+            .attr("transform", function() { return "translate(" + xScale(theData[0].time) + ", 0)"; })
+            .attr('class', 'a-cluster');
 
         // - Rectangle
         var rect = cluster.append("rect")
             .classed("sm-timeSets-svg-cluster-rect", true)
-            .attr("x", 0)
-            .attr("y", -CLUSTER_HEIGHT / 2)
+            .attr("x", -6)
+            .attr("y", -CLUSTER_HEIGHT / 2 - 3)
+            .attr("rx", 8)
+            .attr("ry", 8)
             .attr("height", CLUSTER_HEIGHT)
-            .attr("stroke", function(d) { return d[0].hasSet ? "#5F92B0" : "#5F92B0"; }) // The first value should be 'dotColor' for hasSet, not correct aggregate yet
-            .attr("fill", function(d) { return d[0].hasSet ? "none" : "#BFEFFC"; });
+            .attr("stroke", function (d) {
+                return d[0].hasSet ? "white" : "5F92B0";
+            }) // The first value should be 'dotColor' for hasSet, not correct aggregate yet
+            .attr("fill", function (d) {
+                return d[0].hasSet ? "none" : "#BFEFFC";
+            })
+            .style('display', 'none'); // Phong: don't need this any more but lazy to remove!!
 
         // - Text
-        var text = "2 events";
+        // var text = "2 events";
+        var highestInfluenceMessage = theData.sort((a, b) => d3.descending(a.influence, b.influence))[0];
+        var highestInfluence = d3.max(theData, d => d.influence);
+
+        // Phong: 12.10.18: show the title of the highest influence event instead of its size
+        theData.fullTitle = highestInfluenceMessage.title;
+
+        // Phong: added rectangular border and text showing original title so that when an aggregate is hovered,
+        // full title is displayed.
+        cluster.append("rect")
+            .classed("sm-timeSets-svg-event-selection", true)
+            .attr("x", function (d) {
+                return getGlyphPadding(d) - 2;
+            })
+            .attr("y", -CLUSTER_HEIGHT / 2 - 3)
+            .attr("rx", 8)
+            .attr("ry", 8)
+            .attr("height", CLUSTER_HEIGHT - 1)
+            .style("display", "none");
+
+        cluster.append("text")
+            .classed("sm-timeSets-svg-event-selection-text", true)
+            .text(function (d) {
+                return highestInfluenceMessage.originalTitle;
+            })
+            .attr("x", 13)
+            .style("display", "none");
+
         var textElement = cluster.append("text")
             .classed("sm-timeSets-svg-event-text", true)
-            .text(text)
-            .attr("x", 5)
-            .attr("dy", EVENT_TEXT_DY) // 9 for 26px level-height
-            .on("mouseover", function(d) {
+            .classed("highlight", topOnly && theData.some(d => highlightData.includes(d)))
+            .text(theData.fullTitle)
+            .attr("x", 13)
+            // .attr("dy", EVENT_TEXT_DY) // Phong: don't need it anymore due to vertical middle alignment
+            .style('font-size', fontScale(highestInfluence) || minFontSize)
+            .on("mouseover", function (d) {
                 showHideTooltip(true, this, d);
 
-                if (setMode === "background") { return; }
+                if (setMode === "background") {
+                    return;
+                }
 
                 d3.select(d3.select(this).node().parentNode).select(".sm-timeSets-svg-cluster-rect").style("fill", "#BFEFFC").style("stroke", "#5F92B0");
                 // highlightLayer(d[0].layer);
             })
-            .on("mouseout", function(d) {
+            .on("mouseout", function (d) {
                 // d3.select(d3.select(this).node().parentNode).select(".sm-timeSets-svg-cluster-rect").style("fill", null).style("stroke", "none");
                 dehighlightEvents();
                 legend.dehighlightRows();
                 showHideTooltip(false, this, d);
 
-                if (setMode === "background") { return; }
+                if (setMode === "background") {
+                    return;
+                }
 
-                d3.select(d3.select(this).node().parentNode).select(".sm-timeSets-svg-cluster-rect").style("fill", null).style("stroke", "white");
+                d3.select(d3.select(this).node().parentNode).select(".sm-timeSets-svg-cluster-rect").style("fill", null).style("stroke", "none");
             })
-            .on("click", function(d) {
+            .on("click", function (d) {
+
+                d3.selectAll(".stayHighlighted").classed("stayHighlighted", false);
+
                 d.x = d3.event.pageX;
                 d.y = d3.event.pageY + 25;
                 d.dialogTitle = d3.select(this).text();
                 d3.select(this).call(eventViewer).call(trustViewer);  // Always show all events
+
+                d3.select(this).classed('stayHighlighted', true)
+
+                showHideTooltip(false, this, d);
             });
 
         rect.attr("width", textElement.node().getComputedTextLength() + 10);
 
+        // Number box
+        cluster.append("rect")
+            .attr('class', "number-box")
+            .attr("x", 0)
+            .attr("y", -CLUSTER_HEIGHT / 2 + 6)
+            .attr("width", 10)
+            .attr("height", CLUSTER_HEIGHT - 13)
+            .style('stroke', 'gray')
+            .style('fill', 'none');
+
+        cluster.append('text')
+            .attr('class', 'number-box-text')
+            .attr('x', 1)
+            .attr("y", -CLUSTER_HEIGHT / 2 + 5)
+            .style('fill', 'gray')
+            .style('dominant-baseline', 'text-before-edge')
+            .text(2);
+
         // Update time bar for cluster
         var startTime = xScale(theData[0].time);
         var endTime = startTime;
-        theData.forEach(function(d) {
+        theData.forEach(function (d) {
             endTime = Math.max(endTime, xScale(d.time));
             if (d.endTime) {
                 endTime = Math.max(endTime, xScale(d.endTime));
@@ -1877,23 +2128,62 @@ sm.vis.timesets = function() {
             .attr("y", -CLUSTER_HEIGHT / 2 - TIME_BAR_HEIGHT + 5)
             .attr("width", endTime - startTime)
             .attr("height", TIME_BAR_HEIGHT)
-            .attr("fill", function(d) { return d[0].hasSet && applyLayout ? dotColor : "steelblue"; });
-            // .style("fill-opacity", 0.5);
+            .attr('fill', 'none') // Phong: no need this?
+        // .attr("fill", function(d) { return d[0].hasSet && applyLayout ? dotColor : "steelblue"; });
+        // .style("fill-opacity", 0.5);
+
+        // Phong 12.10.18: add dots for events
+        const dotContainer = cluster.append('g').attr('class', 'dots')
+            .attr('transform', 'translate(0,' + (2 - CLUSTER_HEIGHT / 2) + ')');
+        addEventTimeDot(dotContainer, theData, highestInfluenceMessage);
 
         return cluster.node();
+    }
+
+    function addEventTimeDot(container, events, highlightEvent) {
+        const dots = container.selectAll('.dot').data(events, key);
+        const minTime = d3.min(events, d => d.time);
+
+        dots.enter().append('circle')
+            .attr('class', 'dot')
+            .attr('r', 3);
+        dots.attr('cx', d => xScale(d.time) - xScale(minTime))
+            .classed('highlight', d => d === highlightEvent);
     }
 
     /**
      * Updates an exisiting cluster with new data.
      */
     function updateCluster(cluster, theData) {
-        var text = theData.length + " events";
-        cluster.select("text").text(text);
-        cluster.select(".sm-timeSets-svg-cluster-rect").attr("width", cluster.select("text").node().getComputedTextLength() + 10);
+        cluster.select(".number-box-text")
+            .text(theData.length);
+        cluster.select(".number-box")
+            .attr("width", cluster.select(".number-box-text").node().getComputedTextLength() + 2);
+
+        // Phong: 12.10.18: show the title of the highest influence event instead of its size
+        // var text = theData.length + " events";
+        var highestInfluenceMessage = theData.sort((a, b) => d3.descending(a.influence, b.influence))[0];
+        theData.fullTitle = highestInfluenceMessage.title;
+        var highestInfluence = d3.max(theData, d => d.influence);
+
+        cluster.select(".sm-timeSets-svg-event-text")
+            .classed("highlight", topOnly && theData.some(d => highlightData.includes(d)))
+            .style('font-size', fontScale(highestInfluence) || minFontSize)
+//         // todo: should be text of the title
+            .attr('x', cluster.select(".number-box-text").node().getComputedTextLength() + 5)
+            .text(theData.fullTitle);
+// >>>>>>> 0b4ca9095cbd2015dd6d3c5d2f73c7561f13c736
+
+        // Width of the tooltip box
+        cluster.select(".sm-timeSets-svg-cluster-rect")
+            .attr("width", cluster.select("text").node().getComputedTextLength() + 10);
+
+        cluster.select(".sm-timeSets-svg-event-selection-text")
+            .text(highestInfluenceMessage.originalTitle);
 
         var startTime = xScale(theData[0].time);
         var endTime = startTime;
-        theData.forEach(function(d) {
+        theData.forEach(function (d) {
             endTime = Math.max(endTime, xScale(d.time));
             if (d.endTime) {
                 endTime = Math.max(endTime, xScale(d.endTime));
@@ -1902,6 +2192,8 @@ sm.vis.timesets = function() {
 
         cluster.append("rect.sm-timeSets-svg-cluster-bar")
             .attr("width", endTime - startTime);
+
+        addEventTimeDot(cluster.select('.dots'), theData, highestInfluenceMessage);
     }
 
     /**
@@ -1917,9 +2209,9 @@ sm.vis.timesets = function() {
     function cScale(i) {
         if (!colors) {
             // Set 2 - colorbrewer
-            colors = ["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854","#ffd92f","#e5c494","#b3b3b3"];
+            colors = ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f", "#e5c494", "#b3b3b3"];
             // Change order to use brighter colors
-            colors = ["#66c2a5","#8da0cb","#ffd92f","#e78ac3","#fc8d62","#a6d854","#e78ac3","#e5c494","#b3b3b3"];
+            colors = ["#66c2a5", "#8da0cb", "#ffd92f", "#e78ac3", "#fc8d62", "#a6d854", "#e78ac3", "#e5c494", "#b3b3b3"];
 
             // Set 3 - colorbrewer
             // colors = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"];
@@ -1937,9 +2229,13 @@ sm.vis.timesets = function() {
      * Checks whether two given attentively allocated events are separate.
      */
     function isSeparate(e1, e2, mayDifferentLevels) {
-        if (!e1 || !e2) { return true; }
+        if (!e1 || !e2) {
+            return true;
+        }
 
-        if (mayDifferentLevels && e1.level !== e2.level) { return true; }
+        if (mayDifferentLevels && e1.level !== e2.level) {
+            return true;
+        }
 
         var extraPad = 0;
         return e1.right + extraPad < e2.left || e1.left > e2.right + extraPad;
@@ -1949,7 +2245,7 @@ sm.vis.timesets = function() {
      * Sets unique id for data.
      */
     function setUniqueIds() {
-        allData.forEach(function(d) {
+        allData.forEach(function (d) {
             d.id = id++;
         });
     }
@@ -1958,10 +2254,12 @@ sm.vis.timesets = function() {
      * If event label is unnecessarily long ('alwaysTrim' attribute is true), trim it.
      */
     function forceTrimEvents() {
-        allData.forEach(function(d) {
+        allData.forEach(function (d) {
             d.originalTitle = d.title;
-            if (d.alwaysTrim) {
-                d.title = d.title.substring(0, MAX_NUM_CHARS) + (d.title.length <= MAX_NUM_CHARS ? "" : "...");
+            if (d.title.length > MAX_NUM_CHARS) {
+                d.title = d.title.substring(0, MAX_NUM_CHARS);
+                d.title = d.title.substring(0, d.title.lastIndexOf(' ') + 1); // Trim at space for readability
+                d.title += '...';
             }
         })
     }
@@ -1972,22 +2270,26 @@ sm.vis.timesets = function() {
     function splitNonSetEvents(init) {
         if (init) {
             allData = data;
-            allData.forEach(function(d) {
+            allData.forEach(function (d) {
                 d.hasSet = d.themes && d.themes.length;
             });
         }
 
-        nonSetData = allData.filter(function(d) { return !d.hasSet; });
-        data = allData.filter(function(d) { return d.hasSet; });
+        nonSetData = allData.filter(function (d) {
+            return !d.hasSet;
+        });
+        data = allData.filter(function (d) {
+            return d.hasSet;
+        });
     }
 
     function combineEvents() {
         allData = data.concat(nonSetData);
-        allData.forEach(function(d) {
+        allData.forEach(function (d) {
             d.hasSet = d.themes && d.themes.length;
         });
 
-        allData.sort(function(a, b) {
+        allData.sort(function (a, b) {
             return d3.ascending(a.time, b.time);
         });
     }
@@ -1996,7 +2298,9 @@ sm.vis.timesets = function() {
      * Combines events with the same label together.
      */
     function aggregateSameLabelEvents(dataset) {
-        if (aggregateLevel === "none" || !dataset || !dataset.length) { return []; }
+        if (aggregateLevel === "none" || !dataset || !dataset.length) {
+            return [];
+        }
 
         var updatePivotEvent = function (pivotEvent, event) {
             if (pivotEvent.aggregated) {
@@ -2029,7 +2333,9 @@ sm.vis.timesets = function() {
                 var pivotEvent = dataset[i];
 
                 // Already aggregated due to previous iteration
-                if (pivotEvent.processed) { continue; }
+                if (pivotEvent.processed) {
+                    continue;
+                }
 
                 var finishAggregation = false;
 
@@ -2060,7 +2366,9 @@ sm.vis.timesets = function() {
     }
 
     function areTwoArrayEqual(array1, array2) {
-        if (array1.length !== array2.length) { return false; }
+        if (array1.length !== array2.length) {
+            return false;
+        }
 
         for (var i = 0; i < array1.length; i++) {
             if (array1[i] !== array2[i]) {
@@ -2077,7 +2385,7 @@ sm.vis.timesets = function() {
      */
     function updateAggregatedLabels() {
         // Update aggregate event's title
-        allData.forEach(function(d) {
+        allData.forEach(function (d) {
             if (d.aggregated) {
                 d.title = d.title + " (x" + d.events.length + ")";
                 d.ogtitle = d.ogtitle + " (x" + d.events.length + ")";
@@ -2090,10 +2398,12 @@ sm.vis.timesets = function() {
      */
     function addParentEvents() {
         // Only applied for set-events but need to traverse through 'allData' because new events will be added with fixed position.
-        if (aggregateLevel === "none" || !allData || !allData.length) { return; }
+        if (aggregateLevel === "none" || !allData || !allData.length) {
+            return;
+        }
 
         // Reset 'added', 'parented' attributes of previous calls
-        allData.forEach(function(d) {
+        allData.forEach(function (d) {
             d.added = d.parented = false;
         });
 
@@ -2102,7 +2412,7 @@ sm.vis.timesets = function() {
         var pivotEvent = allData[0]; // The event to compare with
         newData.push(pivotEvent);
 
-        var getCommonStart = function(s1, s2) {
+        var getCommonStart = function (s1, s2) {
             var n = Math.min(s1.length, s2.length);
             var i = 0;
             for (i; i < n; i++) {
@@ -2114,7 +2424,7 @@ sm.vis.timesets = function() {
             return s1.substring(0, i);
         };
 
-        var getCommonEnd = function(s1, s2) {
+        var getCommonEnd = function (s1, s2) {
             var n = Math.min(s1.length, s2.length);
             var i = 0;
             for (i; i < n; i++) {
@@ -2127,20 +2437,27 @@ sm.vis.timesets = function() {
         };
 
         // Initialize parent event
-        var parentEvent = { "isParent": true, "hasSet": true, "themes": pivotEvent.themes, "themeIds": pivotEvent.themeIds, "time": pivotEvent.time, "events": [pivotEvent] };
+        var parentEvent = {
+            "isParent": true,
+            "hasSet": true,
+            "themes": pivotEvent.themes,
+            "themeIds": pivotEvent.themeIds,
+            "time": pivotEvent.time,
+            "events": [pivotEvent]
+        };
         var lcsStart, lcsEnd;
         lcsStart = lcsEnd = pivotEvent.title;
         var hasCommonStart, hasCommonEnd;
 
         // Insert parent event to the begining of its children
-        var insertParent = function() {
+        var insertParent = function () {
             if (parentEvent.events.length > 1) {
                 newData.splice(parentIndex, 0, parentEvent);
 
                 var parentTitle;
 
                 // Add a marker to the begining of child events and trim common text
-                parentEvent.events.forEach(function(d) {
+                parentEvent.events.forEach(function (d) {
                     var startIdx = hasCommonStart ? lcsStart.length : 0;
                     var endIdx = d.title.length - (hasCommonEnd ? lcsEnd.length : 0);
                     endIdx = Math.max(endIdx, startIdx); // Common start and common end can be overlapped
@@ -2161,7 +2478,9 @@ sm.vis.timesets = function() {
             var event = allData[i];
             newData.push(event);
 
-            if (!event.hasSet) { continue; }
+            if (!event.hasSet) {
+                continue;
+            }
 
             var commonStart = getCommonStart(event.title, lcsStart);
             var commonEnd = getCommonEnd(event.title, lcsEnd);
@@ -2172,7 +2491,7 @@ sm.vis.timesets = function() {
                 hasCommonEnd = commonEnd.length > numChars;
                 lcsStart = hasCommonStart ? commonStart : "";
                 lcsEnd = hasCommonEnd ? commonEnd : "";
-                stopComparison = !hasCommonStart &&  !hasCommonEnd;
+                stopComparison = !hasCommonStart && !hasCommonEnd;
             } else { // Already has common string, need to match to follow
                 lcsStart = commonStart.length > numChars ? commonStart : lcsStart;
                 lcsEnd = commonEnd.length > numChars ? commonEnd : lcsEnd;
@@ -2192,7 +2511,14 @@ sm.vis.timesets = function() {
                 pivotEvent = event;
                 lcsStart = lcsEnd = pivotEvent.title;
                 parentIndex = newData.length - 1;
-                parentEvent = { "isParent": true, "hasSet": true, "themes" : pivotEvent.themes, "themeIds": pivotEvent.themeIds, "time": pivotEvent.time, "events": [pivotEvent] };
+                parentEvent = {
+                    "isParent": true,
+                    "hasSet": true,
+                    "themes": pivotEvent.themes,
+                    "themeIds": pivotEvent.themeIds,
+                    "time": pivotEvent.time,
+                    "events": [pivotEvent]
+                };
             }
         }
 
@@ -2208,7 +2534,7 @@ sm.vis.timesets = function() {
      */
     function layeriseEvents() {
         // Reset
-        data.forEach(function(d) {
+        data.forEach(function (d) {
             d.layers = [];
             d.oID = d.id;
         });
@@ -2218,9 +2544,13 @@ sm.vis.timesets = function() {
         }
 
         // Clone
-        layerisedData = data.map(function(d) { return d; });
+        layerisedData = data.map(function (d) {
+            return d;
+        });
 
-        var numActiveThemes = d3.sum(activeThemeIds, function(d) { return d ? 1 : 0; });
+        var numActiveThemes = d3.sum(activeThemeIds, function (d) {
+            return d ? 1 : 0;
+        });
         numLayers = numActiveThemes === 0 ? 0 : numActiveThemes * 2 - 1;
 
         var processedEvents = new Array(layerisedData.length); // If events are processed, they will be replicated, if they can't share
@@ -2235,7 +2565,7 @@ sm.vis.timesets = function() {
 
             idx++;
 
-            layerisedData.forEach(function(d, i) {
+            layerisedData.forEach(function (d, i) {
                 if (d.themeIds.indexOf(themeId) === -1) {
                     return true;
                 }
@@ -2261,7 +2591,7 @@ sm.vis.timesets = function() {
                         if (d.layers[0] === idx - 1) { // Yes, it is the layer below
                             d.layers.push(idx);
                         } else { // No, need to find the event in the replicated data
-                            replicateData.forEach(function(d2) {
+                            replicateData.forEach(function (d2) {
                                 if (d2.oID === d.oID && d2.layers.length === 1 && d2.layers[0] === idx - 1) {
                                     d2.layers.push(idx);
                                 }
@@ -2299,7 +2629,7 @@ sm.vis.timesets = function() {
         layerisedData = layerisedData.concat(replicateData);
 
         // Re-format layers if shared layers are treated explicitly
-        layerisedData.forEach(function(d) {
+        layerisedData.forEach(function (d) {
             d.layer = d.layers.length === 1 ? d.layers[0] * 2 : d.layers[0] * 2 + 1;
             if (isNaN(d.layer)) {
                 // console.log(d);
@@ -2307,7 +2637,7 @@ sm.vis.timesets = function() {
         });
 
         // Sort data by time ascendingly for easy computing layout
-        layerisedData.sort(function(a, b) {
+        layerisedData.sort(function (a, b) {
             if (a.time.getTime() === b.time.getTime()) {
                 return d3.ascending(a.title.length, b.title.length);
             }
@@ -2331,7 +2661,7 @@ sm.vis.timesets = function() {
         }
 
         // - Fill the table
-        data.forEach(function(d) {
+        data.forEach(function (d) {
             if (d.themeIds.length === 2) {
                 table[d.themeIds[0]][d.themeIds[1]]++;
                 table[d.themeIds[1]][d.themeIds[0]]++;
@@ -2351,7 +2681,9 @@ sm.vis.timesets = function() {
                 }
                 if (sum > longestPathValue) {
                     longestPathValue = sum;
-                    longestPath = values.map(function(d) { return d; });
+                    longestPath = values.map(function (d) {
+                        return d;
+                    });
                 }
             } else {
                 k++;
@@ -2393,7 +2725,7 @@ sm.vis.timesets = function() {
             }
         }
 
-        data.forEach(function(d) {
+        data.forEach(function (d) {
             if (d.themeIds.length === 2) {
                 table[d.themeIds[0]][d.themeIds[1]]++;
             }
@@ -2404,13 +2736,13 @@ sm.vis.timesets = function() {
         for (var i = 0; i < numThemes; i++) {
             for (var j = i + 1; j < numThemes; j++) {
                 if (table[i][j] > 0) {
-                    edges.push({ vertex1: i, vertex2: j, weight: table[i][j] });
+                    edges.push({vertex1: i, vertex2: j, weight: table[i][j]});
                 }
             }
         }
 
         // Sort descendingly by number of shared events
-        edges.sort(function(a, b) {
+        edges.sort(function (a, b) {
             return d3.descending(a.weight, b.weight);
         });
 
@@ -2438,8 +2770,8 @@ sm.vis.timesets = function() {
         // - Find theme lengths
         var themeLengths = sm.createArray(numThemes, 0);
 
-        themes.forEach(function(d2, i) {
-            data.forEach(function(d) {
+        themes.forEach(function (d2, i) {
+            data.forEach(function (d) {
                 if (d.themeIds.indexOf(i) !== -1) {
                     themeLengths[i]++;
                 }
@@ -2448,7 +2780,7 @@ sm.vis.timesets = function() {
 
         // - Sort themes by length, find sorted indices
         var sortedIndices = d3.range(numThemes);
-        sortedIndices.sort(function(a, b) {
+        sortedIndices.sort(function (a, b) {
             return d3.descending(themeLengths[a], themeLengths[b]);
         });
 
@@ -2469,7 +2801,9 @@ sm.vis.timesets = function() {
 
             // Stop when all stories are processed
             if (processedThemes[processingIndex]) {
-                var allProcessed = processedThemes.every(function(d) { return d; });
+                var allProcessed = processedThemes.every(function (d) {
+                    return d;
+                });
                 if (allProcessed) { // Finish
                     break;
                 } else {
@@ -2545,7 +2879,9 @@ sm.vis.timesets = function() {
             }
 
             // -- Mark vertices in the path as processed
-            path.forEach(function(i) { processedThemes[i] = true; });
+            path.forEach(function (i) {
+                processedThemes[i] = true;
+            });
 
             // -- Make sure the path starts with longer story
             if (themeLengths[path[0]] < themeLengths[path[path.length - 1]]) {
@@ -2578,7 +2914,9 @@ sm.vis.timesets = function() {
             return 1;
         }
 
-        var count = d3.sum(events, function(d) { return d.full ? 5 : d.trimmed ? 3 : 0; } );
+        var count = d3.sum(events, function (d) {
+            return d.full ? 5 : d.trimmed ? 3 : 0;
+        });
         return count / events.length / 5;
     }
 
@@ -2592,7 +2930,7 @@ sm.vis.timesets = function() {
         }
 
         var mean = d3.mean(ratios);
-        var dev = d3.sum(ratios, function(r) {
+        var dev = d3.sum(ratios, function (r) {
             return (mean - r) * (mean - r);
         });
 
@@ -2625,7 +2963,7 @@ sm.vis.timesets = function() {
             assignedLayers[i].endLevel += offset;
         }
 
-        activeData.forEach(function(d) {
+        activeData.forEach(function (d) {
             if (d.layer > index) {
                 d.level += offset;
             }
@@ -2696,17 +3034,27 @@ sm.vis.timesets = function() {
      */
     function translateEvent(eventData, transitionDuration) {
         var t = eventData.originalTranslate;
-        if (!t) { return; }
+        if (!t) {
+            return;
+        }
 
         var tDest = [xScale(eventData.time), yScale(eventData.level)];
         if (t[0] === -width || t[1] === 0) { // Enter events, no transition
-            d3.select(eventData.ref).attr("transform", function() { return "translate(" + tDest[0] + "," + tDest[1] + ")"; });
+            d3.select(eventData.ref).attr("transform", function () {
+                return "translate(" + tDest[0] + "," + tDest[1] + ")";
+            });
         } else { // Update events, movement
             d3.select(eventData.ref)
-                .attr("transform", function() { return "translate(" + t[0] + "," + t[1] + ")"; })
+                .attr("transform", function () {
+                    return "translate(" + t[0] + "," + t[1] + ")";
+                })
                 .transition().duration(transitionDuration)
-                .each("start", function() { d3.select(this).style("opacity", 1); })
-                .attr("transform", function() { return "translate(" + tDest[0] + "," + tDest[1] + ")"; });
+                .each("start", function () {
+                    d3.select(this).style("opacity", 1);
+                })
+                .attr("transform", function () {
+                    return "translate(" + tDest[0] + "," + tDest[1] + ")";
+                });
         }
     }
 
@@ -2719,7 +3067,7 @@ sm.vis.timesets = function() {
         outlineBorderGroup.selectAll("g").remove();
         outlineBorderGroup.selectAll("path").remove();
 
-        events.each(function() {
+        events.each(function () {
             d3.select(this).select(".sm-timeSets-svg-event-background").style("opacity", 0);
         });
 
@@ -2741,7 +3089,7 @@ sm.vis.timesets = function() {
             }
 
             if (elementMode === "gradient" && !usePicture) {
-                events.each(function(d) {
+                events.each(function (d) {
                     d3.select(this).select(".sm-timeSets-svg-event-background").style("opacity", d.trust);
                 });
                 drawLocalSets();
@@ -2749,7 +3097,7 @@ sm.vis.timesets = function() {
         } else if (setMode === "line") {
             drawLineSets();
         } else if (setMode === "local") {
-            events.each(function(d) {
+            events.each(function (d) {
                 d3.select(this).select(".sm-timeSets-svg-event-background").style("opacity", d.trust);
             });
             drawLocalSets();
@@ -2778,9 +3126,9 @@ sm.vis.timesets = function() {
                 var idx = count++ * 2;
 
                 var path = [];
-                activeData.forEach(function(d) {
+                activeData.forEach(function (d) {
                     if (d.ref && (d.layer === idx || d.layer === idx - 1 || d.layer === idx + 1)) {
-                        path.push( {x: xScale(d.time), y: yScale(d.level) });
+                        path.push({x: xScale(d.time), y: yScale(d.level)});
                     }
                 });
 
@@ -2807,7 +3155,9 @@ sm.vis.timesets = function() {
                 // });
 
                 // Simple line
-                path = path.sort(function(a, b) { return d3.ascending(a.x, b.x);} );
+                path = path.sort(function (a, b) {
+                    return d3.ascending(a.x, b.x);
+                });
                 for (var j = 0; j < path.length - 1; j++) {
                     var p1 = path[j];
                     var p2 = path[j + 1];
@@ -2831,9 +3181,9 @@ sm.vis.timesets = function() {
                 }
 
                 var path = [];
-                activeData.forEach(function(d) {
+                activeData.forEach(function (d) {
                     if (d.ref && d.themeIds.indexOf(i) !== -1) {
-                        path.push( {x: xScale(d.time), y: yScale(d.level) });
+                        path.push({x: xScale(d.time), y: yScale(d.level)});
                     }
                 });
 
@@ -2843,7 +3193,7 @@ sm.vis.timesets = function() {
                 var g = outlineGroup.append("g");
 
                 var tree = emst.getEMST();
-                tree.forEach(function(d) {
+                tree.forEach(function (d) {
                     var p1 = path[d.v1];
                     var p2 = path[d.v2];
 
@@ -2901,9 +3251,9 @@ sm.vis.timesets = function() {
                 .classed("sm-timeSets-svg-path", true)
                 .attr("d", roundedPath)
                 .attr("index", i)
-                .on("mouseover", function() {
+                .on("mouseover", function () {
                     // highlightPathBorder(+d3.select(this).attr("index"));
-                }).on("mouseout", function() {
+                }).on("mouseout", function () {
                     legend.dehighlightRows();
                     dehighlightEvents();
                 });
@@ -2957,7 +3307,7 @@ sm.vis.timesets = function() {
                         for (var j = 0; j <= numSegments; j++) {
                             grad.append("stop")
                                 .attr("offset", j * segmentLength)
-                                .attr("stop-color", j % 2 ? aboveColor: belowColor);
+                                .attr("stop-color", j % 2 ? aboveColor : belowColor);
                         }
                     }
                 }
@@ -2991,11 +3341,11 @@ sm.vis.timesets = function() {
                         .attr("height", 20)
                         .attr("patternUnits", "userSpaceOnUse")
                         .append("rect")
-                            .attr("x", 0)
-                            .attr("y", 0)
-                            .attr("width", 30)
-                            .attr("height", 20)
-                            .style("fill", backgroundColor);
+                        .attr("x", 0)
+                        .attr("y", 0)
+                        .attr("width", 30)
+                        .attr("height", 20)
+                        .style("fill", backgroundColor);
 
                     // - Vertical
                     foregroundColor = d3.rgb(i % 4 === 1 ? aboveColor : belowColor).darker(DARKER_RATIO);
@@ -3123,7 +3473,9 @@ sm.vis.timesets = function() {
             // return;
 
             // - Find color stop offsets
-            var totalHeight = d3.max(assignedLayers, function(d) { return d ? d.endLevel : 0; });
+            var totalHeight = d3.max(assignedLayers, function (d) {
+                return d ? d.endLevel : 0;
+            });
             var accumLayerHeights = [0];
             var value = 0;
             for (var i = 0; i < numLayers; i++) {
@@ -3185,7 +3537,7 @@ sm.vis.timesets = function() {
                         for (var j = 0; j <= numSegments; j++) {
                             grad.append("stop")
                                 .attr("offset", j * segmentLength + offset)
-                                .attr("stop-color", j % 2 ? aboveColor: belowColor);
+                                .attr("stop-color", j % 2 ? aboveColor : belowColor);
                         }
                     }
                 }
@@ -3209,7 +3561,7 @@ sm.vis.timesets = function() {
             counts[idx + 1] = [];
 
             var rects = [];
-            activeData.forEach(function(d) {
+            activeData.forEach(function (d) {
                 if (d.ref && (d.layer === idx || d.layer === idx - 1 || d.layer === idx + 1)) {
                     var middle = yScale(d.level);
                     rects.push({
@@ -3218,7 +3570,7 @@ sm.vis.timesets = function() {
                         top: Math.floor(middle - LEVEL_HEIGHT / 2),
                         bottom: Math.floor(middle + LEVEL_HEIGHT / 2),
                         level: d.level,
-                        part: intersectionMode === "color-blending2" ? (d.layer === idx - 1 ? "bottom" : d.layer === idx ? "middle": "top") : ""
+                        part: intersectionMode === "color-blending2" ? (d.layer === idx - 1 ? "bottom" : d.layer === idx ? "middle" : "top") : ""
                     });
 
                     counts[d.layer].push(d.level);
@@ -3237,9 +3589,9 @@ sm.vis.timesets = function() {
                 .attr("id", "path" + i)
                 .attr("index", i)
                 // .style("stroke", d3.rgb(currentThemeColor).darker(DARKER_RATIO))
-                .on("mouseover", function() {
+                .on("mouseover", function () {
                     // highlightPathBorder(+d3.select(this).attr("index"));
-                }).on("mouseout", function() {
+                }).on("mouseout", function () {
                     legend.dehighlightRows();
                     dehighlightEvents();
                 });
@@ -3306,7 +3658,7 @@ sm.vis.timesets = function() {
                         for (var j = 0; j <= numSegments; j++) {
                             grad.append("stop")
                                 .attr("offset", j * segmentLength)
-                                .attr("stop-color", j % 2 ? currentThemeColor: prevThemeColor);
+                                .attr("stop-color", j % 2 ? currentThemeColor : prevThemeColor);
                         }
                     } else if (i > 0) {
                         grad.append("stop")
@@ -3523,7 +3875,7 @@ sm.vis.timesets = function() {
             }
 
 
-            layerEvents[i].forEach(function(d) {
+            layerEvents[i].forEach(function (d) {
                 if (d.ref) {
                     // Start and end colors are the theme's background color
                     var onePartWidth = 15;
@@ -3548,7 +3900,11 @@ sm.vis.timesets = function() {
                             rect.style("fill", "url(#gradient" + d.id + ")");
 
                             var numStops = (d.themeIds.length - 1) * 2;
-                            var stopColors = d.themeIds.map(function(t) { return cScale(t); }).filter(function(c) { return c !== color; });
+                            var stopColors = d.themeIds.map(function (t) {
+                                return cScale(t);
+                            }).filter(function (c) {
+                                return c !== color;
+                            });
 
                             grad.append("stop")
                                 .attr("offset", startOffset * toPixelRatio)
@@ -3566,7 +3922,7 @@ sm.vis.timesets = function() {
                         }
                     } else {
                         // if (d.themeIds.length === 2) {
-                            rect.style("fill", "none");
+                        rect.style("fill", "none");
                         // } else {
                         //     // Vertical gradient from the bottom to the top (y: 1->0)
                         //     var grad = d3.select(d.ref).append("linearGradient")
@@ -3638,14 +3994,14 @@ sm.vis.timesets = function() {
         // Each band represents a subset and connects adjacent events belonging to that set.
         var allBands = [];
         var activeBands = []; // Bands that can store on incoming events. A band becomes inactive if its membership doesn't belong to the latest event's membership
-        activeData.forEach(function(d) {
+        activeData.forEach(function (d) {
             // For each set membership of the event, if there exists an active band of that set, add the event to that band.
             // Otherwise, add a new band to hold it. Other bands become inactive.
-            activeBands.forEach(function(d) {
+            activeBands.forEach(function (d) {
                 d.active = false;
             });
 
-            d.themeIds.forEach(function(t) {
+            d.themeIds.forEach(function (t) {
                 var added = false;
                 for (var i = 0; i < activeBands.length; i++) {
                     var band = activeBands[i];
@@ -3659,13 +4015,17 @@ sm.vis.timesets = function() {
                 }
 
                 if (!added) {
-                    activeBands.push({ "setId": t, "events": [d], "active": true });
+                    activeBands.push({"setId": t, "events": [d], "active": true});
                 }
             });
 
             // Add inactive bands to 'allBands'
-            allBands = allBands.concat(activeBands.filter(function(b) { return !b.active; }));
-            activeBands = activeBands.filter(function(b) { return b.active; });
+            allBands = allBands.concat(activeBands.filter(function (b) {
+                return !b.active;
+            }));
+            activeBands = activeBands.filter(function (b) {
+                return b.active;
+            });
         });
 
         // Finish traversing, add all active bands to 'allBands'
@@ -3675,10 +4035,15 @@ sm.vis.timesets = function() {
         updateEventBoundaries();
 
         var shapeOutlines = [];
-        allBands.forEach(function(b) {
+        allBands.forEach(function (b) {
             // Generate outline for bandor band
-            var rects = b.events.filter(function(d) { return d.ref && !d.cluster; });
-            shapeOutlines.push({ outline: sm.layout.timesetsOutline().verticalMode(verticalMode).rects(rects).call(), setId: b.setId });
+            var rects = b.events.filter(function (d) {
+                return d.ref && !d.cluster;
+            });
+            shapeOutlines.push({
+                outline: sm.layout.timesetsOutline().verticalMode(verticalMode).rects(rects).call(),
+                setId: b.setId
+            });
         });
 
         return shapeOutlines;
@@ -3690,7 +4055,7 @@ sm.vis.timesets = function() {
      * Updates 'top' and 'bottom' properties based on its level.
      */
     function updateEventBoundaries() {
-        layerisedData.forEach(function(d) {
+        layerisedData.forEach(function (d) {
             var middle = yScale(d.level);
             // console.log(d.level);
             d.top = Math.floor(middle - LEVEL_HEIGHT / 2);
@@ -3699,7 +4064,7 @@ sm.vis.timesets = function() {
     }
 
     function trimLastEvents(rightmostEvents) {
-        d3.values(rightmostEvents).forEach(function(d) {
+        d3.values(rightmostEvents).forEach(function (d) {
             if (d.cluster) return;
 
             // Trim events ensuring they don't exceed the right border.
@@ -3748,9 +4113,9 @@ sm.vis.timesets = function() {
                 width: 420,
                 height: 240,
                 position: {
-                     my: "right-5 top+5",
-                     at: "right top",
-                     of: ".sm-timesets-doc-container"
+                    my: "right-5 top+5",
+                    at: "right top",
+                    of: ".sm-timesets-doc-container"
                 },
             });
 
@@ -3767,7 +4132,7 @@ sm.vis.timesets = function() {
         $("<div style='padding-top:3px;float:left; padding-right:20px'><label style='margin-right:4px' for='widthSpinner'>Width:</label><input id='widthSpinner' style='width:40px' name='widthSpinner' value='" + width + " '></input></div>").appendTo(container);
         $("#widthSpinner").spinner({
             step: 100,
-            stop: function() {
+            stop: function () {
                 width = this.value;
                 module.update(null, true);
             }
@@ -3777,7 +4142,7 @@ sm.vis.timesets = function() {
         $("<div style='padding-top:3px'><label style='margin-right:4px' for='heightSpinner'>Height (number of rows):</label><input id='heightSpinner' style='width:40px' name='heightSpinner' value='" + maxLevel + " '></input></div>").appendTo(container);
         $("#heightSpinner").spinner({
             step: 1,
-            stop:  function() {
+            stop: function () {
                 maxLevel = this.value;
                 module.update(null, true);
             }
@@ -3790,7 +4155,7 @@ sm.vis.timesets = function() {
         $("<input type='radio' id='radio61' name='rdoLayoutMode' checked='checked' value='middle'></input><label for='radio61'>traceability</label>").appendTo(div);
         div.find("input:radio[value=" + layoutMode + "]").attr('checked', 'checked');
         div.buttonset()
-            .change(function() {
+            .change(function () {
                 layoutMode = $("#rdoLayoutMode").find(":checked").val();
                 $("#tminDiv").css("display", layoutMode === "middle" ? "block" : "none");
                 module.update(null, true);
@@ -3803,7 +4168,7 @@ sm.vis.timesets = function() {
             step: 0.1,
             min: 0,
             max: 1,
-            stop:  function() {
+            stop: function () {
                 trimThresholdRatio = this.value;
                 module.update(null, true);
             }
@@ -3821,7 +4186,7 @@ sm.vis.timesets = function() {
         $("<input type='radio' id='radio15' name='rdoSetMode' value='background'></input><label for='radio15'>Background</label>").appendTo(div);
         div.find("input:radio[value=" + setMode + "]").attr('checked', 'checked');
         div.buttonset()
-            .change(function() {
+            .change(function () {
                 var value = $("#rdoSetMode").find(":checked").val();
                 if (value === "nolayout") {
                     applyLayout = false;
@@ -3850,7 +4215,7 @@ sm.vis.timesets = function() {
         // $("<input type='radio' id='radio54' name='rdoIntersection' value='texture'></input><label for='radio54'>texture</label>").appendTo(div);
         div.find("input:radio[value=" + intersectionMode + "]").attr('checked', 'checked');
         div.buttonset()
-            .change(function() {
+            .change(function () {
                 intersectionMode = $("#rdoIntersection").find(":checked").val();
                 module.update(null, true);
             });
@@ -3863,7 +4228,7 @@ sm.vis.timesets = function() {
         $("<input type='radio' id='radio03' name='rdoElementMode' value='rings'></input><label for='radio03'>rings</label>").appendTo(div);
         $("<input type='radio' id='radio04' name='rdoElementMode' value='gradient'></input><label for='radio04'>gradient</label>").appendTo(div);
         div.find("input:radio[value=" + elementMode + "]").attr('checked', 'checked');
-        div.buttonset().change(function() {
+        div.buttonset().change(function () {
             elementMode = $("#rdoElementMode").find(":checked").val();
             updateTimeCircles();
             module.update(null, true);
@@ -3876,7 +4241,7 @@ sm.vis.timesets = function() {
         $("<input type='radio' id='radio22' name='rdoCompactingMode' value='no'></input><label for='radio22'>no</label>").appendTo(div);
         div.find("input:radio[name=rdoCompactingMode][value=" + (compactingMode ? "yes" : "no") + "]").attr('checked', 'checked');
         div.buttonset()
-            .change(function() {
+            .change(function () {
                 compactingMode = $("#rdoCompactingMode").find(":checked").val() === "yes";
                 module.update(null, true);
             });
@@ -3888,7 +4253,7 @@ sm.vis.timesets = function() {
         $("<input type='radio' id='radio24' name='rdoBalancingMode' value='no'></input><label for='radio24'>no</label>").appendTo(div);
         div.find("input:radio[name=rdoBalancingMode][value=" + (balancingMode ? "yes" : "no") + "]").attr('checked', 'checked');
         div.buttonset()
-            .change(function() {
+            .change(function () {
                 balancingMode = $("#rdoBalancingMode").find(":checked").val() === "yes";
                 module.update(null, true);
             });
@@ -3932,58 +4297,58 @@ sm.vis.timesets = function() {
                     primary: "ui-icon-refresh"
                 },
                 text: false
-            }).click(function() {
+            }).click(function () {
                 zoom.translate([0, 0]).scale(1);
                 module.update(null, true);
             }).appendTo(container);
 
         btn.offset({
-                top: offset.top + container.height() - btn.height(),
-                left: offset.left + container.width() - btn.width() - 10
-            });
+            top: offset.top + container.height() - btn.height(),
+            left: offset.left + container.width() - btn.width() - 10
+        });
     }
 
     function buildCapture() {
         $("<button>Capture visualization</button>")
             .addClass("sm-timeSets-capture-button")
-            .css({ right: 10, bottom: 60 })
+            .css({right: 10, bottom: 60})
             .button({
                 icons: {
                     primary: "ui-icon-image"
                 },
                 text: false
-            }).click(function() {
-                // Capture and send to server
-                // The 'finding' object
-                var url = document.URL;
-                url += (url.indexOf("?") === -1 ? "?" : "&");
-                url += "scale=" + scale + "&tx=" + translate[0] + "&ty=" +  translate[1];
+            }).click(function () {
+            // Capture and send to server
+            // The 'finding' object
+            var url = document.URL;
+            url += (url.indexOf("?") === -1 ? "?" : "&");
+            url += "scale=" + scale + "&tx=" + translate[0] + "&ty=" + translate[1];
 
-                var finding = {
-                    // Common fields
-                    origin: "TimeSets",
-                    note: "Test params from TimeSets at " + d3.time.format("%H:%M:%S")(new Date()),
-                    tags: [ { "name": "TimeSets" }, { "name": "client" } ],
-                    createdBy: "phong",
-                    screenshot: null,
-                    // contentType: "link",
-                    // Deep provenance, can be stored in provenance server
-                    // provenance: { scale: scale, translate: translate },
-                    // originalUrl: document.url // Will be appended with &findingId
-                    url: url
-                };
+            var finding = {
+                // Common fields
+                origin: "TimeSets",
+                note: "Test params from TimeSets at " + d3.time.format("%H:%M:%S")(new Date()),
+                tags: [{"name": "TimeSets"}, {"name": "client"}],
+                createdBy: "phong",
+                screenshot: null,
+                // contentType: "link",
+                // Deep provenance, can be stored in provenance server
+                // provenance: { scale: scale, translate: translate },
+                // originalUrl: document.url // Will be appended with &findingId
+                url: url
+            };
 
-                // Save to database
-                sm.ajax("findings", "POST", finding, function(id) {
-                    // Save returned id together with provenance data for restoring it.
-                });
-            }).appendTo($("body"));
+            // Save to database
+            sm.ajax("findings", "POST", finding, function (id) {
+                // Save returned id together with provenance data for restoring it.
+            });
+        }).appendTo($("body"));
     }
 
     /**
      * Sets/gets the margin of the timeSets.
      */
-    module.margin = function(value) {
+    module.margin = function (value) {
         if (!arguments.length) return margin;
         margin = value;
         return this;
@@ -3992,7 +4357,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the width of the timeSets.
      */
-    module.width = function(value) {
+    module.width = function (value) {
         if (!arguments.length) return width;
         width = value;
         return this;
@@ -4001,7 +4366,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the height of the timeSets.
      */
-    module.height = function(value) {
+    module.height = function (value) {
         if (!arguments.length) return height;
         height = value;
         if (longTick) {
@@ -4014,7 +4379,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the long tick option.
      */
-    module.longTick = function(value) {
+    module.longTick = function (value) {
         if (!arguments.length) return longTick;
         longTick = value;
         if (longTick) {
@@ -4026,7 +4391,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the element mode of the timeSets.
      */
-    module.elementMode = function(value) {
+    module.elementMode = function (value) {
         if (!arguments.length) return elementMode;
         elementMode = value;
         return this;
@@ -4035,7 +4400,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the intersection mode of the timeSets.
      */
-    module.intersectionMode = function(value) {
+    module.intersectionMode = function (value) {
         if (!arguments.length) return intersectionMode;
         intersectionMode = value;
         return this;
@@ -4044,7 +4409,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the set mode of the timeSets.
      */
-    module.setMode = function(value) {
+    module.setMode = function (value) {
         if (!arguments.length) return setMode;
         setMode = value;
         return this;
@@ -4053,7 +4418,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the path mode of the timeSets.
      */
-    module.shapeMode = function(value) {
+    module.shapeMode = function (value) {
         if (!arguments.length) return shapeMode;
         shapeMode = value;
         return this;
@@ -4062,7 +4427,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the balancing mode of the timeSets.
      */
-    module.balancingMode = function(value) {
+    module.balancingMode = function (value) {
         if (!arguments.length) return balancingMode;
         balancingMode = value;
         return this;
@@ -4071,7 +4436,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the compacting mode of the timeSets.
      */
-    module.compactingMode = function(value) {
+    module.compactingMode = function (value) {
         if (!arguments.length) return compactingMode;
         compactingMode = value;
         return this;
@@ -4080,7 +4445,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the use picutre mode of the timeSets.
      */
-    module.usePicture = function(value) {
+    module.usePicture = function (value) {
         if (!arguments.length) return usePicture;
         usePicture = value;
         LEVEL_HEIGHT = usePicture ? 57 : 24;
@@ -4092,7 +4457,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the option applying layout of the timeSets.
      */
-    module.applyLayout = function(value) {
+    module.applyLayout = function (value) {
         if (!arguments.length) return applyLayout;
         applyLayout = value;
         return this;
@@ -4101,7 +4466,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the colors used for sets.
      */
-    module.colors = function(value) {
+    module.colors = function (value) {
         if (!arguments.length) return colors;
         colors = value;
         return this;
@@ -4110,7 +4475,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the legend visibility.
      */
-    module.showLegend = function(value) {
+    module.showLegend = function (value) {
         if (!arguments.length) return legend.show();
         legend.show(value);
         return this;
@@ -4119,29 +4484,29 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the settings visibility.
      */
-    module.showSettings = function(value) {
+    module.showSettings = function (value) {
         if (!arguments.length) return showSettings;
         if (showSettings != value) {
             showSettings = value;
             if (showSettings) {
                 if (settingsUi === undefined) {
                     settingsUi = buildSettings();
-				}
+                }
                 else if (!settingsUi.dialog("isOpen")) {
                     settingsUi.dialog("open");
                 }
             }
             else if (settingsUi !== undefined && settingsUi.dialog("isOpen")) {
                 settingsUi.dialog("close");
-             }
-		}
+            }
+        }
         return this;
     };
 
     /**
      * Sets/gets the callback for handling event click.
      */
-    module.eventViewer = function(value) {
+    module.eventViewer = function (value) {
         if (!arguments.length) return eventViewer;
         eventViewer = value;
         return this;
@@ -4150,7 +4515,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the mode to draw vertical lines for outlines: straight/rounded/ellipse/curve
      */
-    module.verticalMode = function(value) {
+    module.verticalMode = function (value) {
         if (!arguments.length) return verticalMode;
         verticalMode = value;
         return this;
@@ -4159,7 +4524,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the scale of the canvas.
      */
-    module.scale = function(value) {
+    module.scale = function (value) {
         if (!arguments.length) return scale;
         if (value !== undefined && !isNaN(value)) scale = value;
         return this;
@@ -4168,7 +4533,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the translate transform of the canvas.
      */
-    module.translate = function(value) {
+    module.translate = function (value) {
         if (!arguments.length) return translate;
         if (value !== undefined) translate = value;
         return this;
@@ -4179,7 +4544,7 @@ sm.vis.timesets = function() {
      * @param value
      * @returns {module}
      */
-    module.trustFilter = function(value) {
+    module.trustFilter = function (value) {
         if (!arguments.length) return trustFilter;
         if (value !== undefined) trustFilter = value;
         return this;
@@ -4188,7 +4553,7 @@ sm.vis.timesets = function() {
     /**
      * Applys given scale, translate.
      */
-    module.applyZoom = function(_scale, _translate) {
+    module.applyZoom = function (_scale, _translate) {
         scale = _scale;
         translate = _translate;
 
@@ -4199,7 +4564,7 @@ sm.vis.timesets = function() {
     /**
      * Sets/gets the layout mode.
      */
-    module.layoutMode = function(value) {
+    module.layoutMode = function (value) {
         if (!arguments.length) return layoutMode;
         layoutMode = value;
         return this;
@@ -4208,36 +4573,38 @@ sm.vis.timesets = function() {
     /**
      * Gets the order-id mapping.
      */
-    module.orderToId = function() {
+    module.orderToId = function () {
         return orderToId;
     };
 
     /**
      * Exports coordinates, themes, text for generating the visualisation using other methods.
      */
-    module.exportData = function(fileName) {
+    module.exportData = function (fileName) {
         var results = [];
         var counts = [];
         for (var i = 0; i < themes.length; i++) {
-            counts[i] = { id: i, count: 0 };
+            counts[i] = {id: i, count: 0};
         }
 
         // Non-aggregate
-        container.selectAll(".sm-timeSets-svg-event").each(function(d) {
+        container.selectAll(".sm-timeSets-svg-event").each(function (d) {
             if (+d3.select(this).style("opacity") === 0) {
                 return;
             }
 
             var circle = d3.select(this).select("circle").node();
             var box = circle.getBoundingClientRect();
-            var item = { x: box.left + box.width / 2, y: height + 30 - (box.top + box.height / 2) };
+            var item = {x: box.left + box.width / 2, y: height + 30 - (box.top + box.height / 2)};
             if (applyLayout) {
-                var themeIdsBasedOnLayers = d.layers.map(function(l) { return orderToId[l]; });
+                var themeIdsBasedOnLayers = d.layers.map(function (l) {
+                    return orderToId[l];
+                });
                 item.themeIds = themeIdsBasedOnLayers.join(";");
             } else {
                 item.themeIds = d.themeIds.join(";");
             }
-            item.themeIds.split(";").forEach(function(t) {
+            item.themeIds.split(";").forEach(function (t) {
                 counts[+t].count++;
             });
 
@@ -4253,21 +4620,23 @@ sm.vis.timesets = function() {
         });
 
         // Aggregate
-        container.selectAll(".sm-timeSets-svg-cluster-rect").each(function(d) {
+        container.selectAll(".sm-timeSets-svg-cluster-rect").each(function (d) {
             if (+d3.select(this).style("opacity") === 0) {
                 return;
             }
 
             var text = d3.select(this.parentNode).select("text");
             var box = text.node().getBoundingClientRect();
-            var item = { x: box.left  - getGlyphPadding(d[0]), y: height + 30 - (box.top + box.height / 2) };
+            var item = {x: box.left - getGlyphPadding(d[0]), y: height + 30 - (box.top + box.height / 2)};
             if (applyLayout) {
-                var themeIdsBasedOnLayers = d[0].layers.map(function(l) { return orderToId[l]; });
+                var themeIdsBasedOnLayers = d[0].layers.map(function (l) {
+                    return orderToId[l];
+                });
                 item.themeIds = themeIdsBasedOnLayers.join(";");
             } else {
                 item.themeIds = d[0].themeIds.join(";");
             }
-            item.themeIds.split(";").forEach(function(t) {
+            item.themeIds.split(";").forEach(function (t) {
                 counts[+t].count++;
             });
 
@@ -4282,7 +4651,7 @@ sm.vis.timesets = function() {
             results.push(item);
         });
 
-        counts.sort(function(a, b) {
+        counts.sort(function (a, b) {
             return d3.descending(a.count, b.count);
         });
 
@@ -4316,9 +4685,11 @@ sm.vis.timesets = function() {
         //     .text(function(d) { return d.text; });
 
         // Generate CSV file
-        var descendingSize = counts.map(function(d) { return d.id; } ).join("-");
+        var descendingSize = counts.map(function (d) {
+            return d.id;
+        }).join("-");
         fileName += "___" + descendingSize + ".csv";
-        $.post("saveFile.php", { fileName: fileName, data: d3.csv.format(results) });
+        $.post("saveFile.php", {fileName: fileName, data: d3.csv.format(results)});
     };
 
     // Binds custom events

@@ -15,7 +15,9 @@ sm.misc.legend = function() {
 
 		selection.each(function(d) {
             var container = $("section.themes")
-				.append("<div class='themes-header'>Themes<img src='img/handshake.png' /></div>");
+				.append("<div class='themes-header'>Themes" +
+                    // "<img src='img/handshake.png' />" +
+                    "</div>");
 
             list = $("<ul class='sm-legend-list'></ul>").appendTo(container)
                 .width(container.innerWidth() - DELETE_WIDTH);
@@ -99,7 +101,7 @@ sm.misc.legend = function() {
             }
 
             // User-defined input
-            $('<input id="newTheme" type="text" name="new-theme" value="Search themes" />').appendTo(container);
+            // $('<input id="newTheme" type="text" name="new-theme" value="Search themes" />').appendTo(container);
 
             // Buttons
             var btnDiv = $("<div class='sm-legend-button'></div>").appendTo(container);

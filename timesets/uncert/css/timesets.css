@@ -3,22 +3,6 @@
 	src: url(fonts/HammersmithOne.ttf);
 }
 
-/*
-@media only screen and (orientation: portrait) {
-
-    .middle {
-    }
-}
-*/
-
-/*
-@media only screen and (orientation: landscape) {
-
-    .middle {
-    }
-}
-*/
-
 text {
     dominant-baseline: text-after-edge;
 }
@@ -64,17 +48,46 @@ text {
     stroke-width: 2;
 }
 
+.stayHighlighted{
+    fill: #BFEFFC;
+    /*stroke: #5F92B0;*/
+    stroke-width: 5;
+}
+
+.sm-timeSets-svg-event-text,
+.sm-timeSets-svg-event-selection-text {
+    dominant-baseline: middle;
+}
+
+.sm-timeSets-svg-event-text.highlight {
+    fill: red;
+    text-decoration: underline;
+    /*fill: #BFEFFC;*/
+    font-weight: bold;
+}
+
 .sm-timeSets-svg-event-text:hover {
     cursor: pointer;
 }
 
 .sm-timeSets-svg-cluster-rect {
     stroke-width: 2;
+    stroke: none;
 }
 
 .sm-timeSets-svg-cluster-range {
     fill: #BFEFFC;
     stroke-width: 2;
+}
+
+.clusters .dots .dot {
+    fill-opacity: 0.5;
+    fill: white;
+}
+
+.clusters .dots .dot.highlight {
+    fill-opacity: 1;
+    fill: red;
 }
 
 .sm-timeSets-svg-path {
@@ -197,9 +210,14 @@ aside .panes {
     display: inline-block;
 }
 
+/*footer {*/
+    /*height: 237px;*/
+    /*max-height: 237px;*/
+/*}*/
+
 footer {
-    height: 237px;
-    max-height: 237px;
+    height: 180px;
+    max-height: 160px;
 }
 
 footer ul {
@@ -216,7 +234,8 @@ footer ul li {
 }
 
 .detail-pane {
-    height: 237px;
+    /*height: 237px;*/
+    height: 180px;
     border-right: 3px solid #eeeeee;
     margin: 0px 3px 0px 3px;
 }
@@ -224,8 +243,8 @@ footer ul li {
 .detail-pane-title {
     font-size: 16px;
     padding-left: 13px;
-    padding-top: 6px;
-    padding-bottom: 3px;
+    /*padding-top: 6px;*/
+    /*padding-bottom: 3px;*/
     background-color: #d2d2d2;
     font-weight: 500;
     color: #6d6b6b;
@@ -233,7 +252,8 @@ footer ul li {
 
 article {
     margin: 8px 8px 0px 12px;
-    max-height: 198px;
+    /*max-height: 198px;*/
+    max-height: 170px;
     overflow: auto;
 }
 

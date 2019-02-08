@@ -103,10 +103,10 @@ var sm = function() {
                 value = 2;
                 break;
             case 'no factual content':
-                value = 3;
+                value = 4;
                 break;
             case 'mostly false':
-                value = 4;
+                value = 3;
                 break;
             case 'undefined':
                 value = 0;
@@ -142,6 +142,11 @@ var sm = function() {
         // var scaleRating = d3.scale.linear()
         //     .range(['mostly true', 'mixture of true and false', 'no factual content', 'mostly false'])
         //     .domain([1, 5]);
+
+        // console.log(source)
+        // console.log(rating)
+        // console.log(sharescount)
+        // console.log(groupUnc)
 
         //use the group avergae uncertainty to set matrix
         groupUnc.forEach(function (d) {

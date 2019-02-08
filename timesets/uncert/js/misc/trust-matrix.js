@@ -42,7 +42,8 @@ sm.misc.trustMatrix = function () {
 
 		// Create the y axis.
 		var yAxisScale = d3.scale.ordinal()
-			.domain(["A", "B", "C", "D", "E"])
+			// .domain(["A", "B", "C", "D", "E"])
+			.domain(["A", "B", "C", "D"])
 			.rangePoints([barMaxHeight + ROW_GAP, graphHeight]);
 
 		var yAxis = d3.svg.axis()
@@ -59,7 +60,8 @@ sm.misc.trustMatrix = function () {
 
 		// Create the x axis.
 		var xAxisScale = d3.scale.ordinal()
-			.domain([1, 2, 3, 4, 5])
+			// .domain([1, 2, 3, 4, 5])
+			.domain([1, 2, 3, 4])
 			.rangeBands([0, graphWidth]);
 
 		var xAxis = d3.svg.axis()

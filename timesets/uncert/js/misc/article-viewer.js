@@ -3,6 +3,8 @@
  */
 sm.misc.articleViewer = function(title) {
 
+    var aside = $("aside");
+
     /**
      * Main entry of the module.
      */
@@ -11,7 +13,11 @@ sm.misc.articleViewer = function(title) {
 
 			$("li.event-viewer .detail-pane").remove();
 
-			var pane = $("<div class='detail-pane'></div>").appendTo($("li.event-viewer"))
+			var pane = $("<div class='detail-pane'></div>");
+
+			pane.css('margin-left',aside.width()+'px');
+
+				pane.appendTo($("li.event-viewer"))
 				.append($("<div class='detail-pane-title'>Event</div>"));
 			var container = $("<article></article>").appendTo(pane);
 
