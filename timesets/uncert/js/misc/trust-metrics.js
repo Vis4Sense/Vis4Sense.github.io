@@ -14,6 +14,15 @@ sm.misc.trustMetrics = function () {
 		"E1", "E2", "E3", "E4", "E5"
 	];
 
+    // var _RATINGS = [
+    //     "A1", "A2", "A3", "A4",
+    //     "B1", "B2", "B3", "B4",
+    //     "C1", "C2", "C3", "C4",
+    //     "D1", "D2", "D3", "D4",
+    //     "E1", "E2", "E3", "E4",
+    // ];
+
+
 	var _RATING_LEVEL = {
 		LOW: 1,
 		MEDIUM: 2,
@@ -28,13 +37,21 @@ sm.misc.trustMetrics = function () {
 		_RATING_LEVEL.MEDIUM, _RATING_LEVEL.MEDIUM, _RATING_LEVEL.LOW, _RATING_LEVEL.LOW, _RATING_LEVEL.LOW
 	];
 
-	var _RATING_RANKS = [
-		1, 2, 5, 9, 16,
-		3, 4, 7, 12, 18,
-		6, 8, 10, 14, 20,
-		11, 13, 15, 22, 23,
-		17, 19, 21, 24, 25
-	];
+	// var _RATING_RANKS = [
+	// 	1, 2, 5, 9, 16,
+	// 	3, 4, 7, 12, 18,
+	// 	6, 8, 10, 14, 20,
+	// 	11, 13, 15, 22, 23,
+	// 	17, 19, 21, 24, 25
+	// ];
+
+    var _RATING_RANKS = [
+        1, 2, 5, 9,
+        3, 4, 7, 12,
+        6, 8, 10, 14,
+        11, 13, 15, 22,
+        17, 19, 21, 24,
+    ];
 
 	// Index of ratings by rank.
 	var _RANK_RATINGS = [];

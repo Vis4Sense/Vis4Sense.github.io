@@ -78,8 +78,7 @@ sm.misc.trustFilter = function () {
                         .classed('uncert', true)
                 }
                 // dispatch.trustfilterchanged(filter);
-            })
-
+            });
 
         // var label = d3.select(".trust-filter")
         //     .selectAll("label")
@@ -102,7 +101,6 @@ sm.misc.trustFilter = function () {
         //         }
         //         dispatch.trustfilterchanged(filter);
         //     })
-
 
         d3.select(".trust-filter").selectAll("label")
             .append("span")

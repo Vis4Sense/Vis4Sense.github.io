@@ -40,6 +40,7 @@ sm.misc.trustMatrix = function () {
 		var barMaxHeight = Math.floor(graphHeight / 5 - ROW_GAP);
 		var barWidth = Math.floor(graphWidth / 5 - COL_GAP);
 
+
 		// Create the y axis.
 		var yAxisScale = d3.scale.ordinal()
 			// .domain(["A", "B", "C", "D", "E"])
@@ -83,7 +84,10 @@ sm.misc.trustMatrix = function () {
 			.attr("class", "graph")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		// Create bars in a 5x5 arrangement
+        // console.log(metrics.counts)
+
+
+        // Create bars in a 5x5 arrangement
 		var bar = graph.selectAll("g")
 			.data(metrics.counts)
 			.enter()
@@ -125,6 +129,10 @@ sm.misc.trustMatrix = function () {
 						return "black";
 				}
 			});
+		
+		bar.on('click', function (d) {
+			console.log(d)
+        });
 
 		// Bar counts
 		bar.append("text")
