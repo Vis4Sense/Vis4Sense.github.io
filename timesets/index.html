@@ -134,7 +134,101 @@
 				<iframe src="https://player.vimeo.com/video/144644488" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 			</div>
 		</div>
-	
+
+
+		<h2>User Guide Uncertainty</h2>
+
+		<div class="row text-center">
+			<div class="col-sm-12">
+
+				<h1 id="load-from-google-spread-sheet">Load from Google Spread Sheet</h1>
+				<h2 id="setup">Setup</h2>
+				<h3 id="install-http-server-optional">Install HTTP Server (optional)</h3>
+				<p><code>$: npm install http-server -g</code></p>
+				<h3 id="run-http-server-optional">Run HTTP Server (optional)</h3>
+				<p><code>$: http-server -p 8083</code></p>
+				<h3 id="open">Open</h3>
+				<p>Nagivate in your browser to the following URL <code>http://localhost:8083</code> or click <a href="http://localhost:8083/">here</a></p>
+				<h2 id="data-model">Data Model</h2>
+				<p>We provide a template spreadsheet where you can plug-in your own data to display in the TimeSets.</p>
+				<p>https://docs.google.com/spreadsheets/d/1SwIizq1WMnpE9xdeWHuD5PoOnyVRcxsfAQtgdw92S84/edit?usp=sharing</p>
+				<h3 id="data-structure">Data structure</h3>
+				<p>The spreadsheet is seperated into different sections. We go over the sections and provide an explanation and example of values the properties can have. Please ensure the names of the colunms are thesame as the below &quot;data&quot; and &quot;themes&quot; </p>
+				<h3 id="data">data</h3>
+				<table>
+					<tbody>
+					<tr class="odd">
+						<td align="left">----------------------</td>
+						<td align="left">---</td>
+					</tr>
+					<tr class="even">
+						<td align="left">ID</td>
+						<td align="left">Number (Integer) - The objects identifier</td>
+					</tr>
+					<tr class="odd">
+						<td align="left">data_type</td>
+						<td align="left">Text - The data type of the object, <strong>e.g., 'link'</strong></td>
+					</tr>
+					<tr class="even">
+						<td align="left">name</td>
+						<td align="left">Text - The objects title, <strong>e.g., '1 Woman Killed, Several Children Injured in Aleppo'</strong></td>
+					</tr>
+					<tr class="odd">
+						<td align="left">description</td>
+						<td align="left">Text - A textual description of the object</td>
+					</tr>
+					<tr class="even">
+						<td align="left">picture</td>
+						<td align="left">URL - The URL to the image, video, media resource.</td>
+					</tr>
+					<tr class="odd">
+						<td align="left">from</td>
+						<td align="left">URL - The URL to the source of the event, <strong>e.g., 'ABC News Politics'</strong></td>
+					</tr>
+					<tr class="even">
+						<td align="left">comments</td>
+						<td align="left">Text - The users comments for the object</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 id="temporal-data-bright-range-cells">Temporal Data (bright range cells)</h3>
+				<table>
+					<tbody>
+					<tr class="odd">
+						<td align="left">----------------------</td>
+						<td align="left">---</td>
+					</tr>
+					<tr class="even">
+						<td align="left">time</td>
+						<td align="left">Defines the temporal interval where the object is valid. The first argument is the start date and the second argument is the end date. If no end date is provided its the first <strong>e.g., 2019-07-19T16:28:44+0000</strong></td>
+					</tr>
+					<tr class="odd">
+						<td align="left">Rating</td>
+						<td align="left">Category (mostly true, no factual content, mixture of true and false, mostly false) (String)</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 id="themes">themes</h3>
+				<table>
+					<tbody>
+					<tr class="odd">
+						<td align="left">----------------------</td>
+						<td align="left">---</td>
+					</tr>
+					<tr class="even">
+						<td align="left">theme</td>
+						<td align="left">Text - The theme to be identified in the data</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 id="loading-data-into-timesets">Loading Data into TimeSets</h3>
+				<p>Export the Spreadsheet by clicking file -&gt; publish to web -&gt; entire documents -&gt; publish</p>
+				<p>goto share -&gt; copylink e.g. https://docs.google.com/spreadsheets/d/1SwIizq1WMnpE9xdeWHuD5PoOnyVRcxsfAQtgdw92S84/edit?usp=sharing</p>
+				<p>Append the url to the end of http://vis4sense.github.io/timesets/uncert/ with ?url='copied_url' e.g. http://vis4sense.github.io/timesets/uncert/?url=https://docs.google.com/spreadsheets/d/1SwIizq1WMnpE9xdeWHuD5PoOnyVRcxsfAQtgdw92S84/edit?usp=sharing</p>
+
+			</div>
+		</div>
+
 	</div>	
 
 </body>
