@@ -33,9 +33,6 @@ sm.misc.articleViewer = function(title) {
 
 			articles.forEach(function(article, i) {
 
-				console.log(article);
-
-
 				// Image
 				if (article.sourceImageUrl !== undefined) {
 					// container.append("<img class='sm-articleViewer-sourceimage' src='data/img/" + article.sourceImageUrl + "' />");

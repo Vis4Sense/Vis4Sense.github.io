@@ -28,6 +28,7 @@ $(function() {
 
     let loadData = function() {
         let query = getUrlQueryByName('url') || 'https://docs.google.com/spreadsheets/d/1SwIizq1WMnpE9xdeWHuD5PoOnyVRcxsfAQtgdw92S84/edit?usp=sharing'
+        // let query = getUrlQueryByName('url') || 'https://docs.google.com/spreadsheets/d/1l6zslga3nAbbKVRswlHWubkxA3M_USThM0uhlpAzzFE/edit?usp=sharing'
 
         let publicSpreadsheetUrl = query ;
         let googleSheetName;
@@ -64,11 +65,16 @@ $(function() {
 
             data = d;
             data.forEach(function(d) {
+                d.description = d.details;
+                d.Rating = d.uncertainty;
                 d.SourceType = 'Article';
                 d.Content = d.content || d.name;
-
+                d.comment_count = d.influence;
+                d.share_count = d.influence;
+                
                 d.Subject = d.name;
-
+                d.from = d.entity;
+                d.From = d.entity;
                 d.Trust = 'C3';
                 d.Relevance = 4;
                 d.time = moment(d.time).format();
@@ -322,7 +328,7 @@ $(function() {
 
             var e = {
                 id: i,
-                title: d.Subject || d.name,
+                title: d.Subject || d.title,
                 time: d.time,
                 sourceType: d.SourceType,
                 // sourceImageUrl: d.SourceImageUrl,
@@ -334,22 +340,22 @@ $(function() {
                 shareCount: d.share_count,
                 source: d.from,
                 sourceAvgRating: rating.groupAvg,
-                influence: d.influence || 0
+                influence: d.influence || 0,
+                from: d.from
             };
 
             if (e.sourceType === 'Article') {
-                e.publisher = d.from.name;
+                e.publisher = d.from;
                 // e.content = d.Content;
                 e.content = d.description || d.name;
             } else if (e.sourceType === 'EmailHeader') {
-                e.from = d.From;
-                e.content = 'From: ' + d.From + '\n\n' + 'To: ' + d.To;
+                e.from = d.from;
+                e.content = 'From: ' + d.from + '\n\n' + 'To: ' + d.To;
             }
 
             if (e.content === undefined) {
                 return;
             }
-
             var s = e.title.toLowerCase();
             var c = e.content.toLowerCase();
             var foundTheme = false;
