@@ -159,17 +159,17 @@
 				<ul>
 					<li><em>title</em>: the event title shown in TimeSets; usually should be very short;</li>
 					<li><em>time</em>: an event can be either an <em>time-point</em> or <em>interval</em> event. If there is only one date value, the event will be treated as a time-point event. If there are two  values, it will be an interval event: the first date will be the starting point and the second date will be the end point;</li>
-					<li><em>entity</em>: this will be used to populate the entity list in TimeSets;</li>
 				</ul>
 				<h5>Optional columns (TimeSets will recognise these fields, but also work without them):</h5>
 				<ul>
 					<li><em>details</em>: the detailed description of an event;</li>
 					<li><em>uncertainty</em>: numeric value of the uncertainty level of an event;</li>
+					<li><em>source</em>: this will be displayed with the <em>details</em> and used to calculate the <em>source uncertainty</em> by averaging all the uncertainty value of all the events from one source;</li>
 					<li><em>influence</em>: this can be the amount of likes, comments, shares, or other similar metrics;</li>
 					<li><em>image</em>: the URL to the associated image.</li>
 				</ul>
 
-				<p>The <code>themes</code> sheet should only have one column <em>theme</em> with the list of entities that define the grouping in TimeSets.</p>
+				<p>The <code>themes</code> sheet should only have one column <em>theme</em> with the list of entities that populate the entity list in TimeSets.</p>
 
 				<h5>Template</h5>
 
