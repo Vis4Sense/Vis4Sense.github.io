@@ -73,8 +73,8 @@ $(function() {
                 d.share_count = d.influence;
                 
                 d.Subject = d.name;
-                d.from = d.entity;
-                d.From = d.entity;
+                d.from = d.source;
+                d.From = d.source;
                 d.Trust = 'C3';
                 d.Relevance = 4;
                 d.time = moment(d.time).format();

@@ -60,10 +60,14 @@ text {
 }
 
 .sm-timeSets-svg-event-text.highlight {
-    fill: red;
+    fill: black;
+    /* fill: red; */
     text-decoration: underline;
     /*fill: #BFEFFC;*/
     font-weight: bold;
+    /* opacity: 0.8; */
+    /* font-size: 3vw !important; */
+    font-size: calc(16px + 1vw) !important;
 }
 
 .sm-timeSets-svg-event-text:hover {
