@@ -62,8 +62,8 @@
 	<div id="about" class="container-fluid">
 		<div class="row">
 			<div class="col-sm-6">
-				<h2>What are the chanllenges in timeline visualisation?</h2>
-				<p>Current timeline visualisations do not allow grouping the event by a person or organisatin. Instead, this is usually done using colour or symble, which make it difficult to follow a person or organisation.</p>
+				<h2>What are the challenges in timeline visualisation?</h2>
+				<p>Current timeline visualisations do not allow grouping the event by a person or organisation. Instead, this is usually done using colour or symbol, which make it difficult to follow a person or organisation.</p>
 			</div>
 
 			<div class="col-sm-6">
@@ -71,7 +71,7 @@
 				<p>Grouping events by person or organisation, while keep their temporal order. This makes it easier to: </p>
 				<ul>
 					<li>Follow a person, organisation, or any other entity type (such as location),</li>
-					<li>See the inteaction of multiple sets,</li>
+					<li>See the interaction of multiple sets,</li>
 					<li>And many other things ...</li>
 				</ul>
 			</div>
@@ -97,6 +97,19 @@
                 <p>P. H. Nguyen, K. Xu, R. Walker, and B. L. William Wong, <strong>TimeSets: Timeline Visualization with Set Relations</strong>, <em>Information Visualization, 2015</em>. <a href="paper.pdf" target="_blank">PDF</a></p>
 			</div>
 		</div>
+
+		<!-- <h2>User Guide</h2> -->
+		
+		<div class="row text-center">
+			<div class="col-sm-6">				
+				<h3>Background and features</h3>
+				<iframe src="https://player.vimeo.com/video/144646446" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			</div>
+			<div class="col-sm-6">
+				<h3>Updated set colouring (no voice over)</h3>
+				<iframe src="https://player.vimeo.com/video/144644488" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			</div>
+		</div>
 		
 	</div>
 
@@ -113,71 +126,62 @@
 
 		<div class="row">
 			<div class="col-sm-1"></div>
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<h3>Online Demo</h3>
-				<p>You can explore the <a href="http://www.vacommunity.org/VAST+Challenge+2014" target="_blank">VAST Challange Dataset </a> with the TimeSet Uncertainty <a href="uncert/" target="_blank">here</a>.</p>
+				<p>You can explore the <a href="https://www.buzzfeednews.com/article/craigsilverman/partisan-fb-pages-analysis" target="_blank">US 2016 Election Facebook Fake News</a> dataset with the TimeSet Uncertainty <a href="uncert/" target="_blank">here</a>.</p>
 			</div>
-			<div class="col-sm-7">
+			<div class="col-sm-6">
 				<h3>Paper</h3>
 				<p>Saminu Salisu, Kai Xu, Adrian Wagstaff, Mike Biggs and Graham Phillips <strong>TimeSets for Uncertainty Visualisation</strong>, <em>EG UK Computer Graphics & Visual Computing, 2016</em>. <a href="uncertainty/paper.pdf" target="_blank">PDF</a></p>
 			</div>
 		</div>
 
-	</div>
+	<!-- </div> -->
 
 	<!-- guide -->
-	<div id="guide" class="container-fluid">
-		<h2>User Guide</h2>
+	<!-- <div id="guide" class="container-fluid"> -->
 		
-		<div class="row text-center">
-			<div class="col-sm-6">				
-				<h3>Background and features</h3>
-				<iframe src="https://player.vimeo.com/video/144646446" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-			</div>
-			<div class="col-sm-6">
-				<h3>Updated set colouring (no voice over)</h3>
-				<iframe src="https://player.vimeo.com/video/144644488" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-			</div>
-		</div>
 
 
 		
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				
-				<h3 id="uncertainty-guide">TimeSets Uncertainty</h2>
+				<h3 id="uncertainty-guide">Load your own data with Google Spreadsheet</h3>
 				
 				<p>The TimeSet Uncertainty allows loading of user data through Google Spread Sheet so long as they follow the simple data format.</p>
 
 				<h4 id="data-model">Data Format</h4>
 
-				<p>For TimeSets Uncertainty to work with your Google Spread Sheet, its first row must contains the column name, exactly as describe below:</p>
+				<p>For TimeSets Uncertainty to work with your Google Spread Sheet, it must have two sheets: one named <code>data</code> and the other named <code>themes</code>. The first row of the <code>data</code> sheet must contains the column name, exactly as describe below:</p>
 
-				<h5>Compulsory columns: without these TimeSets Uncertainty won't work</h5>
+				<h5>Compulsory columns (without these TimeSets Uncertainty won't work):</h5>
 				<ul>
 					<li><em>title</em>: the event title shown in TimeSets; usually should be very short;</li>
 					<li><em>time</em>: an event can be either an <em>time-point</em> or <em>interval</em> event. If there is only one date value, the event will be treated as a time-point event. If there are two  values, it will be an interval event: the first date will be the starting point and the second date will be the end point;</li>
-					<li><em>entity</em>: this will be used to populate the entity list in TimeSets;</li>
 				</ul>
-				<h5>Optional columns: TimeSets will recognise these fields, but also works without them.</h5>
+				<h5>Optional columns (TimeSets will recognise these fields, but also work without them):</h5>
 				<ul>
 					<li><em>details</em>: the detailed description of an event;</li>
 					<li><em>uncertainty</em>: numeric value of the uncertainty level of an event;</li>
+					<li><em>source</em>: this will be displayed with the <em>details</em> and used to calculate the <em>source uncertainty</em> by averaging all the uncertainty value of all the events from one source;</li>
 					<li><em>influence</em>: this can be the amount of likes, comments, shares, or other similar metrics;</li>
 					<li><em>image</em>: the URL to the associated image.</li>
 				</ul>
 
+				<p>The <code>themes</code> sheet should only have one column <em>theme</em> with the list of entities that populate the entity list in TimeSets.</p>
+
 				<h5>Template</h5>
 
-				<p>We provide an <a href="https://docs.google.com/spreadsheets/d/1SwIizq1WMnpE9xdeWHuD5PoOnyVRcxsfAQtgdw92S84/edit?usp=sharing">example</a> that you can try out.</p>
+				<p>This is an <a target="_blank" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTAWOIdH7eLcV4K5tKIc4tHxPB97ZRz8tLV3__5drNNQ7UrauUQTNyONm9L0yLAcESOeJxdu5xA9SxQ/pubhtml">example</a> that you can use to create your own spreadsheet. It has all the compulsory and optional columns with some example rows.</p>
 
 				
 				<h4>Load Data into TimeSets Uncertainty</h4>
 				<p>Once the data is formatted as described above in the Google Spreadsheet, it can be added to TimeSets Uncertainty using following steps:</p>
 				<ol>
 					<li>Export the Spreadsheet by clicking <code>file</code> -&gt; <code>publish to web</code> -&gt; <code>entire documents</code> -&gt; <code>publish</code>;</li>
-					<li>goto <code>share</code> -&gt; <code>copylink</code> e.g. <code>https://docs.google.com/spreadsheets/d/1SwIizq1WMnpE9xdeWHuD5PoOnyVRcxsfAQtgdw92S84/edit?usp=sharing</code></li>
-					<li>Append the url to the end of <code>http://vis4sense.github.io/timesets/uncert/</code> with <code>?url=</code>, e.g. <code>http://vis4sense.github.io/timesets/uncert/?url=https://docs.google.com/spreadsheets/d/1SwIizq1WMnpE9xdeWHuD5PoOnyVRcxsfAQtgdw92S84/edit?usp=sharing</code></li>
+					<li>goto <code>share</code> -&gt; <code>copy link</code> e.g. <code>https://docs.google.com/spreadsheets/d/e/pubhtml</code></li>
+					<li>Append the url to the end of <code>http://vis4sense.github.io/timesets/uncert/</code> with <code>?url=</code>, e.g. <code>http://vis4sense.github.io/timesets/uncert/?url=https://docs.google.com/spreadsheets/pubhtml</code></li>
 					<li>Open the URL in the browser and it should show your data in the TimeSets Uncertainty.</li>
 				</ol>
 
