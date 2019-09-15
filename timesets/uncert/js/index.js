@@ -383,6 +383,8 @@ $(function() {
 
             events.push(e);
         });
-        data = { themes: extThemes || themes, events: events };
+
+        console.log(events)
+        data = { themes: extThemes || themes, events: events.filter(d => d.themes[0] !== 'other') };
     }
 });
