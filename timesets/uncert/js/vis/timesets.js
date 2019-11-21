@@ -623,8 +623,8 @@ sm.vis.timesets = function () {
                     //     d3.select(this)
                     //         .classed("stayHighlighted", true);
 
-                    d3.select(this)
-                        .classed("highlight", true);
+                    // d3.select(this)
+                    //     .classed("highlight", true);
 
                     // showHideTooltip(true, this, d);
 

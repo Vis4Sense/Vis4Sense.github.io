@@ -384,7 +384,7 @@ $(function() {
             events.push(e);
         });
 
-        console.log(events)
+        // console.log(events)
         data = { themes: extThemes || themes, events: events.filter(d => d.themes[0] !== 'other') };
     }
 });
