@@ -254,17 +254,20 @@ $(function() {
     function formatFacebookUNCData(extThemes) {
         var events = [];
         //var themes = ["fire", "incident", "inspection", "kidnap", "patch"/*, "ransom"*/, "security"/*, "vip", "POK", "tiskele", "government"*/];
-        var themes = extThemes || [
-            'Clinton',
-            'Trump',
-            'Obama',
-            'Charlotte',
-            'GOP',
-            'Republicans',
-            'Democrats',
-            'FBI',
-            'other'
-        ];
+        // var themes = extThemes || [
+        //     'Clinton',
+        //     'Trump',
+        //     'Obama',
+        //     'Charlotte',
+        //     'GOP',
+        //     'Republicans',
+        //     'Democrats',
+        //     'FBI',
+        //     'other'
+        // ];
+
+        var themes = extThemes;
+
         // var themes = ["news", "left"];
         var format = d3.time.format('%Y-%d-%m');
 
@@ -335,7 +338,6 @@ $(function() {
                 title: d.Subject || d.title,
                 time: d.time,
                 sourceType: d.SourceType,
-                // sourceImageUrl: d.SourceImageUrl,
                 sourceImageUrl: d.picture,
                 confidence: rating.rating,
                 trust: trustOpacity(rating.rating),
@@ -350,8 +352,8 @@ $(function() {
 
             if (e.sourceType === 'Article') {
                 e.publisher = d.from;
-                // e.content = d.Content;
-                e.content = d.description || d.name;
+                // e.content = d.description || d.name;
+                e.content = d.from;
             } else if (e.sourceType === 'EmailHeader') {
                 e.from = d.from;
                 e.content = 'From: ' + d.from + '\n\n' + 'To: ' + d.To;
