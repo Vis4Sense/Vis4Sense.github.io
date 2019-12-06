@@ -22,7 +22,7 @@ sm.vis.timesets = function () {
         MAX_NUM_CHARS = 50, // The maximum characters to display for 'alwaysTrim' events
         minEventWidth = 50, // An event has to be aggregated if the remaining space for it less than this value
         trimThresholdRatio = 0.1, // Can only trim an event so that a new event can stay in the same row if the remaining part is larger than this value
-        minFontSize = 14,
+        minFontSize = 10,
         maxFontSize = minFontSize * 2,
         fontScale = d3.scale.linear().range([minFontSize, maxFontSize]),
         topOnly = true,
@@ -236,7 +236,11 @@ sm.vis.timesets = function () {
             xScale.domain(domain);
 
             // Phong: update font scale
-            fontScale.domain(d3.extent(data, d => d.influence));
+            fontScale.domain(d3.extent(data, d => +d.influence));
+
+            // console.log(data)
+            // console.log(d3.extent(data, d => +d.shareCount))
+
             highlightData = data.slice().sort((a, b) => d3.descending(a.influence, b.influence)).slice(0, numHighlights);
 
             // Sort data by time ascendingly for easy computing layout
@@ -586,7 +590,7 @@ sm.vis.timesets = function () {
                     .style("font-style", function (d) {
                         return d.isParent ? "italic" : "normal";
                     })
-                    .style("font-size", fontScale(d.influence))
+                    .style("font-size", fontScale(+d.influence))
                     .style("opacity", function (d) {
                         return d.trust;
                     })
@@ -2055,7 +2059,8 @@ sm.vis.timesets = function () {
             .text(theData.fullTitle)
             .attr("x", 13)
             // .attr("dy", EVENT_TEXT_DY) // Phong: don't need it anymore due to vertical middle alignment
-            .style('font-size', fontScale(highestInfluence) || minFontSize)
+            // .style('font-size', fontScale(highestInfluence) || minFontSize)
+            .style('font-size', fontScale(+d.influence)
             .on("mouseover", function (d) {
                 showHideTooltip(true, this, d);
 
@@ -2168,7 +2173,8 @@ sm.vis.timesets = function () {
 
         cluster.select(".sm-timeSets-svg-event-text")
             .classed("highlight", topOnly && theData.some(d => highlightData.includes(d)))
-            .style('font-size', fontScale(highestInfluence) || minFontSize)
+            // .style('font-size', fontScale(highestInfluence) || minFontSize)
+            .style('font-size', fontScale(+d.influence)
 //         // todo: should be text of the title
             .attr('x', cluster.select(".number-box-text").node().getComputedTextLength() + 5)
             .text(theData.fullTitle);

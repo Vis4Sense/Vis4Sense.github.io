@@ -65,12 +65,16 @@ $(function() {
 
             data = d;
             data.forEach(function(d) {
+
+                // console.log(d)
+
                 d.description = d.details;
                 d.Rating = d.uncertainty;
                 d.SourceType = 'Article';
                 d.Content = d.content || d.name;
-                d.comment_count = d.influence;
-                d.share_count = d.influence;
+
+                d.comment_count = +d.influence;
+                d.share_count = +d.influence;
                 
                 d.Subject = d.name;
                 d.from = d.source;
@@ -322,7 +326,7 @@ $(function() {
 
             // rating and uncertainty applied here using the average, rating and group data
             let rating;
-            rating = sm.ratingCalc(d.from, d.Rating, d.comment_count, groupUncAverage);
+            rating = sm.ratingCalc(d.from, d.Rating, d.share_count, groupUncAverage);
 
             // console.log(d);
 
@@ -340,7 +344,7 @@ $(function() {
                 shareCount: d.share_count,
                 source: d.from,
                 sourceAvgRating: rating.groupAvg,
-                influence: d.influence || 0,
+                influence: +d.influence || 0,
                 from: d.from
             };
 
