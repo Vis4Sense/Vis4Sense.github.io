@@ -19,19 +19,19 @@ sm.misc.trustFilter = function () {
 		var DATA = [
 			{
 				id: "trust-filter-low",
-				label: "Low",
+				label: "mostly false",
 				value: RATING_LEVEL.LOW,
 				opacity: 0.2
 			},
 			{
 				id: "trust-filter-medium",
-				label: "Medium",
+				label: "mix of true and false",
 				value: RATING_LEVEL.MEDIUM,
 				opacity: 0.5
 			},
 			{
 				id: "trust-filter-high",
-				label: "High",
+				label: "mostly true'",
 				value: RATING_LEVEL.HIGH,
 				opacity: 1.0
 			}

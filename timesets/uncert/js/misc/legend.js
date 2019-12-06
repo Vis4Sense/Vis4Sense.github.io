@@ -23,6 +23,8 @@ sm.misc.legend = function() {
                 .width(container.innerWidth() - DELETE_WIDTH);
             data = d.data;
 
+            // console.log(data)
+
             d.data.forEach(function(pair) {
                 var item = $("<li>" + pair.text + "</li>")
 					.addClass("ui-selected")

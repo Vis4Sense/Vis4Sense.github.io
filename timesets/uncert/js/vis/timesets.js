@@ -230,6 +230,9 @@ sm.vis.timesets = function () {
                 return true;
             });
 
+            // console.log(theData)
+
+
             var domain = d3.extent(data, function (d) {
                 return d.time;
             });
@@ -290,6 +293,7 @@ sm.vis.timesets = function () {
             links = links.filter(function (d) {
                 return d.source && d.target;
             });
+
 
             // Legend
             var legendData = themes.map(function (d, i) {
