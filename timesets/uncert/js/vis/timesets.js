@@ -11,7 +11,7 @@
 
 sm.vis.timesets = function () {
     var width = 600, height = 500,
-        margin = {top: 20, right: 30, bottom: 20, left: 20},
+        margin = { top: 20, right: 30, bottom: 20, left: 20 },
         THEME_CIRCLE_RADIUS = 6,
         TIME_BAR_HEIGHT = 6,
         DARKER_RATIO = 0.5,
@@ -230,8 +230,6 @@ sm.vis.timesets = function () {
                 return true;
             });
 
-            // console.log(theData)
-
 
             var domain = d3.extent(data, function (d) {
                 return d.time;
@@ -242,7 +240,7 @@ sm.vis.timesets = function () {
             fontScale.domain(d3.extent(data, d => +d.influence));
 
             // console.log(data)
-            console.log(d3.extent(data, d => d.shareCount))
+            // console.log(d3.extent(data, d => d.shareCount))
 
             highlightData = data.slice().sort((a, b) => d3.descending(a.influence, b.influence)).slice(0, numHighlights);
 
@@ -370,7 +368,8 @@ sm.vis.timesets = function () {
             parent.datum({
                 data: legendData,
                 background: applyLayout || setMode === "background",
-                title: "Themes"
+                title: "Themes",
+                labelCount: countArray(data)
             }).call(legend);
         }
 
@@ -380,8 +379,8 @@ sm.vis.timesets = function () {
         activeData = sourceData.filter(function (d) {
             // OR condition, at least one active theme exists
             if (!d.themeIds.some(function (i) {
-                    return activeThemeIds[i];
-                })) {
+                return activeThemeIds[i];
+            })) {
                 return false;
             }
 
@@ -480,6 +479,18 @@ sm.vis.timesets = function () {
 
         return this;
     };
+
+    /**
+     * Label counts function for each theme.
+     */
+
+    function countArray(arr) {
+        var counts = {};
+        for (var i = 0; i < arr.length; i++) {
+            counts[arr[i].themes[0]] = 1 + (counts[arr[i].themes[0]] || 0);
+        }
+        return counts;
+    }
 
     function updateEvents(duration) {
         // DATA JOIN
@@ -614,33 +625,33 @@ sm.vis.timesets = function () {
                         // console.log(d)
 
                     }).on("mouseout", function (d) {
-                    dehighlightEvents();
-                    showHideTooltip(false, this, d);
-                    legend.dehighlightRows();
-                }).on("click", function (d) {
+                        dehighlightEvents();
+                        showHideTooltip(false, this, d);
+                        legend.dehighlightRows();
+                    }).on("click", function (d) {
 
-                    //flush
-                    d3.selectAll(".stayHighlighted").classed("stayHighlighted", false);
+                        //flush
+                        d3.selectAll(".stayHighlighted").classed("stayHighlighted", false);
 
-                    d.x = d3.event.pageX;
-                    d.y = d3.event.pageY;
-                    d3.select(this).call(eventViewer).call(trustViewer);
+                        d.x = d3.event.pageX;
+                        d.y = d3.event.pageY;
+                        d3.select(this).call(eventViewer).call(trustViewer);
 
-                    //keep highlighted on click
-                    // console.log(this);
-                    //     d3.select(this)
-                    //         .classed("stayHighlighted", true);
+                        //keep highlighted on click
+                        // console.log(this);
+                        //     d3.select(this)
+                        //         .classed("stayHighlighted", true);
 
-                    // d3.select(this)
-                    //     .classed("highlight", true);
+                        // d3.select(this)
+                        //     .classed("highlight", true);
 
-                    // showHideTooltip(true, this, d);
+                        // showHideTooltip(true, this, d);
 
-                }).on("touchend", function (d) {
-                    d.x = d3.event.pageX;
-                    d.y = d3.event.pageY;
-                    d3.select(this).call(eventViewer).call(trustViewer);
-                });
+                    }).on("touchend", function (d) {
+                        d.x = d3.event.pageX;
+                        d.y = d3.event.pageY;
+                        d3.select(this).call(eventViewer).call(trustViewer);
+                    });
             } else {
                 var textHeight = 20;
                 var imageHeight = LEVEL_HEIGHT - textHeight - 4;
@@ -655,12 +666,12 @@ sm.vis.timesets = function () {
                     .on("mouseover", function (d) {
                         d3.select(this).style("cursor", "pointer");
                     }).on("mouseout", function (d) {
-                    d3.select(this).style("cursor", "default");
-                }).on("click", function (d) {
-                    d.x = d3.event.pageX;
-                    d.y = d3.event.pageY;
-                    d3.select(this).call(eventViewer).call(trustViewer);
-                });
+                        d3.select(this).style("cursor", "default");
+                    }).on("click", function (d) {
+                        d.x = d3.event.pageX;
+                        d.y = d3.event.pageY;
+                        d3.select(this).call(eventViewer).call(trustViewer);
+                    });
 
                 // Title text
                 d3.select(this).append("foreignObject")
@@ -1105,18 +1116,18 @@ sm.vis.timesets = function () {
     function adjustClusterText() {
         const allCoords = [];
         eventGroup.selectAll('.sm-timeSets-svg-event')
-            .filter(function(d) { return !d.cluster && d3.select(this).style('opacity') > 0; })
-            .each(function(d) {
+            .filter(function (d) { return !d.cluster && d3.select(this).style('opacity') > 0; })
+            .each(function (d) {
                 allCoords.push(this.getBoundingClientRect());
             });
 
-        clusterGroup.selectAll('.a-cluster').each(function(d) {
+        clusterGroup.selectAll('.a-cluster').each(function (d) {
             allCoords.push(this.getBoundingClientRect());
         });
 
         // For each cluster, find the one at the same level that is closest to the right.
         // That is the maximum width it can take
-        clusterGroup.selectAll('.a-cluster').each(function(d) {
+        clusterGroup.selectAll('.a-cluster').each(function (d) {
             const rect = this.getBoundingClientRect();
             const minX = d3.min(allCoords.filter(d => d.y === rect.y && d.x > rect.x), d => d.x);
             const allowX = minX - 10;
@@ -1162,7 +1173,7 @@ sm.vis.timesets = function () {
         });
 
         var rightmostEvents = {};
-        var extremeLevels = {low: 0, high: 0};
+        var extremeLevels = { low: 0, high: 0 };
         var prevEvent = null;
 
         events.each(function (d) {
@@ -1430,7 +1441,7 @@ sm.vis.timesets = function () {
             highestLevel = computeLayerLayout(startLevel, endLevel, i) + 1;
 
             numAvailableLevels -= (highestLevel - startLevel);
-            assignedLayers[i] = {index: i};
+            assignedLayers[i] = { index: i };
             assignedLayers[i].ratio = computeLegibilityRatio(i);
             assignedLayers[i].startLevel = startLevel;
             assignedLayers[i].endLevel = highestLevel;
@@ -1447,8 +1458,8 @@ sm.vis.timesets = function () {
      */
     function balanceLayers() {
         if (assignedLayers.every(function (d) {
-                return d.ratio === 1;
-            })) {
+            return d.ratio === 1;
+        })) {
             return;
         }
 
@@ -2009,7 +2020,7 @@ sm.vis.timesets = function () {
     function createNewCluster(theData) {
         var cluster = clusterGroup.append("g").datum(theData)
 
-            .attr("transform", function() { return "translate(" + xScale(theData[0].time) + ", 0)"; })
+            .attr("transform", function () { return "translate(" + xScale(theData[0].time) + ", 0)"; })
             .attr('class', 'a-cluster');
 
         // - Rectangle
@@ -2179,10 +2190,10 @@ sm.vis.timesets = function () {
             .classed("highlight", topOnly && theData.some(d => highlightData.includes(d)))
             .style('font-size', fontScale(highestInfluence) || minFontSize)
             // .style('font-size', fontScale(+d.influence))
-//         // todo: should be text of the title
+            //         // todo: should be text of the title
             .attr('x', cluster.select(".number-box-text").node().getComputedTextLength() + 5)
             .text(theData.fullTitle);
-// >>>>>>> 0b4ca9095cbd2015dd6d3c5d2f73c7561f13c736
+        // >>>>>>> 0b4ca9095cbd2015dd6d3c5d2f73c7561f13c736
 
         // Width of the tooltip box
         cluster.select(".sm-timeSets-svg-cluster-rect")
@@ -2746,7 +2757,7 @@ sm.vis.timesets = function () {
         for (var i = 0; i < numThemes; i++) {
             for (var j = i + 1; j < numThemes; j++) {
                 if (table[i][j] > 0) {
-                    edges.push({vertex1: i, vertex2: j, weight: table[i][j]});
+                    edges.push({ vertex1: i, vertex2: j, weight: table[i][j] });
                 }
             }
         }
@@ -3138,7 +3149,7 @@ sm.vis.timesets = function () {
                 var path = [];
                 activeData.forEach(function (d) {
                     if (d.ref && (d.layer === idx || d.layer === idx - 1 || d.layer === idx + 1)) {
-                        path.push({x: xScale(d.time), y: yScale(d.level)});
+                        path.push({ x: xScale(d.time), y: yScale(d.level) });
                     }
                 });
 
@@ -3193,7 +3204,7 @@ sm.vis.timesets = function () {
                 var path = [];
                 activeData.forEach(function (d) {
                     if (d.ref && d.themeIds.indexOf(i) !== -1) {
-                        path.push({x: xScale(d.time), y: yScale(d.level)});
+                        path.push({ x: xScale(d.time), y: yScale(d.level) });
                     }
                 });
 
@@ -4025,7 +4036,7 @@ sm.vis.timesets = function () {
                 }
 
                 if (!added) {
-                    activeBands.push({"setId": t, "events": [d], "active": true});
+                    activeBands.push({ "setId": t, "events": [d], "active": true });
                 }
             });
 
@@ -4321,38 +4332,38 @@ sm.vis.timesets = function () {
     function buildCapture() {
         $("<button>Capture visualization</button>")
             .addClass("sm-timeSets-capture-button")
-            .css({right: 10, bottom: 60})
+            .css({ right: 10, bottom: 60 })
             .button({
                 icons: {
                     primary: "ui-icon-image"
                 },
                 text: false
             }).click(function () {
-            // Capture and send to server
-            // The 'finding' object
-            var url = document.URL;
-            url += (url.indexOf("?") === -1 ? "?" : "&");
-            url += "scale=" + scale + "&tx=" + translate[0] + "&ty=" + translate[1];
+                // Capture and send to server
+                // The 'finding' object
+                var url = document.URL;
+                url += (url.indexOf("?") === -1 ? "?" : "&");
+                url += "scale=" + scale + "&tx=" + translate[0] + "&ty=" + translate[1];
 
-            var finding = {
-                // Common fields
-                origin: "TimeSets",
-                note: "Test params from TimeSets at " + d3.time.format("%H:%M:%S")(new Date()),
-                tags: [{"name": "TimeSets"}, {"name": "client"}],
-                createdBy: "phong",
-                screenshot: null,
-                // contentType: "link",
-                // Deep provenance, can be stored in provenance server
-                // provenance: { scale: scale, translate: translate },
-                // originalUrl: document.url // Will be appended with &findingId
-                url: url
-            };
+                var finding = {
+                    // Common fields
+                    origin: "TimeSets",
+                    note: "Test params from TimeSets at " + d3.time.format("%H:%M:%S")(new Date()),
+                    tags: [{ "name": "TimeSets" }, { "name": "client" }],
+                    createdBy: "phong",
+                    screenshot: null,
+                    // contentType: "link",
+                    // Deep provenance, can be stored in provenance server
+                    // provenance: { scale: scale, translate: translate },
+                    // originalUrl: document.url // Will be appended with &findingId
+                    url: url
+                };
 
-            // Save to database
-            sm.ajax("findings", "POST", finding, function (id) {
-                // Save returned id together with provenance data for restoring it.
-            });
-        }).appendTo($("body"));
+                // Save to database
+                sm.ajax("findings", "POST", finding, function (id) {
+                    // Save returned id together with provenance data for restoring it.
+                });
+            }).appendTo($("body"));
     }
 
     /**
@@ -4594,7 +4605,7 @@ sm.vis.timesets = function () {
         var results = [];
         var counts = [];
         for (var i = 0; i < themes.length; i++) {
-            counts[i] = {id: i, count: 0};
+            counts[i] = { id: i, count: 0 };
         }
 
         // Non-aggregate
@@ -4605,7 +4616,7 @@ sm.vis.timesets = function () {
 
             var circle = d3.select(this).select("circle").node();
             var box = circle.getBoundingClientRect();
-            var item = {x: box.left + box.width / 2, y: height + 30 - (box.top + box.height / 2)};
+            var item = { x: box.left + box.width / 2, y: height + 30 - (box.top + box.height / 2) };
             if (applyLayout) {
                 var themeIdsBasedOnLayers = d.layers.map(function (l) {
                     return orderToId[l];
@@ -4637,7 +4648,7 @@ sm.vis.timesets = function () {
 
             var text = d3.select(this.parentNode).select("text");
             var box = text.node().getBoundingClientRect();
-            var item = {x: box.left - getGlyphPadding(d[0]), y: height + 30 - (box.top + box.height / 2)};
+            var item = { x: box.left - getGlyphPadding(d[0]), y: height + 30 - (box.top + box.height / 2) };
             if (applyLayout) {
                 var themeIdsBasedOnLayers = d[0].layers.map(function (l) {
                     return orderToId[l];
@@ -4699,7 +4710,7 @@ sm.vis.timesets = function () {
             return d.id;
         }).join("-");
         fileName += "___" + descendingSize + ".csv";
-        $.post("saveFile.php", {fileName: fileName, data: d3.csv.format(results)});
+        $.post("saveFile.php", { fileName: fileName, data: d3.csv.format(results) });
     };
 
     // Binds custom events

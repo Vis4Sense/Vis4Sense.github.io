@@ -96,16 +96,16 @@ var sm = function() {
     sm.convertRating = function (rating) {
         let value;
         switch (rating) {
-            case 'mostly true':
+            case 'mostly false':
                 value = 1;
                 break;
             case 'mixture of true and false':
                 value = 2;
                 break;
-            case 'no factual content':
+            case 'mostly true':
                 value = 4;
                 break;
-            case 'mostly false':
+            case 'no factual content':
                 value = 3;
                 break;
             case 'undefined':
@@ -118,16 +118,16 @@ var sm = function() {
         let value;
         switch (Math.floor(rating)) {
             case 1:
-                value = 'mostly true';
+                value = 'mostly false';
                 break;
             case 2:
                 value = 'mixture of true and false';
                 break;
             case 3:
-                value = 'no factual content';
+                value = 'mostly true';
                 break;
             case 4:
-                value = 'mostly false';
+                value = 'no factual content';
         }
         return value
     };

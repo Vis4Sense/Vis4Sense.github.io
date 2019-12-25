@@ -14,6 +14,7 @@ sm.misc.legend = function() {
         var DELETE_WIDTH = 0;
 
 		selection.each(function(d) {
+            var countTheme = d.labelCount;
             var container = $("section.themes")
 				.append("<div class='themes-header'>Themes" +
                     // "<img src='img/handshake.png' />" +
@@ -23,15 +24,13 @@ sm.misc.legend = function() {
                 .width(container.innerWidth() - DELETE_WIDTH);
             data = d.data;
 
-            // console.log(data)
-
             d.data.forEach(function(pair) {
-                var item = $("<li>" + pair.text + "</li>")
-					.addClass("ui-selected")
+                var item = $("<li>" + pair.text + ' (' + getLabelCount(countTheme, pair.text) +')' + "</li>")
+                    .css("font-size", "smaller")
+                    .addClass("ui-selected")
                     .appendTo(list);
-
                 //// Delete item button
-                //$('<span class="glyphicon glyphicon-remove-circle"></span>').appendTo(item)
+                // $('<span class="glyphicon glyphicon-remove-circle"></span>').appendTo(item)
                 //      .click(function () {
                 //          console.log("clicked");
                 //     });
@@ -126,7 +125,23 @@ sm.misc.legend = function() {
 
 			legendUi = container;
         });
-	}
+    }
+    
+    /**
+     * Get label counts for each theme
+     */
+    function getLabelCount(data, label){
+        var count;
+
+        Object.keys(data).forEach(function(key) {
+            if(key === label){
+                // console.log(key, data[key]);
+                count = data[key];
+            }
+        });
+
+        return count;
+    }
 
 	/**
 	 * Sets/gets the visibility of the legend.
