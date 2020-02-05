@@ -391,6 +391,7 @@ $(function() {
         });
 
         // console.log(events)
-        data = { themes: extThemes || themes, events: events.filter(d => d.themes[0] !== 'other') };
+        // data = { themes: extThemes || themes, events: events.filter(d => d.themes[0] !== 'other') };
+        data = { themes: extThemes || themes, events: events };
     }
 });
