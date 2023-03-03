@@ -1,173 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>SenseMap for Online Sensemaking</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>SenseMap for Online Sensemaking</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="\css\my-style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="\css\my-style.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<!-- google analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+   <!-- google analytics -->
+   <script>
+      (function (i, s, o, g, r, a, m) {
+         i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+         }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
       ga('create', 'UA-96019279-1', 'auto');
       ga('send', 'pageview');
 
-    </script>
+   </script>
 
 </head>
+
 <body>
 
-	<!-- nav bar -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="..\" class="navbar-brand"><em>vis</em><span style="color: blue">4</span><span style="font-weight: bolder">sense</span></a>
-			</div>
+   <!-- nav bar -->
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a href="..\" class="navbar-brand"><em>vis</em><span style="color: blue">4</span><span
+                  style="font-weight: bolder">sense</span></a>
+         </div>
 
-			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#about">Overview</a></li>
-					<li><a href="#demo">Demo</a></li>
-					<li><a href="#guide">Guide</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	
-	<!-- header -->
-	<div class="jumbotron text-center">
-		<h1>SenseMap for Online Sensemaking</h1> 
-	</div>
+         <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="#about">Overview</a></li>
+               <li><a href="#demo">Demo</a></li>
+               <li><a href="#guide">Guide</a></li>
+            </ul>
+         </div>
+      </div>
+   </nav>
 
-	<!-- about -->
+   <!-- header -->
+   <div class="jumbotron text-center">
+      <h1>SenseMap for Online Sensemaking</h1>
+   </div>
 
-	<div id="about" class="container-fluid">
-		<div class="col-sm-6">
-			<h2>What are the challenges in online sensemaking?</h2>
-			<p>Very often, users get lost when solving a task online, such as buying a camera or planning a holidy.</p> 
-			<ul>
-				<li>Where is that information I saw before?</li>
-				<li>How do I compare different options?</li>
-				<li>Where did I left off two days ago?</li>
-			</ul>			
-		</div>
+   <!-- about -->
 
-		<div class="col-sm-6">
-			<h2>SenseMap</h2>
-			<p>SenseMap captures sensemaking actions and visualise their relationships, making it easier to:</p>
-			<ul>
-				<li>Find previous infomration,</li>
-				<li>Re-trace the thinking process, </li>
-				<li>Make sense of the topic,</li>
-				<li>And many other things ...</li>
-			</ul>
-		</div>
-	</div>
+   <div id="about" class="container-fluid">
+      <div class="col-sm-6">
+         <h2>What are the challenges in online sensemaking?</h2>
+         <p>Very often, users get lost when solving a task online, such as buying a camera or planning a holidy.</p>
+         <ul>
+            <li>Where is that information I saw before?</li>
+            <li>How do I compare different options?</li>
+            <li>Where did I left off two days ago?</li>
+         </ul>
+      </div>
 
-	<!-- demo -->
+      <div class="col-sm-6">
+         <h2>SenseMap</h2>
+         <p>SenseMap captures sensemaking actions and visualise their relationships, making it easier to:</p>
+         <ul>
+            <li>Find previous infomration,</li>
+            <li>Re-trace the thinking process, </li>
+            <li>Make sense of the topic,</li>
+            <li>And many other things ...</li>
+         </ul>
+      </div>
+   </div>
 
-	<div id="demo" class="container-fluid text-center bg-grey">
-		<div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10"><a href="https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb" target="_blank"><img  src="sensemap.jpg" class="thumbnail img-responsive"/></a></div>
-        </div>
-        <div class="row">
-			<div class="col-sm-7">				
-				<h3>Video</h3>
-				<iframe src="https://player.vimeo.com/video/161322047" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-			</div>
-			<div class="col-sm-4">				
-				<h3>Chrome Extension</h3>
-                <p><s>SenseMap is available as a <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb' target="_blank">Chrome extension.</a></s> The old version of SenseMap is no longer being maintained.</p> 
-                
-                <p>A new version called <a href="https://github.com/Vis4Sense/HistoryMap" target="_blank"> HistoryMap</a> is currently under development. It is available on the <a href="https://chrome.google.com/webstore/detail/historymap/jjgdemkolpjjdkgmfgolldlnoghhodlj" target="_blank">Chrome Web Store</a>, but not working properly yet.</p>
-			
-				<h3>Paper</h3>
-                <p>P. H. Nguyen, K. Xu, A. Bardill, B. Salman, K. Herd and B. L. William Wong. <strong>SenseMap: Supporting Browser-based Online Sensemaking through Analytic Provenance</strong>, <em>IEEE Symposium on Visual Analytics Science and Technology</em>. 2016. <a href="paper.pdf" title='Download full paper' target="_blank">PDF</i></a></p>
-			</div>
-		</div>
-	</div>
+   <!-- demo -->
 
-	<!-- guide -->
-	<div id="guide" class="container-fluid">
-		<h2>User Guide</h2>
-		
-		<div class="col-sm-6">
-			<div class="panel-heading">
-				<h3>Install</h3>
-			</div>
-			<div class="panel-body">
-				<p><s>SenseMap is available as <a href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb' target="_blank">a Chrome extension</a>.</s></p>
-				<p><s>After installation, click the <img src="sm-logo-19.png"> icon in the top-right corner of your browser to start the extension.</s></p>
-            <p>The old version of SenseMap is no longer being maintained. A new version called <a href="https://github.com/Vis4Sense/HistoryMap" target="_blank"> HistoryMap</a> is currently under development. It is available on the <a href="https://chrome.google.com/webstore/detail/historymap/jjgdemkolpjjdkgmfgolldlnoghhodlj" target="_blank">Chrome Web Store</a>, but not working properly yet.</p>
-			</div>
-		</div>
-		
-		<div class="col-sm-6">
-			<div class="panel-heading">
-				<h3>Browser Window</h3>
-			</div>
-			<div class="panel-body">
-				<p>You can highligh text by selecting it first and then choose <strong>highlight</strong> from the right-click menu. Click on the highlight to <strong>remove</strong> or <strong>add a note</strong>.</p>
-				<p>A snapshot of a webpage is used to help you recognize the page in the <em>history map</em>. You can replace the default snapshot with a picture in the webpage by right-clicking on the picture and select <strong>Set as Page Image</strong>.</p>
-			</div>
-		</div>
+   <div id="demo" class="container-fluid text-center bg-grey">
+      <div class="row">
+         <div class="col-sm-1"></div>
+         <div class="col-sm-10"><a
+               href="https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb"
+               target="_blank"><img src="sensemap.jpg" class="thumbnail img-responsive" /></a></div>
+      </div>
+      <div class="row">
+         <div class="col-sm-7">
+            <h3>Video</h3>
+            <iframe src="https://player.vimeo.com/video/161322047" width="500" height="281" frameborder="0"
+               webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+         </div>
+         <div class="col-sm-4">
+            <h3>Chrome Extension</h3>
+            <p><s>SenseMap is available as a <a
+                     href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'
+                     target="_blank">Chrome extension.</a></s> The old version of SenseMap is no longer being
+               maintained.</p>
 
-		<div class="col-sm-6">
-			<div class="panel-heading">
-				<h3>History Map</h3>
-			</div>
-			<div class="panel-body">
-				<h4>Node</h4>
-				<p>Each node represents a webpage with its logo and title. The image below shows the different types of logos:</p>
-				<img class="img-responsive" src="icon-list.png" alt="action icons"/>
-				<p>You can go back to a webpage in the browser by clicking its node.</p>
-				<p>Highlighted text is displayed below the node image (with yellow background), but limit to the maximum of 2 lines. Click on <strong>Show All</strong> from the hovering menu to see all the highlighted text. Click on the highlighted text to go back to that specific highlight.</p>
-				<p>You can <strong>highlight</strong>, <strong>minimize</strong>, <strong>curate</strong> and <strong>remove</strong> a node using the hovering menu. Node's background color: <span style="background-color: cyan">cyan</span> for active page, <span style="background-color: #e6e600">yellow</span> for favorite page, and <span style="background-color: #E8A199">red</span> for brushing between two views. <span style="border: 1px dashed #6e6e6e; border-radius: 4px">Dashed border</span> indicates unvisited pages. Curated nodes have a pttle tick <i class="fa fa-check-square" style="color: #2ecc71"></i> at the top right cornder. Click on a minimized node to maximize it.</li>
+            <p>A new version called <a href="https://github.com/Vis4Sense/HistoryMap" target="_blank"> HistoryMap</a> is
+               currently under development. It is available on the <a
+                  href="https://chrome.google.com/webstore/detail/historymap/jjgdemkolpjjdkgmfgolldlnoghhodlj"
+                  target="_blank">Chrome Web Store</a>, but not working properly yet.</p>
 
-				<h4>Menu</h4>
-				<p>In the top-right corner is the menu icon, from where you can <strong>create, save</strong>, or <strong>load</strong> a SenseMap. Also, you can use it to pause or resume the SenseMap.</p>
-				<p>There are several ways to <strong>pan</strong> the History Map
-					<ul>
-						<li>Click on an empty space and drag.</li>
-						<li>Click on any place while holding <strong>Shift</strong> key and drag.</li>
-						<li>Mouse wheel for vertical pan.</li>
-						<li>Track pad.</li>
-					</ul>
-				<p>You can <strong>zoom</strong> the map using <strong>plus/minus</strong> button at the bottom right corner of the window.</p>
-			</div>
-		</div>
+            <h3>Paper</h3>
+            <p>P. H. Nguyen, K. Xu, A. Bardill, B. Salman, K. Herd and B. L. William Wong. <strong>SenseMap: Supporting
+                  Browser-based Online Sensemaking through Analytic Provenance</strong>, <em>IEEE Symposium on Visual
+                  Analytics Science and Technology</em>. 2016. <a href="paper.pdf" title='Download full paper'
+                  target="_blank">PDF</i></a></p>
+         </div>
+      </div>
+   </div>
 
-		<div class="col-sm-6">
-			<div class="panel-heading">
-				<h3>Knowledge Map</h3>		
-			</div>
-			<div class="panel-body">
-				<h4>Node</h4>
-				<p>Nodes can be added from the History Map with the <strong>Curate</strong> button in the node hovering menu. You can remove a node from the Knowledge Map using its hovering menu.</p>
+   <!-- guide -->
+   <div id="guide" class="container-fluid">
+      <h2>User Guide</h2>
 
-				<h4>Link</h4>
-				<p>Links from collection view will be copied to the curation view when nodes are added.</p>
-				<p>You can add custom link by <strong>holding the left mouse button until the cursor changes to the arrow</strong>, then dragging it and dropping onto the targeting node.</p>
-				<p>Custom links are shown with <span style="color:blue">blue</span> color to distinguish with system links.</p>
-				<p>You can remove a link using the hovering menu.</p>
-			</div>
-		</div>
-	
-	</div>	
+      <div class="col-sm-6">
+         <div class="panel-heading">
+            <h3>Install</h3>
+         </div>
+         <div class="panel-body">
+            <p><s>SenseMap is available as <a
+                     href='https://chrome.google.com/webstore/detail/sensemap/agljnpanahlilmpipaeflmnjkiiecfjb'
+                     target="_blank">a Chrome extension</a>.</s></p>
+            <p><s>After installation, click the <img src="sm-logo-19.png"> icon in the top-right corner of your browser
+                  to start the extension.</s></p>
+            <p>The old version of SenseMap is no longer being maintained. A new version called <a
+                  href="https://github.com/Vis4Sense/HistoryMap" target="_blank"> HistoryMap</a> is currently under development. It is available on the <a
+                  href="https://chrome.google.com/webstore/detail/historymap/jjgdemkolpjjdkgmfgolldlnoghhodlj"
+                  target="_blank">Chrome Web Store</a>, but not working properly yet.</p>
+         </div>
+      </div>
+
+      <div class="col-sm-6">
+         <div class="panel-heading">
+            <h3>Browser Window</h3>
+         </div>
+         <div class="panel-body">
+            <p>You can highligh text by selecting it first and then choose <strong>highlight</strong> from the
+               right-click menu. Click on the highlight to <strong>remove</strong> or <strong>add a note</strong>.</p>
+            <p>A snapshot of a webpage is used to help you recognize the page in the <em>history map</em>. You can
+               replace the default snapshot with a picture in the webpage by right-clicking on the picture and select
+               <strong>Set as Page Image</strong>.</p>
+         </div>
+      </div>
+
+      <div class="col-sm-6">
+         <div class="panel-heading">
+            <h3>History Map</h3>
+         </div>
+         <div class="panel-body">
+            <h4>Node</h4>
+            <p>Each node represents a webpage with its logo and title. The image below shows the different types of
+               logos:</p>
+            <img class="img-responsive" src="icon-list.png" alt="action icons" />
+            <p>You can go back to a webpage in the browser by clicking its node.</p>
+            <p>Highlighted text is displayed below the node image (with yellow background), but limit to the maximum of
+               2 lines. Click on <strong>Show All</strong> from the hovering menu to see all the highlighted text. Click
+               on the highlighted text to go back to that specific highlight.</p>
+            <p>You can <strong>highlight</strong>, <strong>minimize</strong>, <strong>curate</strong> and
+               <strong>remove</strong> a node using the hovering menu. Node's background color: <span
+                  style="background-color: cyan">cyan</span> for active page, <span
+                  style="background-color: #e6e600">yellow</span> for favorite page, and <span
+                  style="background-color: #E8A199">red</span> for brushing between two views. <span
+                  style="border: 1px dashed #6e6e6e; border-radius: 4px">Dashed border</span> indicates unvisited pages.
+               Curated nodes have a pttle tick <i class="fa fa-check-square" style="color: #2ecc71"></i> at the top
+               right cornder. Click on a minimized node to maximize it.</li>
+
+            <h4>Menu</h4>
+            <p>In the top-right corner is the menu icon, from where you can <strong>create, save</strong>, or
+               <strong>load</strong> a SenseMap. Also, you can use it to pause or resume the SenseMap.</p>
+            <p>There are several ways to <strong>pan</strong> the History Map
+            <ul>
+               <li>Click on an empty space and drag.</li>
+               <li>Click on any place while holding <strong>Shift</strong> key and drag.</li>
+               <li>Mouse wheel for vertical pan.</li>
+               <li>Track pad.</li>
+            </ul>
+            <p>You can <strong>zoom</strong> the map using <strong>plus/minus</strong> button at the bottom right corner
+               of the window.</p>
+         </div>
+      </div>
+
+      <div class="col-sm-6">
+         <div class="panel-heading">
+            <h3>Knowledge Map</h3>
+         </div>
+         <div class="panel-body">
+            <h4>Node</h4>
+            <p>Nodes can be added from the History Map with the <strong>Curate</strong> button in the node hovering
+               menu. You can remove a node from the Knowledge Map using its hovering menu.</p>
+
+            <h4>Link</h4>
+            <p>Links from collection view will be copied to the curation view when nodes are added.</p>
+            <p>You can add custom link by <strong>holding the left mouse button until the cursor changes to the
+                  arrow</strong>, then dragging it and dropping onto the targeting node.</p>
+            <p>Custom links are shown with <span style="color:blue">blue</span> color to distinguish with system links.
+            </p>
+            <p>You can remove a link using the hovering menu.</p>
+         </div>
+      </div>
+
+   </div>
 
 </body>
+
 </html>
